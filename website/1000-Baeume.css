@@ -1,0 +1,379 @@
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: black;
+}
+
+
+
+
+.myentrance {
+    height: 750px;
+    width: 100%;
+    background-image: url(images/Pflanze_Dunkel.jpg);
+    background-size: cover;
+    background-position: center;
+    text-align: left;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    /* background-color: chartreuse; */
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+
+.myentrancelogobox {
+    /* background-color: olive; */
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.myentrancelogo {
+    /* background-color: grey; */
+    height: 150px;
+    width: 150px;
+    background-image: url(images/Logo_Kreis.png);
+    background-size: cover;
+    background-position: center;
+    margin-right: 100px;
+}
+
+
+.myentrancetext {
+    /* background-color: crimson; */
+    height: auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 50px;
+    margin-top: -200px;
+}
+
+
+
+
+
+    .myentrancetexth1 h1 {
+        color: white;
+        font-size: 7rem;
+    }
+
+    .myentrancetexth2 h2 {
+        color: white;
+        font-size: 4rem;
+    }
+
+
+
+.myheading {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+
+.mytext {
+   margin-left: 20px;
+    /* margin: 40px 20px; */
+    /* padding-bottom: 10px; */
+}
+
+.myquotes {
+    /* background-color: yellow; */
+    min-height: 300px;
+    width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.myquote1 {
+    /* background-color: red; */
+    height: 300px;
+    width: 250px;
+    background-image: url(images/Statement_Foedermayr.png);
+    background-size: cover;
+}
+
+.myquote2 {
+    /* background-color: green; */
+    height: 300px;
+    width: 250px;
+    background-image: url(images/Statement_Hackl.png);
+    background-size: cover;
+}
+
+.myquote3 {
+    /* background-color: blue; */
+    height: 300px;
+    width: 250px;
+    background-image: url(images/Statement_Kaufmann.png);
+    background-size: cover;
+}
+
+.myquote4 {
+    /* background-color: blueviolet; */
+    height: 300px;
+    width: 250px;
+    background-image: url(images/Statement_Schmidbauer.png);
+    background-size: cover;
+}
+
+.mygreybox {
+    background-color: rgb(212, 230, 212);
+}
+
+.myFAQbox {
+    min-height: 200px;
+    width: 100%;
+    /* background-color: teal; */
+    padding: 50px;
+    /* margin: 20px; */
+    flex-wrap: wrap;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.myFAQtext {
+    /* background-color: orange; */
+    height: 55px;
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.myFAQfragen {
+    /* background-color: pink; */
+    min-height: 200px;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.myFAQantworten {
+    /* background-color: red; */
+    width: 45%;
+    flex-wrap: wrap;
+}
+
+.myimagebox {
+    background-color: rgb(48, 48, 48);
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+
+    
+}
+
+.mycarouseltext p {
+    color: white;
+}
+
+.myimages {
+    width: 90%;
+
+}
+
+.mydata {
+    width: 100%;
+    /* height: 200px; */
+    background-color: rgb(139, 151, 139);
+    display: flex;
+    justify-content: center;
+}
+
+.mydatatext {
+    /* background-color: red; */
+    /* height: 150px; */
+    width: 80%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mydatalink {
+    /* background-color: green; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.5rem;
+    color: grey;
+    /* margin-bottom: 20px; */
+}
+
+
+.trees-view {
+    height: 500px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.tree-container {
+    width: 400px;
+    height: 460px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+.tree-container h6 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.tree-imagebox {
+    width: 90%;
+    height: 200px;
+    margin-left: 5%;
+    object-fit: contain;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+@media (max-width:425px){
+
+    li {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 1rem;
+        color: black;
+    }
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+
+    .myentrance {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .myentrancelogobox {
+        /* background-color: olive; */
+        height: 100px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: -100px;
+        align-content: center;
+        align-items: center;
+    }
+
+    .myentrancelogo {
+        /* background-color: grey; */
+        height: 100px;
+        width: 100px;
+        background-image: url(images/Logo_Kreis.png);
+        background-size: cover;
+        background-position: center;
+        /* margin-right: 100px; */
+        padding-left: 10px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    
+    .myentrancetext {
+        margin-left: 5px;
+        padding-left: 0px;
+        width: 300px;
+    }
+
+    .myentrancetexth1 h1 {
+        font-size: 3rem;
+        padding: 0px;
+    }
+
+    .myentrancetexth2 h2 {
+        font-size: 2rem;
+    }
+
+    .myheading h1 {
+        font-size: 3rem;
+        margin-top: 40px;
+    }
+    .myFAQbox {
+        margin: 0px;
+        display: flex;
+        justify-content: left;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .myFAQtext h1 {
+        font-size: 1.5rem;
+    }
+
+    .myimagebox {
+        padding: 0px;
+    }
+
+    .myFAQantworten {
+        /* background-color: red; */
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .myFAQbox {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .myFAQtext {
+        padding-top: 40px;
+    }
+
+    .myquote1, .myquote2, .myquote3, .myquote4 {
+        width: 100%;
+    }
+
+    
+    .myentrancelogobox {
+        padding: 10px 0px 0px 10px;
+    }
+}

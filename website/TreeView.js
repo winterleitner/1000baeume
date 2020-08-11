@@ -4,24 +4,32 @@ var _React = React,
     useState = _React.useState;
 
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 var TreeView = function TreeView(props) {
     return React.createElement(
         "div",
-        { className: "container" },
+        null,
         React.createElement(
             "div",
-            { className: "myheading" },
+            { className: "container" },
             React.createElement(
-                "h1",
-                null,
-                "Die bereits gepflanzten B\xE4ume"
+                "div",
+                { className: "myheading" },
+                React.createElement(
+                    "h1",
+                    null,
+                    "Die bereits gepflanzten B\xE4ume"
+                )
             )
         ),
         React.createElement(
             "div",
             { className: "trees-view" },
             props.trees.map(function (t) {
-                return React.createElement(TreeContainer, { tree: t });
+                return React.createElement(TreeContainer, { tree: t, key: getRandomInt(1000000) });
             })
         )
     );
@@ -33,7 +41,7 @@ var TreeContainer = function TreeContainer(props) {
     return React.createElement(
         "div",
         { className: "tree-container" },
-        React.createElement(TreeImages, { images: tree.bilder }),
+        React.createElement(TreeImages, { images: tree.bilder, mainKey: props.key }),
         React.createElement(
             "h2",
             null,
@@ -85,7 +93,9 @@ var TreeImages = function TreeImages(props) {
         window.setTimeout(function () {
             if (selected + 1 < props.images.length) setSelected(selected + 1);else setSelected(0);
         }, 5000);
-        return React.createElement("img", { src: props.images[selected].src, alt: props.images[selected].alt, className: "tree-imagebox" });
+        return props.images.map(function (i) {
+            return React.createElement("img", { src: i.src, alt: i.alt, className: "tree-imagebox" });
+        });
     }
 };
 

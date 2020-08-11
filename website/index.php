@@ -18,7 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&amp;" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/ezd2sip.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
-
     <script src="https://kit.fontawesome.com/6d2ea8d999.js" crossorigin="anonymous"></script><link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet"><link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet"><link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
 
     <style>
@@ -148,6 +147,10 @@
     // Load from Database here into trees constant
     const trees = [
         {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: [{src: "/images/Baum1.JPG", alt:"Pflanzen"}, {src: "/images/Logo_Kreis.png", alt:"Logo"}]},
+        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
         {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
         {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []}
     ]

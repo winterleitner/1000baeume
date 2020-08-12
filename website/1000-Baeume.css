@@ -230,7 +230,7 @@ p {
 
 
 .trees-view {
-    height: 500px;
+    height: 600px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -244,7 +244,7 @@ p {
 
 .tree-container {
     width: 400px;
-    height: 460px;
+    height: 550px;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
@@ -257,13 +257,89 @@ p {
     box-shadow: 0 10px 20px rgba(0,0,0,.3);
     overflow: hidden;
     border-radius: 5px;
-    padding: 25px;
     text-align: center;
     z-index: 2;
 }
 
-.tree-container:hover {
-    transform: scale(1.015);
+
+.tree-container-top {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.tree-id {
+    text-align: left;
+    position: absolute;
+    left:10px;
+    top: 10px;
+    color: white;
+    z-index: 999;
+    height: 33px;
+    width: 65px;
+    border-radius: 5px;
+    background-color:  rgb(212, 230, 212);
+    box-shadow: 0 0px 5px rgba(0,0,0,.1);
+}
+
+.tree-id div {
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+
+.tree-container-bottom {
+    padding-top: 10px;
+    position: relative;
+    height: 250px;
+}
+
+.tree-date {
+    text-align: left;
+    position: absolute;
+    left:15px;
+    bottom: 10px;
+}
+
+.tree-date span {
+    font-size: 22px;
+}
+
+.tree-location {
+    text-align: right;
+    position: absolute;
+    right:15px;
+    bottom: 10px;
+}
+
+.tree-location span {
+    font-size: 22px;
+}
+
+.tree-description {
+    text-align: left;
+    position: absolute;
+    left:15px;
+    top: 20px;
+    width: 370px;
+}
+
+.tree-description p {
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.tree-sponsors {
+    text-align: left;
+    position: absolute;
+    left:15px;
+    bottom: 70px;
+}
+
+.tree-sponsors span {
+    font-size: 22px;
 }
 
 .tree-container h6 {
@@ -272,11 +348,40 @@ p {
 }
 
 .tree-imagebox {
-    width: 90%;
-    height: 200px;
-    margin-left: 5%;
-    object-fit: contain;
-    margin-bottom: 30px;
+    width: 100%;
+    height: 300px;
+    margin-left: 0%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.tree-imagebox div {
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+
+.dots-container {
+    position: absolute;
+    left:50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+}
+
+.slider-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ffff;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 999;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgb(212, 230, 212);
 }
 
 

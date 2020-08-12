@@ -144,15 +144,22 @@
 </div>
 
 <script>
+    <?php
+        $conn = new mysqli("0.0.0.0", "php_user", "password", "1000baeume");
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "SELECT * ";
+    ?>
     // Load from Database here into trees constant
     const trees = [
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: [{src: "/images/Baum1.JPG", alt:"Pflanzen"}, {src: "/images/Logo_Kreis.png", alt:"Logo"}]},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []}
+        {id: 2, beschreibung: "Baum 1 war ein wichtiger Meilenstein für das 1000-Bäume-Projekt. Anwesend waren unter anderem der Bürgermeister der Stadt Steyr, Gerald Hackl, sowie Projektinitiator Leopold Födermayr.", datum: "10.10.2020", ort: {name: "Stadtplatz", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix Winterleitner", beitrag: "100€"}], bilder: [{src: "/images/Baum1.JPG", alt:"Pflanzen"}, {src: "/images/Logo_Kreis.png", alt:"Logo"}]},
+        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Grünmarkt", lat: 22.22124, long: 23.232323}, paten: [{name: "Michael Aichinger", beitrag: "100€"},{name: "Stefanie Aichiner", beitrag: "10€"}], bilder: []},
+        {id: 879, beschreibung: "Hallo", datum: "10.10.2020", ort: {name: "Taborstiege (oben)", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: [{src: "https://www.lamodula.at/media/wysiwyg/Lexikon/esche-holz-baum-1.jpeg", alt:"Pflanzen"}, {src: "https://www.baumpflegeportal.de/wp-content/uploads/2016/05/160509_Starke-Baumtypen_Eiche-im-Seidengewand_02.jpg", alt:"Logo"}]},
+        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
+        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []}
     ]
 </script>
 <div id="trees_root"></div>

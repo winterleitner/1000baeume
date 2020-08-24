@@ -10,6 +10,18 @@ function getRandomInt(max) {
 }
 
 var TreeView = function TreeView(props) {
+    var _useState = useState(null),
+        _useState2 = _slicedToArray(_useState, 2),
+        modalImage = _useState2[0],
+        setModalImage = _useState2[1];
+
+    useEffect(function () {
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("imageModal")) {
+                setModalImage(null);
+            }
+        };
+    });
     return React.createElement(
         "div",
         null,
@@ -32,10 +44,33 @@ var TreeView = function TreeView(props) {
             props.trees.slice(0, 10).map(function (t) {
                 return React.createElement(TreeContainer, { tree: t,
                     key: getRandomInt(1000000),
-                    scrollInterval: props.scrollInterval });
+                    scrollInterval: props.scrollInterval,
+                    openImage: setModalImage });
             })
-        )
+        ),
+        React.createElement(ImageModal, { show: modalImage !== null, image: modalImage, close: function close() {
+                return setModalImage(null);
+            } })
     );
+};
+
+var ImageModal = function ImageModal(props) {
+    return props.show ? React.createElement(
+        "div",
+        { className: "modal", id: "imageModal" },
+        React.createElement(
+            "div",
+            { className: "modal-content" },
+            React.createElement(
+                "div",
+                { className: "close", onClick: props.close },
+                "x"
+            ),
+            React.createElement("img", { className: "modal-image", src: props.image, onClick: function onClick(e) {
+                    return e.stopPropagation();
+                } })
+        )
+    ) : React.createElement("div", null);
 };
 
 var TreeContainer = function TreeContainer(props) {
@@ -56,7 +91,8 @@ var TreeContainer = function TreeContainer(props) {
                     tree.id
                 )
             ),
-            React.createElement(TreeImages, { images: tree.bilder, treeId: tree.id, scrollInterval: props.scrollInterval })
+            React.createElement(TreeImages, { images: tree.bilder, treeId: tree.id, scrollInterval: props.scrollInterval,
+                openImage: props.openImage })
         ),
         React.createElement(
             "div",
@@ -128,15 +164,15 @@ var TreeContainer = function TreeContainer(props) {
 };
 
 var TreeImages = function TreeImages(props) {
-    var _useState = useState(0),
-        _useState2 = _slicedToArray(_useState, 2),
-        selected = _useState2[0],
-        setSelected = _useState2[1];
-
     var _useState3 = useState(0),
         _useState4 = _slicedToArray(_useState3, 2),
-        intervalId = _useState4[0],
-        setIntervalId = _useState4[1];
+        selected = _useState4[0],
+        setSelected = _useState4[1];
+
+    var _useState5 = useState(0),
+        _useState6 = _slicedToArray(_useState5, 2),
+        intervalId = _useState6[0],
+        setIntervalId = _useState6[1];
 
     useEffect(function () {
         window.clearTimeout(intervalId);
@@ -152,24 +188,29 @@ var TreeImages = function TreeImages(props) {
     var decrementSelected = function decrementSelected() {
         if (selected - 1 >= 0) setSelected(selected - 1);else setSelected(props.images.length - 1);
     };
-    if (props.images.length == 0) return React.createElement("div", { style: { backgroundImage: "url(/images/Logo_Steyr.png)" },
-        className: "tree-imagebox" });else {
+    if (props.images.length === 0) return React.createElement("div", { style: { backgroundImage: "url(/images/Logo_Steyr.png)" },
+        className: "tree-imagebox", onClick: function onClick() {
+            return props.openImage("/images/Logo_Steyr.png");
+        } });else {
         return React.createElement(
             "div",
             null,
             React.createElement(
                 "div",
-                { style: { backgroundImage: "url(" + props.images[selected].src + ")" }, src: props.images[selected].src,
-                    alt: props.images[selected].alt, className: "tree-imagebox" },
+                { style: { backgroundImage: "url(" + props.images[selected].src + ")" },
+                    className: "tree-imagebox", onClick: function onClick() {
+                        return props.openImage(props.images[selected].src);
+                    } },
                 React.createElement(
                     "div",
                     { className: "dots-container" },
                     props.images.map(function (i, index) {
                         return React.createElement("div", {
                             key: props.treeId + "-" + index,
-                            className: "slider-dot " + (i == props.images[selected] ? "selected" : ""),
-                            onClick: function onClick() {
-                                return setSelected(index);
+                            className: "slider-dot " + (i === props.images[selected] ? "selected" : ""),
+                            onClick: function onClick(e) {
+                                e.stopPropagation();
+                                setSelected(index);
                             } });
                     })
                 ),
@@ -178,7 +219,10 @@ var TreeImages = function TreeImages(props) {
                     { className: "arrows-container" },
                     React.createElement(
                         "div",
-                        { className: "arrow arrow-left", onClick: decrementSelected },
+                        { className: "arrow arrow-left", onClick: function onClick(e) {
+                                e.stopPropagation();
+                                decrementSelected();
+                            } },
                         React.createElement(
                             "svg",
                             { width: "100%", height: "100%", viewBox: "0 0 320 512" },
@@ -189,7 +233,10 @@ var TreeImages = function TreeImages(props) {
                     ),
                     React.createElement(
                         "div",
-                        { className: "arrow arrow-right", onClick: incrementSelected },
+                        { className: "arrow arrow-right", onClick: function onClick(e) {
+                                e.stopPropagation();
+                                incrementSelected();
+                            } },
                         React.createElement(
                             "svg",
                             { width: "100%", height: "100%", viewBox: "0 0 320 512" },

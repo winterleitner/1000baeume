@@ -1,3 +1,8 @@
+<html lang="de">
+<head>
+    <script src="https://kit.fontawesome.com/9b34ae5609.js" crossorigin="anonymous"></script>
+    <title>1000 Bäume Administrator</title>
+</head>
 <?php
 session_start();
 require 'php/database.php';
@@ -75,4 +80,7 @@ if ($res->num_rows > 0) {
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="AdminView.js"></script>
+
+
+</html>
 

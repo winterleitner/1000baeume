@@ -40,7 +40,13 @@ $res = $conn->query($sql);
 if ($res->num_rows > 0) {
     // output data of each row
     while ($row = $res->fetch_assoc()) {
-        print ("<script>const trees=" . $row["res"] . "</script>");
+        $trees = json_decode($row["res"]);
+        foreach ($trees as $tree) {
+            if (is_null($tree -> images))  $tree -> images = [];
+            if (is_null($tree -> sponsors))  $tree -> sponsors = [];
+        }
+
+        print ("<script>const trees=" . json_encode($trees) . "</script>");
     }
 }
 ?>

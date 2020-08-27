@@ -2,12 +2,12 @@
 require '../php/database.php';
 
 
-if(!isset($_POST['tree'])) {
+if(!isset($_POST)) {
     http_response_code(400);
     die();
 }
 try {
-    $tree = json_decode($_POST['tree']);
+    $tree = json_decode(file_get_contents('php://input'));
 }
 catch (Exception $ex) {
     http_response_code(400);
@@ -30,18 +30,12 @@ $tree = json_decode($tree);
 
 */
 $desc = $tree -> description;
-$date_planted = $tree -> date_planted;
+$date_planted = date("Y-m-d", strtotime($tree -> date_planted));
 $location = $tree -> location_name;
 $x = $tree -> x;
 $y = $tree -> y;
 
-
-
-$desc = "Trst";
-$date_planted = "20.04.2020";
-$location = "Daheim";
-
-
+var_dump($date_planted);
 $images = $tree -> images;
 $sponsors = $tree -> sponsors;
 

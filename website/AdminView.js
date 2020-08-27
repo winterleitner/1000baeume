@@ -215,8 +215,40 @@ var EditTreeForm = function EditTreeForm(props) {
 };
 
 var TreeForm = function TreeForm(props) {
+    var _useState3 = useState(""),
+        _useState4 = _slicedToArray(_useState3, 2),
+        description = _useState4[0],
+        setDescription = _useState4[1];
+
+    var _useState5 = useState(new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear()),
+        _useState6 = _slicedToArray(_useState5, 2),
+        date_planted = _useState6[0],
+        setDatePlanted = _useState6[1];
+
+    var _useState7 = useState(""),
+        _useState8 = _slicedToArray(_useState7, 2),
+        location_name = _useState8[0],
+        setLocationName = _useState8[1];
+
+    var _useState9 = useState([]),
+        _useState10 = _slicedToArray(_useState9, 2),
+        sponsors = _useState10[0],
+        setSponsors = _useState10[1];
+
+    var _useState11 = useState([]),
+        _useState12 = _slicedToArray(_useState11, 2),
+        images = _useState12[0],
+        setImages = _useState12[1];
+
     var isNew = props.isNew;
 
+    var save = function save() {
+        var url = isNew ? "create.php" : "edit.php";
+        fetch("/admin/" + url, {
+            method: "POST",
+            body: JSON.stringify({ description: description, date_planted: date_planted, location_name: location_name, sponsors: sponsors, images: images, x: 22.22, y: 33.33 })
+        });
+    };
     return React.createElement(
         "div",
         { className: "tree-form" },
@@ -234,7 +266,9 @@ var TreeForm = function TreeForm(props) {
                 "Beschreibung"
             ),
             React.createElement("br", null),
-            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: props.tree.description }),
+            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: props.tree.description, onChange: function onChange(e) {
+                    return setDescription(e.target.value);
+                } }),
             React.createElement("br", null),
             React.createElement(
                 "label",
@@ -246,7 +280,10 @@ var TreeForm = function TreeForm(props) {
                 onFocus: function onFocus(e) {
                     return e.target.value.length == 0 ? e.target.value = new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear() : "";
                 },
-                defaultValue: props.tree.date_planted }),
+                defaultValue: props.tree.date_planted,
+                onChange: function onChange(e) {
+                    return setDatePlanted(e.target.value);
+                } }),
             React.createElement("br", null),
             React.createElement(
                 "label",
@@ -254,16 +291,18 @@ var TreeForm = function TreeForm(props) {
                 "Standort-Name"
             ),
             React.createElement("br", null),
-            React.createElement("input", { type: "text", name: "location_name", defaultValue: props.tree.location_name }),
+            React.createElement("input", { type: "text", name: "location_name", defaultValue: props.tree.location_name, onChange: function onChange(e) {
+                    return setLocationName(e.target.value);
+                } }),
             React.createElement("br", null),
             React.createElement("hr", null),
-            React.createElement(SponsorsForm, { sponsors: props.tree.sponsors }),
+            React.createElement(SponsorsForm, { sponsors: props.tree.sponsors, change: setSponsors }),
             React.createElement("hr", null),
-            React.createElement(ImageUpload, { images: props.tree.images }),
+            React.createElement(ImageUpload, { images: props.tree.images, change: setImages }),
             React.createElement("hr", null),
             React.createElement(
                 "button",
-                { className: "btn btn-sm btn-primary" },
+                { className: "btn btn-sm btn-primary", onClick: save },
                 "Speichern"
             )
         )
@@ -271,20 +310,20 @@ var TreeForm = function TreeForm(props) {
 };
 
 var SponsorsForm = function SponsorsForm(props) {
-    var _useState3 = useState([]),
-        _useState4 = _slicedToArray(_useState3, 2),
-        sponsors = _useState4[0],
-        setSponsors = _useState4[1];
+    var _useState13 = useState([]),
+        _useState14 = _slicedToArray(_useState13, 2),
+        sponsors = _useState14[0],
+        setSponsors = _useState14[1];
 
-    var _useState5 = useState(""),
-        _useState6 = _slicedToArray(_useState5, 2),
-        nSponsorName = _useState6[0],
-        setNSponsorName = _useState6[1];
+    var _useState15 = useState(""),
+        _useState16 = _slicedToArray(_useState15, 2),
+        nSponsorName = _useState16[0],
+        setNSponsorName = _useState16[1];
 
-    var _useState7 = useState(""),
-        _useState8 = _slicedToArray(_useState7, 2),
-        nSponsorContr = _useState8[0],
-        setNSponsorContr = _useState8[1];
+    var _useState17 = useState(""),
+        _useState18 = _slicedToArray(_useState17, 2),
+        nSponsorContr = _useState18[0],
+        setNSponsorContr = _useState18[1];
 
     useEffect(function () {
         setSponsors(props.sponsors);
@@ -292,6 +331,7 @@ var SponsorsForm = function SponsorsForm(props) {
     var addSponsor = function addSponsor(e) {
         e.preventDefault();
         setSponsors([].concat(_toConsumableArray(sponsors), [{ name: nSponsorName, contribution: nSponsorContr }]));
+        props.change(sponsors);
         setNSponsorName("");
         setNSponsorContr("");
     };
@@ -316,9 +356,9 @@ var SponsorsForm = function SponsorsForm(props) {
                     "\xA0",
                     React.createElement("i", { className: "fa fa-trash", style: { color: "red" }, "aria-hidden": "true",
                         onClick: function onClick() {
-                            return setSponsors(sponsors.filter(function (x) {
+                            setSponsors(sponsors.filter(function (x) {
                                 return x !== s;
-                            }));
+                            }));props.change(sponsors);
                         } })
                 );
             })
@@ -376,15 +416,15 @@ var SponsorsForm = function SponsorsForm(props) {
 };
 
 var ImageUpload = function ImageUpload(props) {
-    var _useState9 = useState([]),
-        _useState10 = _slicedToArray(_useState9, 2),
-        images = _useState10[0],
-        setImages = _useState10[1];
+    var _useState19 = useState([]),
+        _useState20 = _slicedToArray(_useState19, 2),
+        images = _useState20[0],
+        setImages = _useState20[1];
 
-    var _useState11 = useState([]),
-        _useState12 = _slicedToArray(_useState11, 2),
-        selected = _useState12[0],
-        setSelected = _useState12[1];
+    var _useState21 = useState([]),
+        _useState22 = _slicedToArray(_useState21, 2),
+        selected = _useState22[0],
+        setSelected = _useState22[1];
 
     var imageInput = useRef(null);
     useEffect(function () {

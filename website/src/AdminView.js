@@ -81,25 +81,38 @@ const EditTreeForm = props =>
     </div>
 
 const TreeForm = props => {
+    const [description, setDescription] = useState("")
+    const [date_planted, setDatePlanted] = useState(`${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`)
+    const [location_name, setLocationName] = useState("")
+    const [sponsors, setSponsors] = useState([])
+    const [images, setImages] = useState([])
     const {isNew} = props
+    const save = () => {
+        const url = isNew ? "create.php" : "edit.php"
+        fetch(`/admin/${url}`, {
+            method: "POST",
+            body: JSON.stringify({description, date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
+        })
+    }
     return (
         <div className="tree-form">
             <h2>{isNew ? "Neuen Baum erstellen." : "Baum bearbeiten."}</h2>
             <div>
                 <label htmlFor="description">Beschreibung</label><br/>
-                <textarea name="description" rows="5" cols="50" defaultValue={props.tree.description}/><br/>
+                <textarea name="description" rows="5" cols="50" defaultValue={props.tree.description} onChange={e => setDescription(e.target.value)}/><br/>
                 <label htmlFor="date_planted">Pflanzdatum</label><br/>
                 <input type="date" name="date_planted"
                        onFocus={(e) => (e.target.value.length == 0 ? e.target.value = `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}` : "")}
-                       defaultValue={props.tree.date_planted}/><br/>
+                       defaultValue={props.tree.date_planted}
+                       onChange={e => setDatePlanted(e.target.value)}/><br/>
                 <label htmlFor="description">Standort-Name</label><br/>
-                <input type="text" name="location_name" defaultValue={props.tree.location_name}/><br/>
+                <input type="text" name="location_name" defaultValue={props.tree.location_name} onChange={e => setLocationName(e.target.value)}/><br/>
                 <hr/>
-                <SponsorsForm sponsors={props.tree.sponsors}/>
+                <SponsorsForm sponsors={props.tree.sponsors} change={setSponsors}/>
                 <hr/>
-                <ImageUpload images={props.tree.images}/>
+                <ImageUpload images={props.tree.images} change={setImages}/>
                 <hr/>
-                <button className="btn btn-sm btn-primary">Speichern</button>
+                <button className="btn btn-sm btn-primary" onClick={save}>Speichern</button>
             </div>
         </div>)
 }
@@ -114,6 +127,7 @@ const SponsorsForm = props => {
     const addSponsor = (e) => {
         e.preventDefault()
         setSponsors([...sponsors, {name: nSponsorName, contribution: nSponsorContr}])
+        props.change(sponsors)
         setNSponsorName("")
         setNSponsorContr("")
     }
@@ -124,7 +138,7 @@ const SponsorsForm = props => {
                 {sponsors.map(s =>
                     <li className="sponsor-item">{s.name} - {s.contribution}
                         &nbsp;<i className="fa fa-trash" style={{color: "red"}} aria-hidden="true"
-                                 onClick={() => setSponsors(sponsors.filter(x => x !== s))}></i>
+                                 onClick={() => {setSponsors(sponsors.filter(x => x !== s)); props.change(sponsors)}}></i>
                     </li>)}
             </ul>
             <table>

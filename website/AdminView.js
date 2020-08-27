@@ -15,25 +15,16 @@ function getRandomInt(max) {
 var nTree = { sponsors: [], images: [] };
 
 var TreeList = function TreeList(props) {
-    var _useState = useState(true),
+    var _useState = useState(nTree),
         _useState2 = _slicedToArray(_useState, 2),
-        showForm = _useState2[0],
-        setShowForm = _useState2[1];
-
-    var _useState3 = useState(nTree),
-        _useState4 = _slicedToArray(_useState3, 2),
-        selectedTree = _useState4[0],
-        setSelectedTree = _useState4[1];
-
-    var _useState5 = useState([]),
-        _useState6 = _slicedToArray(_useState5, 2),
-        sponsors = _useState6[0],
-        setSponsors = _useState6[1];
+        selectedTree = _useState2[0],
+        setSelectedTree = _useState2[1];
 
     return React.createElement(
         "div",
         null,
-        showForm ? React.createElement(TreeForm, { tree: selectedTree, modifyTree: setSelectedTree }) : React.createElement("div", null),
+        React.createElement(NewTreeForm, { tree: nTree }),
+        React.createElement(EditTreeForm, { tree: selectedTree, modifyTree: setSelectedTree }),
         React.createElement(
             "div",
             { className: "inline" },
@@ -44,15 +35,14 @@ var TreeList = function TreeList(props) {
             ),
             React.createElement(
                 "button",
-                { onClick: function onClick() {
-                        return setShowForm(true);
-                    } },
+                { className: "btn btn-sm btn-outline-primary", type: "button", "data-toggle": "modal",
+                    "data-target": "#modal-new" },
                 "Neu"
             )
         ),
         React.createElement(
             "table",
-            null,
+            { "class": "table table-responsive-sm table-striped" },
             React.createElement(
                 "thead",
                 null,
@@ -99,7 +89,7 @@ var TreeList = function TreeList(props) {
                         "tr",
                         { onClick: function onClick() {
                                 return setSelectedTree(t);
-                            } },
+                            }, "data-toggle": "modal", "data-target": "#modal-edit" },
                         React.createElement(
                             "td",
                             null,
@@ -146,8 +136,87 @@ var TreeList = function TreeList(props) {
     );
 };
 
+var NewTreeForm = function NewTreeForm(props) {
+    return React.createElement(
+        "div",
+        { className: "modal fade", id: "modal-new", tabIndex: "-1", role: "dialog", "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true" },
+        React.createElement(
+            "div",
+            { className: "modal-dialog modal-primary", role: "document" },
+            React.createElement(
+                "div",
+                { className: "modal-content" },
+                React.createElement(
+                    "div",
+                    { className: "modal-header" },
+                    React.createElement(
+                        "h4",
+                        { className: "modal-title" },
+                        "Neuen Baum anlegen"
+                    ),
+                    React.createElement(
+                        "button",
+                        { className: "close", type: "button", "data-dismiss": "modal", "aria-label": "Close" },
+                        React.createElement(
+                            "span",
+                            { "aria-hidden": "true" },
+                            "\xD7"
+                        )
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "modal-body" },
+                    React.createElement(TreeForm, Object.assign({}, props, { isNew: true }))
+                )
+            )
+        )
+    );
+};
+
+var EditTreeForm = function EditTreeForm(props) {
+    return React.createElement(
+        "div",
+        { className: "modal fade", id: "modal-edit", tabIndex: "-1", role: "dialog", "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true" },
+        React.createElement(
+            "div",
+            { className: "modal-dialog modal-primary", role: "document" },
+            React.createElement(
+                "div",
+                { className: "modal-content" },
+                React.createElement(
+                    "div",
+                    { className: "modal-header" },
+                    React.createElement(
+                        "h4",
+                        { className: "modal-title" },
+                        "Baum bearbeiten"
+                    ),
+                    React.createElement(
+                        "button",
+                        { className: "close", type: "button", "data-dismiss": "modal", "aria-label": "Close" },
+                        React.createElement(
+                            "span",
+                            { "aria-hidden": "true" },
+                            "\xD7"
+                        )
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "modal-body" },
+                    React.createElement(TreeForm, Object.assign({}, props, { isNew: false }))
+                )
+            )
+        )
+    );
+};
+
 var TreeForm = function TreeForm(props) {
-    var isNew = props.tree === nTree;
+    var isNew = props.isNew;
+
     return React.createElement(
         "div",
         { className: "tree-form" },
@@ -157,7 +226,7 @@ var TreeForm = function TreeForm(props) {
             isNew ? "Neuen Baum erstellen." : "Baum bearbeiten."
         ),
         React.createElement(
-            "form",
+            "div",
             null,
             React.createElement(
                 "label",
@@ -165,7 +234,7 @@ var TreeForm = function TreeForm(props) {
                 "Beschreibung"
             ),
             React.createElement("br", null),
-            React.createElement("textarea", { name: "description", rows: "5", cols: "60", defaultValue: props.tree.description }),
+            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: props.tree.description }),
             React.createElement("br", null),
             React.createElement(
                 "label",
@@ -187,72 +256,50 @@ var TreeForm = function TreeForm(props) {
             React.createElement("br", null),
             React.createElement("input", { type: "text", name: "location_name", defaultValue: props.tree.location_name }),
             React.createElement("br", null),
+            React.createElement("hr", null),
             React.createElement(SponsorsForm, { sponsors: props.tree.sponsors }),
+            React.createElement("hr", null),
             React.createElement(ImageUpload, { images: props.tree.images }),
             React.createElement("hr", null),
             React.createElement(
                 "button",
-                null,
+                { className: "btn btn-sm btn-primary" },
                 "Speichern"
             )
-        ),
-        !isNew ? React.createElement(
-            "div",
-            null,
-            React.createElement(
-                "h3",
-                null,
-                "Sponsoren / Baumpaten"
-            ),
-            React.createElement(
-                "ul",
-                null,
-                props.tree.sponsors && props.tree.sponsors.length > 0 ? props.tree.sponsors.map(function (i) {
-                    return React.createElement(
-                        "li",
-                        null,
-                        i.name,
-                        " - ",
-                        i.contribution
-                    );
-                }) : React.createElement(React.Fragment, null)
-            ),
-            React.createElement("input", { type: "text" }),
-            React.createElement("input", { type: "text" }),
-            React.createElement(
-                "button",
-                null,
-                "Hinzuf\xFCgen"
-            )
-        ) : React.createElement(React.Fragment, null)
+        )
     );
 };
 
 var SponsorsForm = function SponsorsForm(props) {
-    var _useState7 = useState(props.sponsors),
+    var _useState3 = useState([]),
+        _useState4 = _slicedToArray(_useState3, 2),
+        sponsors = _useState4[0],
+        setSponsors = _useState4[1];
+
+    var _useState5 = useState(""),
+        _useState6 = _slicedToArray(_useState5, 2),
+        nSponsorName = _useState6[0],
+        setNSponsorName = _useState6[1];
+
+    var _useState7 = useState(""),
         _useState8 = _slicedToArray(_useState7, 2),
-        sponsors = _useState8[0],
-        setSponsors = _useState8[1];
+        nSponsorContr = _useState8[0],
+        setNSponsorContr = _useState8[1];
 
-    var _useState9 = useState(""),
-        _useState10 = _slicedToArray(_useState9, 2),
-        nSponsorName = _useState10[0],
-        setNSponsorName = _useState10[1];
-
-    var _useState11 = useState(""),
-        _useState12 = _slicedToArray(_useState11, 2),
-        nSponsorContr = _useState12[0],
-        setNSponsorContr = _useState12[1];
-
+    useEffect(function () {
+        setSponsors(props.sponsors);
+    }, [props]);
     var addSponsor = function addSponsor(e) {
         e.preventDefault();
         setSponsors([].concat(_toConsumableArray(sponsors), [{ name: nSponsorName, contribution: nSponsorContr }]));
+        setNSponsorName("");
+        setNSponsorContr("");
     };
     return React.createElement(
         "div",
         null,
         React.createElement(
-            "strong",
+            "h4",
             null,
             "Sponsoren"
         ),
@@ -277,45 +324,72 @@ var SponsorsForm = function SponsorsForm(props) {
             })
         ),
         React.createElement(
-            "label",
+            "table",
             null,
-            "Name"
+            React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                    "th",
+                    null,
+                    React.createElement(
+                        "label",
+                        null,
+                        "Name"
+                    )
+                ),
+                React.createElement(
+                    "th",
+                    null,
+                    React.createElement(
+                        "label",
+                        null,
+                        "Beitrag"
+                    )
+                )
+            ),
+            React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                    "td",
+                    null,
+                    React.createElement("input", { type: "text", value: nSponsorName, onChange: function onChange(e) {
+                            return setNSponsorName(e.target.value);
+                        } })
+                ),
+                React.createElement(
+                    "td",
+                    null,
+                    React.createElement("input", { type: "text", value: nSponsorContr, onChange: function onChange(e) {
+                            return setNSponsorContr(e.target.value);
+                        } })
+                )
+            )
         ),
-        React.createElement("br", null),
-        React.createElement("input", { type: "text", onChange: function onChange(e) {
-                return setNSponsorName(e.target.value);
-            } }),
-        React.createElement("br", null),
-        React.createElement(
-            "label",
-            null,
-            "Beitrag"
-        ),
-        React.createElement("br", null),
-        React.createElement("input", { type: "text", onChange: function onChange(e) {
-                return setNSponsorContr(e.target.value);
-            } }),
-        React.createElement("br", null),
         React.createElement(
             "button",
-            { onClick: addSponsor },
+            { className: "btn btn-sm btn-outline-primary mt-1", onClick: addSponsor },
             "Hinzuf\xFCgen"
         )
     );
 };
 
 var ImageUpload = function ImageUpload(props) {
-    var _useState13 = useState(props.images),
-        _useState14 = _slicedToArray(_useState13, 2),
-        images = _useState14[0],
-        setImages = _useState14[1];
+    var _useState9 = useState([]),
+        _useState10 = _slicedToArray(_useState9, 2),
+        images = _useState10[0],
+        setImages = _useState10[1];
 
-    var _useState15 = useState([]),
-        _useState16 = _slicedToArray(_useState15, 2),
-        selected = _useState16[0],
-        setSelected = _useState16[1];
+    var _useState11 = useState([]),
+        _useState12 = _slicedToArray(_useState11, 2),
+        selected = _useState12[0],
+        setSelected = _useState12[1];
 
     var imageInput = useRef(null);
+    useEffect(function () {
+        setImages(props.images);
+    }, [props]);
     var upload = function upload(e) {
         e.preventDefault();
         selected.forEach(function (datei) {
@@ -346,7 +420,7 @@ var ImageUpload = function ImageUpload(props) {
         "div",
         null,
         React.createElement(
-            "h3",
+            "h4",
             null,
             "Bilder"
         ),
@@ -357,12 +431,22 @@ var ImageUpload = function ImageUpload(props) {
                 return React.createElement(
                     "div",
                     {
-                        className: "images-list-item" },
-                    React.createElement("img", { src: i, height: "180px" }),
+                        className: "images-list-item mb-3" },
+                    React.createElement("img", { src: i.image, height: "180px" }),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        i.text
+                    ),
                     React.createElement("br", null),
                     React.createElement(
                         "button",
-                        null,
+                        { className: "btn btn-sm btn-outline-danger mt-1", onClick: function onClick() {
+                                return setImages(images.filter(function (x) {
+                                    return x !== i;
+                                }));
+                            } },
                         "L\xF6schen"
                     )
                 );
@@ -392,7 +476,7 @@ var ImageUpload = function ImageUpload(props) {
         ) : React.createElement(React.Fragment, null),
         React.createElement(
             "button",
-            { onClick: upload },
+            { className: "btn btn-sm btn-outline-primary", onClick: upload },
             "Hochladen"
         )
     );

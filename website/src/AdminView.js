@@ -123,7 +123,7 @@ const SponsorsForm = props => {
     const [nSponsorContr, setNSponsorContr] = useState("")
     const addSponsor = (e) => {
         e.preventDefault()
-        props.change([...props.sponsors, {name: nSponsorName, contribution: nSponsorContr}])
+        props.change([...props.sponsors, {name: nSponsorName, contribution: nSponsorContr, id: -1}])
         setNSponsorName("")
         setNSponsorContr("")
     }

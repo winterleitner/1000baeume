@@ -14,12 +14,12 @@ $conn = new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
 
 $sql1 = "SELECT id, description, date_planted, ST_X(location) as x, ST_Y(location) as y, location_name, last_modified,
        (SELECT JSON_ARRAYAGG(JSON_OBJECT('image', image, 'text', text)) FROM images WHERE tree_id = id) AS images,
-       (SELECT JSON_ARRAYAGG(JSON_OBJECT('name', name, 'contribution', contribution)) FROM sponsors WHERE tree_id = id) AS sponsors 
+       (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'contribution', contribution)) FROM sponsors WHERE tree_id = id) AS sponsors 
        FROM trees ORDER BY id DESC;";
 
 $sql = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'description', description, 'date_planted', DATE_FORMAT(date_planted, '%d.%m.%Y'), 'x', ST_X(location), 'y', ST_Y(location), 'location_name', location_name, 'last_modified', last_modified,
        'images', (SELECT JSON_ARRAYAGG(JSON_OBJECT('image', image, 'text', text)) FROM images WHERE tree_id = id),
-       'sponsors', (SELECT JSON_ARRAYAGG(JSON_OBJECT('name', name, 'contribution', contribution)) FROM sponsors WHERE tree_id = id))) AS res
+       'sponsors', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'contribution', contribution)) FROM sponsors WHERE tree_id = id))) AS res
        FROM trees ORDER BY id DESC;";
 
 $res = $conn->query($sql);

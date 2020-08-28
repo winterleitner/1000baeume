@@ -42,7 +42,7 @@ var TreeList = function TreeList(props) {
         ),
         React.createElement(
             "table",
-            { "class": "table table-responsive-sm table-striped" },
+            { className: "table table-responsive-sm table-striped" },
             React.createElement(
                 "thead",
                 null,
@@ -242,6 +242,9 @@ var TreeForm = function TreeForm(props) {
 
     var isNew = props.isNew;
 
+    useEffect(function () {
+        return setSponsors(props.tree.sponsors);
+    }, [props]);
     var save = function save() {
         var url = isNew ? "create.php" : "edit.php";
         fetch("/admin/" + url, {
@@ -296,7 +299,7 @@ var TreeForm = function TreeForm(props) {
                 } }),
             React.createElement("br", null),
             React.createElement("hr", null),
-            React.createElement(SponsorsForm, { sponsors: props.tree.sponsors, change: setSponsors }),
+            React.createElement(SponsorsForm, { sponsors: sponsors, change: setSponsors }),
             React.createElement("hr", null),
             React.createElement(ImageUpload, { images: props.tree.images, change: setImages }),
             React.createElement("hr", null),
@@ -310,28 +313,19 @@ var TreeForm = function TreeForm(props) {
 };
 
 var SponsorsForm = function SponsorsForm(props) {
-    var _useState13 = useState([]),
+    var _useState13 = useState(""),
         _useState14 = _slicedToArray(_useState13, 2),
-        sponsors = _useState14[0],
-        setSponsors = _useState14[1];
+        nSponsorName = _useState14[0],
+        setNSponsorName = _useState14[1];
 
     var _useState15 = useState(""),
         _useState16 = _slicedToArray(_useState15, 2),
-        nSponsorName = _useState16[0],
-        setNSponsorName = _useState16[1];
+        nSponsorContr = _useState16[0],
+        setNSponsorContr = _useState16[1];
 
-    var _useState17 = useState(""),
-        _useState18 = _slicedToArray(_useState17, 2),
-        nSponsorContr = _useState18[0],
-        setNSponsorContr = _useState18[1];
-
-    useEffect(function () {
-        setSponsors(props.sponsors);
-    }, [props]);
     var addSponsor = function addSponsor(e) {
         e.preventDefault();
-        setSponsors([].concat(_toConsumableArray(sponsors), [{ name: nSponsorName, contribution: nSponsorContr }]));
-        props.change(sponsors);
+        props.change([].concat(_toConsumableArray(props.sponsors), [{ name: nSponsorName, contribution: nSponsorContr }]));
         setNSponsorName("");
         setNSponsorContr("");
     };
@@ -346,7 +340,7 @@ var SponsorsForm = function SponsorsForm(props) {
         React.createElement(
             "ul",
             null,
-            sponsors.map(function (s) {
+            props.sponsors.map(function (s) {
                 return React.createElement(
                     "li",
                     { className: "sponsor-item" },
@@ -356,9 +350,9 @@ var SponsorsForm = function SponsorsForm(props) {
                     "\xA0",
                     React.createElement("i", { className: "fa fa-trash", style: { color: "red" }, "aria-hidden": "true",
                         onClick: function onClick() {
-                            setSponsors(sponsors.filter(function (x) {
+                            return props.change(props.sponsors.filter(function (x) {
                                 return x !== s;
-                            }));props.change(sponsors);
+                            }));
                         } })
                 );
             })
@@ -416,20 +410,12 @@ var SponsorsForm = function SponsorsForm(props) {
 };
 
 var ImageUpload = function ImageUpload(props) {
-    var _useState19 = useState([]),
-        _useState20 = _slicedToArray(_useState19, 2),
-        images = _useState20[0],
-        setImages = _useState20[1];
-
-    var _useState21 = useState([]),
-        _useState22 = _slicedToArray(_useState21, 2),
-        selected = _useState22[0],
-        setSelected = _useState22[1];
+    var _useState17 = useState([]),
+        _useState18 = _slicedToArray(_useState17, 2),
+        selected = _useState18[0],
+        setSelected = _useState18[1];
 
     var imageInput = useRef(null);
-    useEffect(function () {
-        setImages(props.images);
-    }, [props]);
     var upload = function upload(e) {
         e.preventDefault();
         selected.forEach(function (datei) {
@@ -455,7 +441,6 @@ var ImageUpload = function ImageUpload(props) {
             reader.readAsDataURL(datei);
         });
     };
-    console.log(selected);
     return React.createElement(
         "div",
         null,
@@ -467,7 +452,7 @@ var ImageUpload = function ImageUpload(props) {
         React.createElement(
             "div",
             { className: "images-list" },
-            images.length > 0 ? images.map(function (i) {
+            props.images.length > 0 ? props.images.map(function (i) {
                 return React.createElement(
                     "div",
                     {
@@ -483,7 +468,7 @@ var ImageUpload = function ImageUpload(props) {
                     React.createElement(
                         "button",
                         { className: "btn btn-sm btn-outline-danger mt-1", onClick: function onClick() {
-                                return setImages(images.filter(function (x) {
+                                return props.change(props.images.filter(function (x) {
                                     return x !== i;
                                 }));
                             } },

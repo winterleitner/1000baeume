@@ -17,7 +17,7 @@ const TreeList = (props) => {
                         data-target="#modal-new">Neu
                 </button>
             </div>
-            <table class="table table-responsive-sm table-striped">
+            <table className="table table-responsive-sm table-striped">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -87,6 +87,7 @@ const TreeForm = props => {
     const [sponsors, setSponsors] = useState([])
     const [images, setImages] = useState([])
     const {isNew} = props
+    useEffect(() => setSponsors(props.tree.sponsors), [props])
     const save = () => {
         const url = isNew ? "create.php" : "edit.php"
         fetch(`/admin/${url}`, {
@@ -108,7 +109,7 @@ const TreeForm = props => {
                 <label htmlFor="description">Standort-Name</label><br/>
                 <input type="text" name="location_name" defaultValue={props.tree.location_name} onChange={e => setLocationName(e.target.value)}/><br/>
                 <hr/>
-                <SponsorsForm sponsors={props.tree.sponsors} change={setSponsors}/>
+                <SponsorsForm sponsors={sponsors} change={setSponsors}/>
                 <hr/>
                 <ImageUpload images={props.tree.images} change={setImages}/>
                 <hr/>
@@ -118,16 +119,11 @@ const TreeForm = props => {
 }
 
 const SponsorsForm = props => {
-    const [sponsors, setSponsors] = useState([])
     const [nSponsorName, setNSponsorName] = useState("")
     const [nSponsorContr, setNSponsorContr] = useState("")
-    useEffect(() => {
-        setSponsors(props.sponsors);
-    }, [props])
     const addSponsor = (e) => {
         e.preventDefault()
-        setSponsors([...sponsors, {name: nSponsorName, contribution: nSponsorContr}])
-        props.change(sponsors)
+        props.change([...props.sponsors, {name: nSponsorName, contribution: nSponsorContr}])
         setNSponsorName("")
         setNSponsorContr("")
     }
@@ -135,10 +131,10 @@ const SponsorsForm = props => {
         <div>
             <h4>Sponsoren</h4>
             <ul>
-                {sponsors.map(s =>
+                {props.sponsors.map(s =>
                     <li className="sponsor-item">{s.name} - {s.contribution}
                         &nbsp;<i className="fa fa-trash" style={{color: "red"}} aria-hidden="true"
-                                 onClick={() => {setSponsors(sponsors.filter(x => x !== s)); props.change(sponsors)}}></i>
+                                 onClick={() => props.change(props.sponsors.filter(x => x !== s))}></i>
                     </li>)}
             </ul>
             <table>
@@ -161,12 +157,8 @@ const SponsorsForm = props => {
 }
 
 const ImageUpload = props => {
-    const [images, setImages] = useState([])
     const [selected, setSelected] = useState([])
     const imageInput = useRef(null);
-    useEffect(() => {
-        setImages(props.images);
-    }, [props])
     const upload = (e) => {
         e.preventDefault()
         selected.forEach(datei => {
@@ -194,14 +186,13 @@ const ImageUpload = props => {
 
         })
     }
-    console.log(selected)
     return (
         <div>
             <h4>Bilder</h4>
             <div className="images-list">
-                {images.length > 0 ? images.map(i => <div
+                {props.images.length > 0 ? props.images.map(i => <div
                     className="images-list-item mb-3"><img src={i.image} height="180px"/><br/><span>{i.text}</span><br/>
-                    <button className="btn btn-sm btn-outline-danger mt-1" onClick={() => setImages(images.filter(x => x !== i))}>Löschen</button>
+                    <button className="btn btn-sm btn-outline-danger mt-1" onClick={() => props.change(props.images.filter(x => x !== i))}>Löschen</button>
                 </div>) : <React.Fragment/>}
             </div>
             <input type="file" multiple ref={imageInput}

@@ -188,7 +188,7 @@ var TreeImages = function TreeImages(props) {
     var decrementSelected = function decrementSelected() {
         if (selected - 1 >= 0) setSelected(selected - 1);else setSelected(props.images.length - 1);
     };
-    if (props.images.length === 0) return React.createElement("div", { style: { backgroundImage: "url(/images/Logo_Steyr.png)" },
+    if (props.images.length === 0) return React.createElement("div", { style: { backgroundImage: "url(/images/Logo_Rechteck.png)" },
         className: "tree-imagebox", onClick: function onClick() {
             return props.openImage("/images/Logo_Steyr.png");
         } });else {

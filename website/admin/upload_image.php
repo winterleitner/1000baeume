@@ -15,7 +15,10 @@ require ("../php/database.php");
 $conn = getDbConnection();
 //$image = file_get_contents('php://input');
 $image = $_FILES["image"];
+$tree_id = $_POST["tree"];
 $hash = hash_file('md5', $image["tmp_name"]);
+
+//error_log(print_r($image, TRUE));
 
 
 $stmt = $conn->prepare("SELECT * FROM images WHERE hash = ?;");
@@ -32,13 +35,13 @@ if ($res->num_rows > 0) {
 }
 if (is_null($url)){
     //Upload image
-    $url = "../uploads/".generateRandomString(5).$image["name"];
-    move_uploaded_file($image["tmp_name"], $url);
-    $url = substr($url, 3);
+    $target = "../uploads/".generateRandomString(5).$image["name"];
+    move_uploaded_file($image["tmp_name"], $target);
+    $url = substr($target, 3);
 }
 
-$stmt = $conn->prepare("INSERT INTO images (image, hash) VALUE (?,?);");
-$stmt->bind_param("ss", $url, $hash);
+$stmt = $conn->prepare("INSERT INTO images (tree_id, image, hash) VALUE (?,?,?);");
+$stmt->bind_param("iss", $tree_id, $url, $hash);
 $stmt->execute();
 print($stmt->insert_id);
 

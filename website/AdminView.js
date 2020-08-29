@@ -23,7 +23,7 @@ var TreeList = function TreeList(props) {
     return React.createElement(
         "div",
         null,
-        React.createElement(NewTreeForm, { tree: nTree }),
+        React.createElement(NewTreeForm, null),
         React.createElement(EditTreeForm, { tree: selectedTree, modifyTree: setSelectedTree }),
         React.createElement(
             "div",
@@ -35,7 +35,7 @@ var TreeList = function TreeList(props) {
             ),
             React.createElement(
                 "button",
-                { className: "btn btn-sm btn-outline-primary", type: "button", "data-toggle": "modal",
+                { className: "btn btn-sm btn-outline-primary ml-2", type: "button", "data-toggle": "modal",
                     "data-target": "#modal-new" },
                 "Neu"
             )
@@ -84,10 +84,12 @@ var TreeList = function TreeList(props) {
             React.createElement(
                 "tbody",
                 null,
-                props.trees.map(function (t) {
+                props.trees.sort(function (a, b) {
+                    return a.id < b.id;
+                }).map(function (t) {
                     return React.createElement(
                         "tr",
-                        { onClick: function onClick() {
+                        { className: "tree-list-tr", onClick: function onClick() {
                                 return setSelectedTree(t);
                             }, "data-toggle": "modal", "data-target": "#modal-edit" },
                         React.createElement(
@@ -192,7 +194,9 @@ var EditTreeForm = function EditTreeForm(props) {
                     React.createElement(
                         "h4",
                         { className: "modal-title" },
-                        "Baum bearbeiten"
+                        "Baum ",
+                        props.tree.id,
+                        " bearbeiten"
                     ),
                     React.createElement(
                         "button",
@@ -268,11 +272,6 @@ var TreeForm = function TreeForm(props) {
         "div",
         { className: "tree-form" },
         React.createElement(
-            "h2",
-            null,
-            isNew ? "Neuen Baum erstellen." : "Baum bearbeiten."
-        ),
-        React.createElement(
             "div",
             null,
             React.createElement(
@@ -292,10 +291,7 @@ var TreeForm = function TreeForm(props) {
             ),
             React.createElement("br", null),
             React.createElement("input", { type: "date", name: "date_planted",
-                onFocus: function onFocus(e) {
-                    return e.target.value.length == 0 ? e.target.value = new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear() : "";
-                },
-                defaultValue: props.tree.date_planted,
+                value: date_planted,
                 onChange: function onChange(e) {
                     return setDatePlanted(e.target.value);
                 } }),
@@ -453,7 +449,11 @@ var ImageUpload = function ImageUpload(props) {
                     method: "POST",
                     body: fd
                 }).then(function (res) {
-                    if (res.ok) props.change([].concat(_toConsumableArray(props.images), [res]));
+                    if (res.ok) {
+                        res.text().then(function (t) {
+                            return props.change([].concat(_toConsumableArray(props.images), [{ id: t }]));
+                        });
+                    }
                 });
             };
 

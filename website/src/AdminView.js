@@ -10,10 +10,10 @@ const TreeList = (props) => {
     const [selectedTree, setSelectedTree] = useState(nTree)
     return (
         <div>
-            <NewTreeForm tree={nTree}/>
+            <NewTreeForm/>
             <EditTreeForm tree={selectedTree} modifyTree={setSelectedTree}/>
             <div className="inline"><strong>Baumliste</strong>
-                <button className="btn btn-sm btn-outline-primary" type="button" data-toggle="modal"
+                <button className="btn btn-sm btn-outline-primary ml-2" type="button" data-toggle="modal"
                         data-target="#modal-new">Neu
                 </button>
             </div>
@@ -29,8 +29,8 @@ const TreeList = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {props.trees.map(t =>
-                    <tr onClick={() => setSelectedTree(t)} data-toggle="modal" data-target="#modal-edit">
+                {props.trees.sort((a,b) => a.id < b.id).map(t =>
+                    <tr className={"tree-list-tr"} onClick={() => setSelectedTree(t)} data-toggle="modal" data-target="#modal-edit">
                         <td>{t.id}</td>
                         <td>{t.description}</td>
                         <td>{t.date_planted}</td>
@@ -68,7 +68,7 @@ const EditTreeForm = props =>
         <div className="modal-dialog modal-primary" role="document">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h4 className="modal-title">Baum bearbeiten</h4>
+                    <h4 className="modal-title">Baum {props.tree.id} bearbeiten</h4>
                     <button className="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -100,19 +100,17 @@ const TreeForm = props => {
         const url = isNew ? "create.php" : "edit.php"
         fetch(`/admin/${url}`, {
             method: "POST",
-            body: JSON.stringify({id, description, date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
+            body: JSON.stringify({id, description: description, date_planted: date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
         }).then(res => res.ok ? window.location.reload() : alert("Das Speichern ist leider fehlgeschlagen."))
     }
     return (
         <div className="tree-form">
-            <h2>{isNew ? "Neuen Baum erstellen." : "Baum bearbeiten."}</h2>
             <div>
                 <label htmlFor="description">Beschreibung</label><br/>
                 <textarea name="description" rows="5" cols="50" defaultValue={props.tree.description} onChange={e => setDescription(e.target.value)}/><br/>
                 <label htmlFor="date_planted">Pflanzdatum</label><br/>
                 <input type="date" name="date_planted"
-                       onFocus={(e) => (e.target.value.length == 0 ? e.target.value = `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}` : "")}
-                       defaultValue={props.tree.date_planted}
+                       value={date_planted}
                        onChange={e => setDatePlanted(e.target.value)}/><br/>
                 <label htmlFor="description">Standort-Name</label><br/>
                 <input type="text" name="location_name" defaultValue={props.tree.location_name} onChange={e => setLocationName(e.target.value)}/><br/>
@@ -193,7 +191,10 @@ const ImageUpload = props => {
                     body: fd
                 }).then(res => {
                     if (res.ok)
-                        props.change([...props.images, res])
+                    {
+                        res.text().then(t => props.change([...props.images, {id: t}]))
+                    }
+
                 })
             }
 

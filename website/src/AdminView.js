@@ -81,19 +81,27 @@ const EditTreeForm = props =>
     </div>
 
 const TreeForm = props => {
+    const [id, setId] = useState(-1)
     const [description, setDescription] = useState("")
     const [date_planted, setDatePlanted] = useState(`${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`)
     const [location_name, setLocationName] = useState("")
     const [sponsors, setSponsors] = useState([])
     const [images, setImages] = useState([])
     const {isNew} = props
-    useEffect(() => setSponsors(props.tree.sponsors), [props])
+    useEffect(() => {
+        setSponsors(props.tree.sponsors)
+        setImages(props.tree.images)
+        setDescription(props.tree.description)
+        setDatePlanted(props.tree.date_planted)
+        setLocationName(props.tree.location_name)
+        setId(props.tree.id)
+    }, [props.tree])
     const save = () => {
         const url = isNew ? "create.php" : "edit.php"
         fetch(`/admin/${url}`, {
             method: "POST",
-            body: JSON.stringify({description, date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
-        })
+            body: JSON.stringify({id, description, date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
+        }).then(res => res.ok ? window.location.reload() : alert("Das Speichern ist leider fehlgeschlagen."))
     }
     return (
         <div className="tree-form">
@@ -111,7 +119,7 @@ const TreeForm = props => {
                 <hr/>
                 <SponsorsForm sponsors={sponsors} change={setSponsors}/>
                 <hr/>
-                <ImageUpload images={props.tree.images} change={setImages}/>
+                <ImageUpload images={images} change={setImages} treeId={props.tree.id}/>
                 <hr/>
                 <button className="btn btn-sm btn-primary" onClick={save}>Speichern</button>
             </div>
@@ -176,8 +184,17 @@ const ImageUpload = props => {
             // Wenn der Dateiinhalt ausgelesen wurde...
             reader.onload = function (theFileData) {
                 senddata.fileData = theFileData.target.result; // Ergebnis vom FileReader auslesen
+                const fd = new FormData()
+                fd.append("tree", props.treeId)
+                fd.append("image", datei)
                 //Upload
-                console.log(theFileData)
+                fetch("/admin/upload_image.php", {
+                    method: "POST",
+                    body: fd
+                }).then(res => {
+                    if (res.ok)
+                        props.change([...props.images, res])
+                })
             }
 
             // Die Datei einlesen und in eine Data-URL konvertieren

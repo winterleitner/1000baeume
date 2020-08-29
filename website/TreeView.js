@@ -142,7 +142,7 @@ var TreeContainer = function TreeContainer(props) {
                     tree.beschreibung.length > 160 ? tree.beschreibung.substr(0, 145) + "..." : tree.beschreibung.length > 0 ? tree.beschreibung : "-"
                 )
             ),
-            React.createElement(
+            tree.paten.length > 0 ? React.createElement(
                 "div",
                 { className: "tree-sponsors" },
                 React.createElement(
@@ -158,7 +158,7 @@ var TreeContainer = function TreeContainer(props) {
                         return p.name;
                     } /*+ "(" + p.beitrag + ")"*/).join(", ")
                 )
-            )
+            ) : React.createElement(React.Fragment, null)
         )
     );
 };

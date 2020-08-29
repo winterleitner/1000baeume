@@ -40,7 +40,7 @@ $images = $tree -> images;
 $sponsors = $tree -> sponsors;
 
 
-$conn = new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
+$conn = getDbConnection();
 
 
 

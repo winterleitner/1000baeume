@@ -40,7 +40,7 @@ $images = $tree -> images;
 $sponsors = $tree -> sponsors;
 
 
-$conn = new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
+$conn = getDbConnection();
 
 
 
@@ -57,7 +57,9 @@ $text = null;
 $images_to_remove = [];
 $stmt = $conn->prepare("SELECT * FROM images WHERE tree_id = ?;");
 $stmt->bind_param("i", $tree_id);
-$res = $stmt->execute();
+$stmt->execute();
+$res = $stmt->get_result();
+
 
 if ($res->num_rows > 0) {
 // output data of each row
@@ -66,7 +68,7 @@ if ($res->num_rows > 0) {
         foreach ($images as $image) {
             if ($image -> id == $row["id"]) $remove = false;
         }
-        if ($remove) array_push($images_to_remove, $image -> id);
+        if ($remove) array_push($images_to_remove, $row["id"]);
     }
 }
 
@@ -75,7 +77,8 @@ $stmt = $conn->prepare("UPDATE images SET tree_id = 0 WHERE id = ?;");
 $stmt->bind_param("i", $img_id);
 foreach ($images_to_remove as $img) {
     $img_id = $img;
-    $stmt->execute();
+    var_dump($img_id);
+    var_dump($stmt->execute());
 }
 
 #endregion
@@ -96,7 +99,9 @@ foreach ($images as $image) {
 $sponsors_to_remove = [];
 $stmt = $conn->prepare("SELECT * FROM sponsors WHERE tree_id = ?;");
 $stmt->bind_param("i", $tree_id);
-$res = $stmt->execute();
+$stmt->execute();
+$res = $stmt->get_result();
+
 
 if ($res->num_rows > 0) {
 // output data of each row
@@ -105,14 +110,14 @@ if ($res->num_rows > 0) {
         foreach ($sponsors as $s) {
             if ($s -> id == $row["id"]) $remove = false;
         }
-        if ($remove) array_push($sponsors_to_remove, $s -> id);
+        if ($remove) array_push($sponsors_to_remove, $row["id"]);
     }
 }
 
 $sponsor_id = -1;
-$stmt = $conn->prepare("DELETE FROM sponsors SET WHERE id = ?;");
+$stmt = $conn->prepare("DELETE FROM sponsors WHERE id = ?;");
 $stmt->bind_param("i", $sponsor_id);
-foreach ($images_to_remove as $sponsor_id) {
+foreach ($sponsors_to_remove as $sponsor_id) {
     $stmt->execute();
 }
 
@@ -121,14 +126,14 @@ foreach ($images_to_remove as $sponsor_id) {
 $name = null;
 $contr = null;
 
-$stmt = $conn->prepare("INSERT INTO sponsors (tree_id, name, contribution) VALUE (?,?,?)");
+$stmt = $conn->prepare("INSERT INTO sponsors (tree_id, name, contribution) VALUE (?,?,?);");
 $stmt->bind_param("iss", $tree_id, $name, $contr);
 
 foreach ($sponsors as $sponsor) {
     if ($sponsor -> id != -1) continue; // Only add newly added sponsors
     $name = $sponsor -> name;
     $contr = $sponsor -> contribution;
-    $stmt->execute();
+    var_dump($stmt->execute());
 }
 #endregion
 http_response_code(200);

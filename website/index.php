@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="de"><head>
+<html lang="de">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
     <title>1000 Bäume für Steyr</title>
     <link rel="icon" type="image/png" href="images/Logo_Kreis.png">
 
-    <meta name="description" content="Das Projekt: Ganz Steyr pflanzt 1000 Bäume, damit das Klima auch in 30 Jahren erträglich bleibt. Helfen Sie jetzt mit!">
+    <meta name="description"
+          content="Das Projekt: Ganz Steyr pflanzt 1000 Bäume, damit das Klima auch in 30 Jahren erträglich bleibt. Helfen Sie jetzt mit!">
 
     <!-- This is Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!--This is my own stylesheet-->
     <link rel="stylesheet" href="1000-Baeume.css">
 
@@ -18,7 +21,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&amp;" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/ezd2sip.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6d2ea8d999.js" crossorigin="anonymous"></script><link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet"><link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet"><link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6d2ea8d999.js" crossorigin="anonymous"></script>
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all"
+          rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all"
+          rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
 
     <style>
         gearbox-hud {
@@ -43,11 +51,11 @@
         gearbox-hud.gbx-recently-active {
             opacity: 1 !important;
         }
-    </style></head>
+    </style>
+</head>
 
 
 <body class="gbx-installed">
-
 
 
 <div class="myentrance">
@@ -72,7 +80,11 @@
     </div>
 
     <div class="mytext">
-        <p>Wenn wir wollen, dass sich die sommerlichen Höchsttemperaturen in der Stadt Steyr auch in 30 Jahren noch in einem einigermaßen erträglichen Rahmen bewegen, dann müssen wir jetzt damit starten, etwas zu unternehmen. Das Projekt „1000 Bäume für Steyr“ hat zum Ziel, im Stadtgebiet 1000 Bäume zu pflanzen. Bäume produzieren Sauerstoff und sorgen für saubere, kühle Klimatisierung der Stadt. Die Bürger der Stadt realisieren gemeinsam mit der Politik und dem Magistrat Steyr dieses Projekt.
+        <p>Wenn wir wollen, dass sich die sommerlichen Höchsttemperaturen in der Stadt Steyr auch in 30 Jahren noch in
+            einem einigermaßen erträglichen Rahmen bewegen, dann müssen wir jetzt damit starten, etwas zu unternehmen.
+            Das Projekt „1000 Bäume für Steyr“ hat zum Ziel, im Stadtgebiet 1000 Bäume zu pflanzen. Bäume produzieren
+            Sauerstoff und sorgen für saubere, kühle Klimatisierung der Stadt. Die Bürger der Stadt realisieren
+            gemeinsam mit der Politik und dem Magistrat Steyr dieses Projekt.
             Helfen Sie mit!</p>
     </div>
 
@@ -100,7 +112,9 @@
                 </ul>
                 <h2>Wo können Bäume gepflanzt werden?</h2>
                 <ul>
-                    <li>Sie haben eine Idee für einen neuen Standort, senden Sie uns ein Foto und die Standortbeschreibung</li>
+                    <li>Sie haben eine Idee für einen neuen Standort, senden Sie uns ein Foto und die
+                        Standortbeschreibung
+                    </li>
                     <li>Wir kontaktieren den Grundeigentümer</li>
                     <li>Wir klären die rechtliche und technische Möglichkeit</li>
                     <li>Wir kümmern uns um die Finanzierung (Patenschaft, Spende)</li>
@@ -109,8 +123,12 @@
                 <h2>Wie kann man eine Baumpatenschaft übernehmen, wie läuft das ab?</h2>
                 <ul>
                     <li>Sie senden uns ein Mail mit dem Betrag für eine Baumpatenschaft (mind. 100€)</li>
-                    <li>Wir stimmen mit Ihnen den Pflanzort und den Baum (Gattung, Stammdurchmesser) ab und informieren Sie über den Termin der Pflanzung.</li>
-                    <li>Sie überweisen den Betrag der Patenschaft auf das Konto "Tourismusverban Steyr und die Nationalparkregion", Zusatzbezeichnung "1000 Bäume für Steyr": AT97 3411 4000 0004 2572 ein.</li>
+                    <li>Wir stimmen mit Ihnen den Pflanzort und den Baum (Gattung, Stammdurchmesser) ab und informieren
+                        Sie über den Termin der Pflanzung.
+                    </li>
+                    <li>Sie überweisen den Betrag der Patenschaft auf das Konto "Tourismusverban Steyr und die
+                        Nationalparkregion", Zusatzbezeichnung "1000 Bäume für Steyr": AT97 3411 4000 0004 2572 ein.
+                    </li>
                     <li>Die Pflanzung erfolgt durch unseren Projektpartner in ihrem Beisein (sofern gewünscht)</li>
                     <li>Sie erhalten eine Urkunde - am Baum wird eine Plakette mit ihrem Namen befestigt.</li>
                     <li>Eigentümer des Baumes ist der jeweilige Grundeigentümer der die Pflege übernimmt</li>
@@ -118,15 +136,23 @@
             </div>
             <div class="myFAQantworten">
                 <h2>Kann man auch einfach nur spenden?</h2>
-                <p>Ja, sie zahlen einen Betrag auf das Bankkonto "Tourismusverband Steyr und die Nationalparkregion", Zusatzbezeichnung "1000 Bäume für Steyr": AT97 3411 4000 0004 2572 ein.</p>
+                <p>Ja, sie zahlen einen Betrag auf das Bankkonto "Tourismusverband Steyr und die Nationalparkregion",
+                    Zusatzbezeichnung "1000 Bäume für Steyr": AT97 3411 4000 0004 2572 ein.</p>
                 <h2>Auf welchen Grundstücken werden die Bäume gepflanzt? Privat, öffentlich? Wer plant das?</h2>
                 <ul>
-                    <li>In der ersten Phase des Projektes werden mögliche Pflanzorte gesucht, alle Bürger werden gebeten, ihre Vorschläge und Ideen mittels eMail mit Angabe des gewünschten Standortes nach Möglichkeit mit Foto bekanntzugeben.</li>
-                    <li>Diese Vorschläge werden vom Projektteam mit dem Grundeigentümer und den Behörden abgestimmt.</li>
+                    <li>In der ersten Phase des Projektes werden mögliche Pflanzorte gesucht, alle Bürger werden
+                        gebeten, ihre Vorschläge und Ideen mittels eMail mit Angabe des gewünschten Standortes nach
+                        Möglichkeit mit Foto bekanntzugeben.
+                    </li>
+                    <li>Diese Vorschläge werden vom Projektteam mit dem Grundeigentümer und den Behörden abgestimmt.
+                    </li>
                     <li>Die Finanzierung der Pflanzung erfolgt dann durch Baumpatenschaft bzw. Spenden.</li>
                 </ul>
-                <h2>Wie wird dafür gesorgt, dass das gespendete bzw. überwiesene Geld für diese Aktion verwendet wird - und nicht für die Verwaltung "draufgeht"?</h2>
-                <p>Die Verwaltung des Geldes erfolgt durch den Tourismusverband der Stadt Steyr. Die gesamte Verwaltungsarbeit erfolgt ehrenamtlich. Die Kontrolle der Gebarung erfolgt durch Dr. Christoph Grumböck von der Notariatskanzlei Dr. Kaliba</p>
+                <h2>Wie wird dafür gesorgt, dass das gespendete bzw. überwiesene Geld für diese Aktion verwendet wird -
+                    und nicht für die Verwaltung "draufgeht"?</h2>
+                <p>Die Verwaltung des Geldes erfolgt durch den Tourismusverband der Stadt Steyr. Die gesamte
+                    Verwaltungsarbeit erfolgt ehrenamtlich. Die Kontrolle der Gebarung erfolgt durch Dr. Christoph
+                    Grumböck von der Notariatskanzlei Dr. Kaliba</p>
                 <h2>Wer ist mein Ansprechpartner? Wo kann ich mich wie hinwenden?</h2>
                 <h3>Projektansprechpartner:</h3>
                 <p>STR Reinhard Kaufmann und Dkfm. Leopold Födermayr
@@ -137,7 +163,8 @@
                 <p><a href="mailto:1000baeume@steyr.gv.at">1000baeume@steyr.gv.at</a>
                     <a href="mailto:steyr@nachrichten.at">steyr@nachrichten.at</a></p>
                 <h3>Projektpartner:</h3>
-                <p>OÖ Nachrichten, Raiffeisenbank Steyr, Tourismusverband Steyr und die Nationalparkregion, GRS Wirtschaftsprüfung Steuerberatung GmbH und Christoph Grumböck Notariatsubstitut Rechtsberatung</p>
+                <p>OÖ Nachrichten, Raiffeisenbank Steyr, Tourismusverband Steyr und die Nationalparkregion, GRS
+                    Wirtschaftsprüfung Steuerberatung GmbH und Christoph Grumböck Notariatsubstitut Rechtsberatung</p>
             </div>
         </div>
     </div>
@@ -145,26 +172,99 @@
 
 <script>
     <?php
-        $conn = new mysqli("0.0.0.0", "php_user", "password", "1000baeume");
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        require "php/database.php";
+    $conn = getDbConnection();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'beschreibung', description, 'datum', DATE_FORMAT(date_planted, '%d.%m.%Y'), 'ort', JSON_OBJECT('lat', ST_X(location), 'long', ST_Y(location), 'name', location_name), 'last_modified', last_modified,
+       'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) FROM images WHERE tree_id = t.id),
+       'paten', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'beitrag', contribution)) FROM sponsors WHERE tree_id = t.id))) AS res
+       FROM trees t ORDER BY t.id DESC;";
+
+    $res = $conn->query($sql);
+    if ($res->num_rows > 0) {
+        // output data of each row
+        while ($row = $res->fetch_assoc()) {
+            $trees = json_decode($row["res"]);
+            foreach ($trees as $tree) {
+                if (is_null($tree -> bilder))  $tree -> bilder = [];
+                if (is_null($tree -> paten))  $tree -> paten = [];
+            }
+
+            print ("let tr=" . json_encode($trees) . ";\n");
         }
-        $sql = "SELECT * ";
+    }
     ?>
     // Load from Database here into trees constant
     const t = [
-        {id: 2, beschreibung: "Baum 1 war ein wichtiger Meilenstein für das 1000-Bäume-Projekt. Anwesend waren unter anderem der Bürgermeister der Stadt Steyr, Gerald Hackl, sowie Projektinitiator Leopold Födermayr.", datum: "10.10.2020", ort: {name: "Stadtplatz", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix Winterleitner", beitrag: "100€"}], bilder: [{src: "/images/Baum1.JPG", alt:"Pflanzen"}, {src: "/images/Logo_Kreis.png", alt:"Logo"}]},
-        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Grünmarkt", lat: 22.22124, long: 23.232323}, paten: [{name: "Michael Aichinger", beitrag: "100€"},{name: "Stefanie Aichiner", beitrag: "10€"}], bilder: []},
-        {id: 879, beschreibung: "Hallo", datum: "10.10.2020", ort: {name: "Taborstiege (oben)", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: [{src: "https://www.lamodula.at/media/wysiwyg/Lexikon/esche-holz-baum-1.jpeg", alt:"Pflanzen"}, {src: "https://www.baumpflegeportal.de/wp-content/uploads/2016/05/160509_Starke-Baumtypen_Eiche-im-Seidengewand_02.jpg", alt:"Logo"}, {src:"https://www.happinez.de/blog/wp-content/uploads/2018/03/AdobeStock_81977003.jpg", alt:""}]},
-        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []},
-        {id: 2, beschreibung: "", datum: "10.10.2020", ort: {name: "Ennskai", lat: 22.22124, long: 23.232323}, paten: [{name: "Felix", beitrag: "100€"},{name: "Steffi", beitrag: "10€"}], bilder: []}
+        {
+            id: 2,
+            beschreibung: "Baum 1 war ein wichtiger Meilenstein für das 1000-Bäume-Projekt. Anwesend waren unter anderem der Bürgermeister der Stadt Steyr, Gerald Hackl, sowie Projektinitiator Leopold Födermayr.",
+            datum: "10.10.2020",
+            ort: {name: "Stadtplatz", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix Winterleitner", beitrag: "100€"}],
+            bilder: [{src: "/images/Baum1.JPG", alt: "Pflanzen"}, {src: "/images/Logo_Kreis.png", alt: "Logo"}]
+        },
+        {
+            id: 2,
+            beschreibung: "",
+            datum: "10.10.2020",
+            ort: {name: "Grünmarkt", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Michael Aichinger", beitrag: "100€"}, {name: "Stefanie Aichiner", beitrag: "10€"}],
+            bilder: []
+        },
+        {
+            id: 879,
+            beschreibung: "Hallo",
+            datum: "10.10.2020",
+            ort: {name: "Taborstiege (oben)", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
+            bilder: [{
+                src: "https://www.lamodula.at/media/wysiwyg/Lexikon/esche-holz-baum-1.jpeg",
+                alt: "Pflanzen"
+            }, {
+                src: "https://www.baumpflegeportal.de/wp-content/uploads/2016/05/160509_Starke-Baumtypen_Eiche-im-Seidengewand_02.jpg",
+                alt: "Logo"
+            }, {src: "https://www.happinez.de/blog/wp-content/uploads/2018/03/AdobeStock_81977003.jpg", alt: ""}]
+        },
+        {
+            id: 2,
+            beschreibung: "",
+            datum: "10.10.2020",
+            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
+            bilder: []
+        },
+        {
+            id: 2,
+            beschreibung: "",
+            datum: "10.10.2020",
+            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
+            bilder: []
+        },
+        {
+            id: 2,
+            beschreibung: "",
+            datum: "10.10.2020",
+            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
+            bilder: []
+        },
+        {
+            id: 2,
+            beschreibung: "",
+            datum: "10.10.2020",
+            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
+            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
+            bilder: []
+        }
     ]
     const scrollInterval = 10000
     const trees = []
     for (let i = 0; i < 100; i++) {
-        trees.push(...t);
+        trees.push(...tr);
     }
 </script>
 <div id="trees_root"></div>
@@ -184,7 +284,6 @@
 </div>
 
 
-
 <div class="mydata">
     <div class="mydatatext">
         <h2>1000 Bäume für Steyr</h2>
@@ -199,8 +298,15 @@
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="TreeView.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
-</body></html>
+</body>
+</html>

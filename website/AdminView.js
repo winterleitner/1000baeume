@@ -215,41 +215,53 @@ var EditTreeForm = function EditTreeForm(props) {
 };
 
 var TreeForm = function TreeForm(props) {
-    var _useState3 = useState(""),
+    var _useState3 = useState(-1),
         _useState4 = _slicedToArray(_useState3, 2),
-        description = _useState4[0],
-        setDescription = _useState4[1];
+        id = _useState4[0],
+        setId = _useState4[1];
 
-    var _useState5 = useState(new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear()),
+    var _useState5 = useState(""),
         _useState6 = _slicedToArray(_useState5, 2),
-        date_planted = _useState6[0],
-        setDatePlanted = _useState6[1];
+        description = _useState6[0],
+        setDescription = _useState6[1];
 
-    var _useState7 = useState(""),
+    var _useState7 = useState(new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear()),
         _useState8 = _slicedToArray(_useState7, 2),
-        location_name = _useState8[0],
-        setLocationName = _useState8[1];
+        date_planted = _useState8[0],
+        setDatePlanted = _useState8[1];
 
-    var _useState9 = useState([]),
+    var _useState9 = useState(""),
         _useState10 = _slicedToArray(_useState9, 2),
-        sponsors = _useState10[0],
-        setSponsors = _useState10[1];
+        location_name = _useState10[0],
+        setLocationName = _useState10[1];
 
     var _useState11 = useState([]),
         _useState12 = _slicedToArray(_useState11, 2),
-        images = _useState12[0],
-        setImages = _useState12[1];
+        sponsors = _useState12[0],
+        setSponsors = _useState12[1];
+
+    var _useState13 = useState([]),
+        _useState14 = _slicedToArray(_useState13, 2),
+        images = _useState14[0],
+        setImages = _useState14[1];
 
     var isNew = props.isNew;
 
     useEffect(function () {
-        return setSponsors(props.tree.sponsors);
-    }, [props]);
+        setSponsors(props.tree.sponsors);
+        setImages(props.tree.images);
+        setDescription(props.tree.description);
+        setDatePlanted(props.tree.date_planted);
+        setLocationName(props.tree.location_name);
+        setId(props.tree.id);
+    }, [props.tree]);
     var save = function save() {
         var url = isNew ? "create.php" : "edit.php";
         fetch("/admin/" + url, {
             method: "POST",
-            body: JSON.stringify({ description: description, date_planted: date_planted, location_name: location_name, sponsors: sponsors, images: images, x: 22.22, y: 33.33 })
+            body: JSON.stringify({ id: id, description: description, date_planted: date_planted, location_name: location_name, sponsors: sponsors, images: images, x: 22.22, y: 33.33 })
+        }).then(function (res) {
+            return res.ok ? window.location.reload() : alert("Das Speichern ist leider fehlgeschlagen.");
         });
     };
     return React.createElement(
@@ -301,7 +313,7 @@ var TreeForm = function TreeForm(props) {
             React.createElement("hr", null),
             React.createElement(SponsorsForm, { sponsors: sponsors, change: setSponsors }),
             React.createElement("hr", null),
-            React.createElement(ImageUpload, { images: props.tree.images, change: setImages }),
+            React.createElement(ImageUpload, { images: images, change: setImages, treeId: props.tree.id }),
             React.createElement("hr", null),
             React.createElement(
                 "button",
@@ -313,19 +325,19 @@ var TreeForm = function TreeForm(props) {
 };
 
 var SponsorsForm = function SponsorsForm(props) {
-    var _useState13 = useState(""),
-        _useState14 = _slicedToArray(_useState13, 2),
-        nSponsorName = _useState14[0],
-        setNSponsorName = _useState14[1];
-
     var _useState15 = useState(""),
         _useState16 = _slicedToArray(_useState15, 2),
-        nSponsorContr = _useState16[0],
-        setNSponsorContr = _useState16[1];
+        nSponsorName = _useState16[0],
+        setNSponsorName = _useState16[1];
+
+    var _useState17 = useState(""),
+        _useState18 = _slicedToArray(_useState17, 2),
+        nSponsorContr = _useState18[0],
+        setNSponsorContr = _useState18[1];
 
     var addSponsor = function addSponsor(e) {
         e.preventDefault();
-        props.change([].concat(_toConsumableArray(props.sponsors), [{ name: nSponsorName, contribution: nSponsorContr }]));
+        props.change([].concat(_toConsumableArray(props.sponsors), [{ name: nSponsorName, contribution: nSponsorContr, id: -1 }]));
         setNSponsorName("");
         setNSponsorContr("");
     };
@@ -410,10 +422,10 @@ var SponsorsForm = function SponsorsForm(props) {
 };
 
 var ImageUpload = function ImageUpload(props) {
-    var _useState17 = useState([]),
-        _useState18 = _slicedToArray(_useState17, 2),
-        selected = _useState18[0],
-        setSelected = _useState18[1];
+    var _useState19 = useState([]),
+        _useState20 = _slicedToArray(_useState19, 2),
+        selected = _useState20[0],
+        setSelected = _useState20[1];
 
     var imageInput = useRef(null);
     var upload = function upload(e) {
@@ -433,8 +445,16 @@ var ImageUpload = function ImageUpload(props) {
             // Wenn der Dateiinhalt ausgelesen wurde...
             reader.onload = function (theFileData) {
                 senddata.fileData = theFileData.target.result; // Ergebnis vom FileReader auslesen
+                var fd = new FormData();
+                fd.append("tree", props.treeId);
+                fd.append("image", datei);
                 //Upload
-                console.log(theFileData);
+                fetch("/admin/upload_image.php", {
+                    method: "POST",
+                    body: fd
+                }).then(function (res) {
+                    if (res.ok) props.change([].concat(_toConsumableArray(props.images), [res]));
+                });
             };
 
             // Die Datei einlesen und in eine Data-URL konvertieren

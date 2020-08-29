@@ -58,10 +58,11 @@ const TreeContainer = (props) => {
                 <div className="tree-description"><strong>Infos</strong><br/>
                     <p>{tree.beschreibung.length > 160 ? tree.beschreibung.substr(0, 145) + "..." : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
                 </div>
+                {tree.paten.length > 0 ?
                 <div className="tree-sponsors">
                     <strong>{tree.paten.length === 1 ? "Baumpate" : "Baumpaten"}</strong><br/>
                     <span>{tree.paten.map(p => p.name /*+ "(" + p.beitrag + ")"*/).join(", ")}</span>
-                </div>
+                </div> : <React.Fragment/>}
             </div>
         </div>)
 }

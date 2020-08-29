@@ -17,7 +17,7 @@ const TreeList = (props) => {
                         data-target="#modal-new">Neu
                 </button>
             </div>
-            <table className="table table-responsive-sm table-striped">
+            <table className="table table-responsive-sm table-striped mt-1">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -89,13 +89,15 @@ const TreeForm = props => {
     const [images, setImages] = useState([])
     const {isNew} = props
     useEffect(() => {
-        setSponsors(props.tree.sponsors)
-        setImages(props.tree.images)
-        setDescription(props.tree.description)
-        setDatePlanted(props.tree.date_planted)
-        setLocationName(props.tree.location_name)
-        setId(props.tree.id)
-    }, [props.tree])
+        if (typeof props.tree != "undefined" && props.tree != null) {
+            if (typeof props.tree.sponsors != "undefined") setSponsors(props.tree.sponsors)
+            if (typeof props.tree.images != "undefined") setImages(props.tree.images)
+            if (typeof props.tree.description != "undefined") setDescription(props.tree.description)
+            if (typeof props.tree.date_planted != "undefined") setDatePlanted(props.tree.date_planted)
+            if (typeof props.tree.location_name != "undefined") setLocationName(props.tree.location_name)
+            if (typeof props.tree.id != "undefined") setId(props.tree.id)
+        }
+    }, [props])
     const save = () => {
         const url = isNew ? "create.php" : "edit.php"
         fetch(`/admin/${url}`, {
@@ -107,19 +109,19 @@ const TreeForm = props => {
         <div className="tree-form">
             <div>
                 <label htmlFor="description">Beschreibung</label><br/>
-                <textarea name="description" rows="5" cols="50" defaultValue={props.tree.description} onChange={e => setDescription(e.target.value)}/><br/>
+                <textarea name="description" rows="5" cols="50" defaultValue={description} onChange={e => setDescription(e.target.value)}/><br/>
                 <label htmlFor="date_planted">Pflanzdatum</label><br/>
                 <input type="date" name="date_planted"
                        value={date_planted}
                        onChange={e => setDatePlanted(e.target.value)}/><br/>
                 <label htmlFor="description">Standort-Name</label><br/>
-                <input type="text" name="location_name" defaultValue={props.tree.location_name} onChange={e => setLocationName(e.target.value)}/><br/>
+                <input type="text" name="location_name" defaultValue={location_name} onChange={e => setLocationName(e.target.value)}/><br/>
                 <hr/>
                 <SponsorsForm sponsors={sponsors} change={setSponsors}/>
                 <hr/>
-                <ImageUpload images={images} change={setImages} treeId={props.tree.id}/>
+                <ImageUpload images={images} change={setImages} treeId={id}/>
                 <hr/>
-                <button className="btn btn-sm btn-primary" onClick={save}>Speichern</button>
+                <button className="btn btn-primary" onClick={save}>Speichern</button>
             </div>
         </div>)
 }
@@ -164,9 +166,11 @@ const SponsorsForm = props => {
 
 const ImageUpload = props => {
     const [selected, setSelected] = useState([])
+    const [loading, setLoading] = useState(false)
     const imageInput = useRef(null);
     const upload = (e) => {
         e.preventDefault()
+        setLoading(true)
         selected.forEach(datei => {
 
             // Ein Objekt um Dateien einzulesen
@@ -182,6 +186,7 @@ const ImageUpload = props => {
             // Wenn der Dateiinhalt ausgelesen wurde...
             reader.onload = function (theFileData) {
                 senddata.fileData = theFileData.target.result; // Ergebnis vom FileReader auslesen
+
                 const fd = new FormData()
                 fd.append("tree", props.treeId)
                 fd.append("image", datei)
@@ -192,7 +197,7 @@ const ImageUpload = props => {
                 }).then(res => {
                     if (res.ok)
                     {
-                        res.text().then(t => props.change([...props.images, {id: t}]))
+                        res.text().then(t => props.change([...props.images, {id: t, image:senddata.fileData}]))
                     }
 
                 })
@@ -203,18 +208,21 @@ const ImageUpload = props => {
 
 
         })
+        setLoading(false)
+        setSelected([])
     }
     return (
         <div>
             <h4>Bilder</h4>
             <div className="images-list">
-                {props.images.length > 0 ? props.images.map(i => <div
+                {props.images.length > 0 ? props.images.sort((a,b) => a.id < b.id).map(i => <div
                     className="images-list-item mb-3"><img src={i.image} height="180px"/><br/><span>{i.text}</span><br/>
                     <button className="btn btn-sm btn-outline-danger mt-1" onClick={() => props.change(props.images.filter(x => x !== i))}>Löschen</button>
                 </div>) : <React.Fragment/>}
             </div>
-            <input type="file" multiple ref={imageInput}
+            <input hidden type="file" multiple ref={imageInput}
                    onChange={(e) => Promise.all([...e.target.files]).then(res => setSelected(res))}/>
+            <button className="btn btn-sm btn-outline-primary" onClick={() => imageInput.current.click()}>Fotos auswählen</button><br/>
             {selected.length > 0 ?
                 <div>
                     Hochzuladende Fotos:
@@ -225,7 +233,11 @@ const ImageUpload = props => {
                     </ul>
                 </div> : <React.Fragment/>
             }
-            <button className="btn btn-sm btn-outline-primary" onClick={upload}>Hochladen</button>
+            {loading ? <button className="btn btn-sm btn-primary mt-1" type="button">
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span className="ml-2">Lade hoch...</span>
+            </button> :
+                (selected.length > 0 ? <button className="btn btn-sm btn-primary mt-1" onClick={upload}>Hochladen</button> : <React.Fragment/>)}
         </div>
     )
 }
@@ -234,9 +246,6 @@ SponsorsForm.defaultProos = {
     sponsors: []
 }
 
-TreeForm.defaultProps = {
-    tree: {sponsors: [], images: []}
-}
 
 const domContainer = document.getElementById('admin_root');
 ReactDOM.render(<TreeList trees={trees}/>, domContainer);

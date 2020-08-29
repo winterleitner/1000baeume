@@ -15,7 +15,14 @@ require ("../php/database.php");
 $conn = getDbConnection();
 //$image = file_get_contents('php://input');
 $image = $_FILES["image"];
-$tree_id = $_POST["tree"];
+
+
+// Um Bilder beim Hochladen auf einen bestehenden Baum-Eintrag direkt zu übernehmen (ohne Speichern-Button) folgende Zeile verwenden
+//$tree_id = $_POST["tree"];
+// Sonst diese:
+$tree_id = 0;
+
+
 $hash = hash_file('md5', $image["tmp_name"]);
 
 //error_log(print_r($image, TRUE));

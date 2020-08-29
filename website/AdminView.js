@@ -42,7 +42,7 @@ var TreeList = function TreeList(props) {
         ),
         React.createElement(
             "table",
-            { className: "table table-responsive-sm table-striped" },
+            { className: "table table-responsive-sm table-striped mt-1" },
             React.createElement(
                 "thead",
                 null,
@@ -252,13 +252,15 @@ var TreeForm = function TreeForm(props) {
     var isNew = props.isNew;
 
     useEffect(function () {
-        setSponsors(props.tree.sponsors);
-        setImages(props.tree.images);
-        setDescription(props.tree.description);
-        setDatePlanted(props.tree.date_planted);
-        setLocationName(props.tree.location_name);
-        setId(props.tree.id);
-    }, [props.tree]);
+        if (typeof props.tree != "undefined" && props.tree != null) {
+            if (typeof props.tree.sponsors != "undefined") setSponsors(props.tree.sponsors);
+            if (typeof props.tree.images != "undefined") setImages(props.tree.images);
+            if (typeof props.tree.description != "undefined") setDescription(props.tree.description);
+            if (typeof props.tree.date_planted != "undefined") setDatePlanted(props.tree.date_planted);
+            if (typeof props.tree.location_name != "undefined") setLocationName(props.tree.location_name);
+            if (typeof props.tree.id != "undefined") setId(props.tree.id);
+        }
+    }, [props]);
     var save = function save() {
         var url = isNew ? "create.php" : "edit.php";
         fetch("/admin/" + url, {
@@ -280,7 +282,7 @@ var TreeForm = function TreeForm(props) {
                 "Beschreibung"
             ),
             React.createElement("br", null),
-            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: props.tree.description, onChange: function onChange(e) {
+            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: description, onChange: function onChange(e) {
                     return setDescription(e.target.value);
                 } }),
             React.createElement("br", null),
@@ -302,18 +304,18 @@ var TreeForm = function TreeForm(props) {
                 "Standort-Name"
             ),
             React.createElement("br", null),
-            React.createElement("input", { type: "text", name: "location_name", defaultValue: props.tree.location_name, onChange: function onChange(e) {
+            React.createElement("input", { type: "text", name: "location_name", defaultValue: location_name, onChange: function onChange(e) {
                     return setLocationName(e.target.value);
                 } }),
             React.createElement("br", null),
             React.createElement("hr", null),
             React.createElement(SponsorsForm, { sponsors: sponsors, change: setSponsors }),
             React.createElement("hr", null),
-            React.createElement(ImageUpload, { images: images, change: setImages, treeId: props.tree.id }),
+            React.createElement(ImageUpload, { images: images, change: setImages, treeId: id }),
             React.createElement("hr", null),
             React.createElement(
                 "button",
-                { className: "btn btn-sm btn-primary", onClick: save },
+                { className: "btn btn-primary", onClick: save },
                 "Speichern"
             )
         )
@@ -423,9 +425,15 @@ var ImageUpload = function ImageUpload(props) {
         selected = _useState20[0],
         setSelected = _useState20[1];
 
+    var _useState21 = useState(false),
+        _useState22 = _slicedToArray(_useState21, 2),
+        loading = _useState22[0],
+        setLoading = _useState22[1];
+
     var imageInput = useRef(null);
     var upload = function upload(e) {
         e.preventDefault();
+        setLoading(true);
         selected.forEach(function (datei) {
 
             // Ein Objekt um Dateien einzulesen
@@ -441,6 +449,7 @@ var ImageUpload = function ImageUpload(props) {
             // Wenn der Dateiinhalt ausgelesen wurde...
             reader.onload = function (theFileData) {
                 senddata.fileData = theFileData.target.result; // Ergebnis vom FileReader auslesen
+
                 var fd = new FormData();
                 fd.append("tree", props.treeId);
                 fd.append("image", datei);
@@ -451,7 +460,7 @@ var ImageUpload = function ImageUpload(props) {
                 }).then(function (res) {
                     if (res.ok) {
                         res.text().then(function (t) {
-                            return props.change([].concat(_toConsumableArray(props.images), [{ id: t }]));
+                            return props.change([].concat(_toConsumableArray(props.images), [{ id: t, image: senddata.fileData }]));
                         });
                     }
                 });
@@ -460,6 +469,8 @@ var ImageUpload = function ImageUpload(props) {
             // Die Datei einlesen und in eine Data-URL konvertieren
             reader.readAsDataURL(datei);
         });
+        setLoading(false);
+        setSelected([]);
     };
     return React.createElement(
         "div",
@@ -472,7 +483,9 @@ var ImageUpload = function ImageUpload(props) {
         React.createElement(
             "div",
             { className: "images-list" },
-            props.images.length > 0 ? props.images.map(function (i) {
+            props.images.length > 0 ? props.images.sort(function (a, b) {
+                return a.id < b.id;
+            }).map(function (i) {
                 return React.createElement(
                     "div",
                     {
@@ -497,12 +510,20 @@ var ImageUpload = function ImageUpload(props) {
                 );
             }) : React.createElement(React.Fragment, null)
         ),
-        React.createElement("input", { type: "file", multiple: true, ref: imageInput,
+        React.createElement("input", { hidden: true, type: "file", multiple: true, ref: imageInput,
             onChange: function onChange(e) {
                 return Promise.all([].concat(_toConsumableArray(e.target.files))).then(function (res) {
                     return setSelected(res);
                 });
             } }),
+        React.createElement(
+            "button",
+            { className: "btn btn-sm btn-outline-primary", onClick: function onClick() {
+                    return imageInput.current.click();
+                } },
+            "Fotos ausw\xE4hlen"
+        ),
+        React.createElement("br", null),
         selected.length > 0 ? React.createElement(
             "div",
             null,
@@ -519,20 +540,25 @@ var ImageUpload = function ImageUpload(props) {
                 })
             )
         ) : React.createElement(React.Fragment, null),
-        React.createElement(
+        loading ? React.createElement(
             "button",
-            { className: "btn btn-sm btn-outline-primary", onClick: upload },
+            { className: "btn btn-sm btn-primary mt-1", type: "button" },
+            React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }),
+            React.createElement(
+                "span",
+                { className: "ml-2" },
+                "Lade hoch..."
+            )
+        ) : selected.length > 0 ? React.createElement(
+            "button",
+            { className: "btn btn-sm btn-primary mt-1", onClick: upload },
             "Hochladen"
-        )
+        ) : React.createElement(React.Fragment, null)
     );
 };
 
 SponsorsForm.defaultProos = {
     sponsors: []
-};
-
-TreeForm.defaultProps = {
-    tree: { sponsors: [], images: [] }
 };
 
 var domContainer = document.getElementById('admin_root');

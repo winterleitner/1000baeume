@@ -190,7 +190,7 @@ var TreeImages = function TreeImages(props) {
     };
     if (props.images.length === 0) return React.createElement("div", { style: { backgroundImage: "url(/images/Logo_Rechteck.png)" },
         className: "tree-imagebox", onClick: function onClick() {
-            return props.openImage("/images/Logo_Steyr.png");
+            return props.openImage("/images/Logo_Rechteck.png");
         } });else {
         return React.createElement(
             "div",
@@ -214,7 +214,7 @@ var TreeImages = function TreeImages(props) {
                             } });
                     })
                 ),
-                React.createElement(
+                props.images.length > 1 ? React.createElement(
                     "div",
                     { className: "arrows-container" },
                     React.createElement(
@@ -245,7 +245,7 @@ var TreeImages = function TreeImages(props) {
                                 className: "" })
                         )
                     )
-                )
+                ) : React.createElement(React.Fragment, null)
             )
         );
     }

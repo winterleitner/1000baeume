@@ -87,7 +87,7 @@ const TreeImages = props => {
         else setSelected(props.images.length - 1)
     }
     if (props.images.length === 0) return <div style={{backgroundImage: "url(/images/Logo_Rechteck.png)"}}
-                                               className="tree-imagebox" onClick={() => props.openImage("/images/Logo_Steyr.png")}/>
+                                               className="tree-imagebox" onClick={() => props.openImage("/images/Logo_Rechteck.png")}/>
     else {
         return (
             <div>
@@ -101,6 +101,7 @@ const TreeImages = props => {
                             setSelected(index);
                         }}/>)}
                     </div>
+                    {props.images.length > 1 ?
                     <div className="arrows-container">
                         <div className="arrow arrow-left" onClick={(e) => {
                             e.stopPropagation();
@@ -122,7 +123,7 @@ const TreeImages = props => {
                                       className=""/>
                             </svg>
                         </div>
-                    </div>
+                    </div> : <React.Fragment/>}
                 </div>
             </div>
         )

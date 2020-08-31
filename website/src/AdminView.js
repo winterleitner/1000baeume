@@ -29,8 +29,9 @@ const TreeList = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {props.trees.sort((a,b) => a.id < b.id).map(t =>
-                    <tr className={"tree-list-tr"} onClick={() => setSelectedTree(t)} data-toggle="modal" data-target="#modal-edit">
+                {props.trees.sort((a, b) => a.id < b.id).map(t =>
+                    <tr className={"tree-list-tr"} onClick={() => setSelectedTree(t)} data-toggle="modal"
+                        data-target="#modal-edit">
                         <td>{t.id}</td>
                         <td>{t.description}</td>
                         <td>{t.date_planted}</td>
@@ -85,6 +86,8 @@ const TreeForm = props => {
     const [description, setDescription] = useState("")
     const [date_planted, setDatePlanted] = useState(`${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`)
     const [location_name, setLocationName] = useState("")
+    const [x, setX] = useState(0.0)
+    const [y, setY] = useState(0.0)
     const [sponsors, setSponsors] = useState([])
     const [images, setImages] = useState([])
     const {isNew} = props
@@ -102,20 +105,32 @@ const TreeForm = props => {
         const url = isNew ? "create.php" : "edit.php"
         fetch(`/admin/${url}`, {
             method: "POST",
-            body: JSON.stringify({id, description: description, date_planted: date_planted, location_name, sponsors, images, x: 22.22, y:33.33})
+            body: JSON.stringify({
+                id,
+                description: description,
+                date_planted: date_planted,
+                location_name,
+                sponsors,
+                images,
+                x,
+                y
+            })
         }).then(res => res.ok ? window.location.reload() : alert("Das Speichern ist leider fehlgeschlagen."))
     }
     return (
         <div className="tree-form">
             <div>
                 <label htmlFor="description">Beschreibung</label><br/>
-                <textarea name="description" rows="5" cols="50" defaultValue={description} onChange={e => setDescription(e.target.value)}/><br/>
+                <textarea name="description" rows="5" cols="50" defaultValue={description}
+                          onChange={e => setDescription(e.target.value)}/><br/>
                 <label htmlFor="date_planted">Pflanzdatum</label><br/>
                 <input type="date" name="date_planted"
                        value={date_planted}
                        onChange={e => setDatePlanted(e.target.value)}/><br/>
                 <label htmlFor="description">Standort-Name</label><br/>
-                <input type="text" name="location_name" defaultValue={location_name} onChange={e => setLocationName(e.target.value)}/><br/>
+                <input type="text" name="location_name" defaultValue={location_name}
+                       onChange={e => setLocationName(e.target.value)}/><br/>
+                <CoordinatesForm x={x} y={y} setX={setX} setY={setY}/>
                 <hr/>
                 <SponsorsForm sponsors={sponsors} change={setSponsors}/>
                 <hr/>
@@ -124,6 +139,47 @@ const TreeForm = props => {
                 <button className="btn btn-primary" onClick={save}>Speichern</button>
             </div>
         </div>)
+}
+
+const CoordinatesForm = props => {
+        const [query, setQuery] = useState("")
+        const [results, setResults] = useState([])
+        const search = () => {
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURI(query)}`).then(res => res.json()).then(res => setResults(res))
+        }
+        return (
+            <div>
+                <h4>Standort-Koordinaten</h4>
+                <input type="text" onChange={e => setQuery(e.target.value)} value={query}/>
+                <button onClick={search}>Suchen</button>
+                {results.length > 0 ? <div>
+                    <strong>Ergebnisse</strong>
+                    <ul>
+                        {results.map(r => <li onClick={() => {
+                            props.setX(r.lat)
+                            props.setY(r.lon)
+                        }}>{r.display_name}</li>)}
+                    </ul></div> : <React.Fragment/>}
+                <table>
+                    <thead>
+                    <tr>
+                        <th><label>Lat</label></th>
+                        <th><label>Long</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" value={props.x} onChange={e => props.setX(e.target.value)}/>
+                        </td>
+                        <td>
+                            <input type="text" value={props.y} onChange={e => props.setY(e.target.value)}/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        )
 }
 
 const SponsorsForm = props => {
@@ -195,9 +251,8 @@ const ImageUpload = props => {
                     method: "POST",
                     body: fd
                 }).then(res => {
-                    if (res.ok)
-                    {
-                        res.text().then(t => props.change([...props.images, {id: t, image:senddata.fileData}]))
+                    if (res.ok) {
+                        res.text().then(t => props.change([...props.images, {id: t, image: senddata.fileData}]))
                     }
 
                 })
@@ -215,14 +270,19 @@ const ImageUpload = props => {
         <div>
             <h4>Bilder</h4>
             <div className="images-list">
-                {props.images.length > 0 ? props.images.sort((a,b) => a.id < b.id).map(i => <div
+                {props.images.length > 0 ? props.images.sort((a, b) => a.id < b.id).map(i => <div
                     className="images-list-item mb-3"><img src={i.image} height="180px"/><br/><span>{i.text}</span><br/>
-                    <button className="btn btn-sm btn-outline-danger mt-1" onClick={() => props.change(props.images.filter(x => x !== i))}>Löschen</button>
+                    <button className="btn btn-sm btn-outline-danger mt-1"
+                            onClick={() => props.change(props.images.filter(x => x !== i))}>Löschen
+                    </button>
                 </div>) : <React.Fragment/>}
             </div>
-            <input hidden type="file" multiple ref={imageInput}
+            <input hidden type="file" multiple ref={imageInput} accept="image/*"
                    onChange={(e) => Promise.all([...e.target.files]).then(res => setSelected(res))}/>
-            <button className="btn btn-sm btn-outline-primary" onClick={() => imageInput.current.click()}>Fotos auswählen</button><br/>
+            <button className="btn btn-sm btn-outline-primary" onClick={() => imageInput.current.click()}>Fotos
+                auswählen
+            </button>
+            <br/>
             {selected.length > 0 ?
                 <div>
                     Hochzuladende Fotos:
@@ -234,10 +294,12 @@ const ImageUpload = props => {
                 </div> : <React.Fragment/>
             }
             {loading ? <button className="btn btn-sm btn-primary mt-1" type="button">
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span className="ml-2">Lade hoch...</span>
-            </button> :
-                (selected.length > 0 ? <button className="btn btn-sm btn-primary mt-1" onClick={upload}>Hochladen</button> : <React.Fragment/>)}
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span className="ml-2">Lade hoch...</span>
+                </button> :
+                (selected.length > 0 ?
+                    <button className="btn btn-sm btn-primary mt-1" onClick={upload}>Hochladen</button> :
+                    <React.Fragment/>)}
         </div>
     )
 }

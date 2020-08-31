@@ -10,6 +10,11 @@ function generateRandomString($length = 10) {
     return $randomString;
 }
 
+session_start();
+if (!isset($_SESSION["username"])) {
+    http_response_code(401);
+    die();
+}
 require ("../php/database.php");
 
 $conn = getDbConnection();

@@ -52,6 +52,19 @@
             opacity: 1 !important;
         }
     </style>
+
+    <!--Leaflet Maps-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <style>
+        #map {height: 400px;}
+    </style>
+    <!---->
+
 </head>
 
 
@@ -282,6 +295,25 @@
     </div>
 
 </div>
+
+<div class="trees-map-container">
+    <div id="map"></div>
+</div>
+
+<script>
+    let mymap = L.map('map').setView([48.0392, 14.4192], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mymap);
+
+
+    trees.forEach(t => {
+        let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
+        marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}`);
+
+    })
+</script>
 
 
 <div class="mydata">

@@ -1,6 +1,11 @@
 <?php
 require '../php/database.php';
 
+session_start();
+if (!isset($_SESSION["username"])) {
+    http_response_code(401);
+    die();
+}
 
 if(!isset($_POST)) {
     http_response_code(400);
@@ -14,21 +19,6 @@ catch (Exception $ex) {
     die("Invalid Format");
 }
 
-/*$tree = '{"x": 48.038938, "y": 14.42171,
-"id": 1,
-"images":
-[{"text": "yo", "image": "https://www.happinez.de/blog/wp-content/uploads/2018/03/AdobeStock_81977003.jpg", "id":1},
-{"text": "hi", "image": "Hallo-2", "id":2}],
-"sponsors": [{"name": "Felix", "contribution": "100€", "id":1}],
-"description": "Baum 1 war ein wichtiger Meilenstein für das 1000-Bäume-Projekt. Anwesend waren unter anderem der Bürgermeister der Stadt Steyr, Gerald Hackl, sowie Projektinitiator Leopold Födermayr.",
-"date_planted": "24.08.2020",
-"last_modified": "2020-08-24 15:09:52.000000",
-"location_name": "Stadtplatzgarage (oben)"}';
-
-$tree = json_decode($tree);
-
-
-*/
 $tree_id = $tree -> id;
 $desc = $tree -> description;
 $date_planted = date("Y-m-d", strtotime($tree -> date_planted));

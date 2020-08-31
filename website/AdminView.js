@@ -91,7 +91,8 @@ var TreeList = function TreeList(props) {
                         "tr",
                         { className: "tree-list-tr", onClick: function onClick() {
                                 return setSelectedTree(t);
-                            }, "data-toggle": "modal", "data-target": "#modal-edit" },
+                            }, "data-toggle": "modal",
+                            "data-target": "#modal-edit" },
                         React.createElement(
                             "td",
                             null,
@@ -239,15 +240,25 @@ var TreeForm = function TreeForm(props) {
         location_name = _useState10[0],
         setLocationName = _useState10[1];
 
-    var _useState11 = useState([]),
+    var _useState11 = useState(0.0),
         _useState12 = _slicedToArray(_useState11, 2),
-        sponsors = _useState12[0],
-        setSponsors = _useState12[1];
+        x = _useState12[0],
+        setX = _useState12[1];
 
-    var _useState13 = useState([]),
+    var _useState13 = useState(0.0),
         _useState14 = _slicedToArray(_useState13, 2),
-        images = _useState14[0],
-        setImages = _useState14[1];
+        y = _useState14[0],
+        setY = _useState14[1];
+
+    var _useState15 = useState([]),
+        _useState16 = _slicedToArray(_useState15, 2),
+        sponsors = _useState16[0],
+        setSponsors = _useState16[1];
+
+    var _useState17 = useState([]),
+        _useState18 = _slicedToArray(_useState17, 2),
+        images = _useState18[0],
+        setImages = _useState18[1];
 
     var isNew = props.isNew;
 
@@ -265,7 +276,16 @@ var TreeForm = function TreeForm(props) {
         var url = isNew ? "create.php" : "edit.php";
         fetch("/admin/" + url, {
             method: "POST",
-            body: JSON.stringify({ id: id, description: description, date_planted: date_planted, location_name: location_name, sponsors: sponsors, images: images, x: 22.22, y: 33.33 })
+            body: JSON.stringify({
+                id: id,
+                description: description,
+                date_planted: date_planted,
+                location_name: location_name,
+                sponsors: sponsors,
+                images: images,
+                x: x,
+                y: y
+            })
         }).then(function (res) {
             return res.ok ? window.location.reload() : alert("Das Speichern ist leider fehlgeschlagen.");
         });
@@ -282,7 +302,8 @@ var TreeForm = function TreeForm(props) {
                 "Beschreibung"
             ),
             React.createElement("br", null),
-            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: description, onChange: function onChange(e) {
+            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: description,
+                onChange: function onChange(e) {
                     return setDescription(e.target.value);
                 } }),
             React.createElement("br", null),
@@ -304,10 +325,12 @@ var TreeForm = function TreeForm(props) {
                 "Standort-Name"
             ),
             React.createElement("br", null),
-            React.createElement("input", { type: "text", name: "location_name", defaultValue: location_name, onChange: function onChange(e) {
+            React.createElement("input", { type: "text", name: "location_name", defaultValue: location_name,
+                onChange: function onChange(e) {
                     return setLocationName(e.target.value);
                 } }),
             React.createElement("br", null),
+            React.createElement(CoordinatesForm, { x: x, y: y, setX: setX, setY: setY }),
             React.createElement("hr", null),
             React.createElement(SponsorsForm, { sponsors: sponsors, change: setSponsors }),
             React.createElement("hr", null),
@@ -322,16 +345,128 @@ var TreeForm = function TreeForm(props) {
     );
 };
 
-var SponsorsForm = function SponsorsForm(props) {
-    var _useState15 = useState(""),
-        _useState16 = _slicedToArray(_useState15, 2),
-        nSponsorName = _useState16[0],
-        setNSponsorName = _useState16[1];
+var CoordinatesForm = function CoordinatesForm(props) {
+    var _useState19 = useState(""),
+        _useState20 = _slicedToArray(_useState19, 2),
+        query = _useState20[0],
+        setQuery = _useState20[1];
 
-    var _useState17 = useState(""),
-        _useState18 = _slicedToArray(_useState17, 2),
-        nSponsorContr = _useState18[0],
-        setNSponsorContr = _useState18[1];
+    var _useState21 = useState([]),
+        _useState22 = _slicedToArray(_useState21, 2),
+        results = _useState22[0],
+        setResults = _useState22[1];
+
+    var search = function search() {
+        fetch("https://nominatim.openstreetmap.org/search?format=json&q=" + encodeURI(query)).then(function (res) {
+            return res.json();
+        }).then(function (res) {
+            return setResults(res);
+        });
+    };
+    return React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h4",
+            null,
+            "Standort-Koordinaten"
+        ),
+        React.createElement("input", { type: "text", onChange: function onChange(e) {
+                return setQuery(e.target.value);
+            }, value: query }),
+        React.createElement(
+            "button",
+            { onClick: search },
+            "Suchen"
+        ),
+        results.length > 0 ? React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "strong",
+                null,
+                "Ergebnisse"
+            ),
+            React.createElement(
+                "ul",
+                null,
+                results.map(function (r) {
+                    return React.createElement(
+                        "li",
+                        { onClick: function onClick() {
+                                props.setX(r.lat);
+                                props.setY(r.lon);
+                            } },
+                        r.display_name
+                    );
+                })
+            )
+        ) : React.createElement(React.Fragment, null),
+        React.createElement(
+            "table",
+            null,
+            React.createElement(
+                "thead",
+                null,
+                React.createElement(
+                    "tr",
+                    null,
+                    React.createElement(
+                        "th",
+                        null,
+                        React.createElement(
+                            "label",
+                            null,
+                            "Lat"
+                        )
+                    ),
+                    React.createElement(
+                        "th",
+                        null,
+                        React.createElement(
+                            "label",
+                            null,
+                            "Long"
+                        )
+                    )
+                )
+            ),
+            React.createElement(
+                "tbody",
+                null,
+                React.createElement(
+                    "tr",
+                    null,
+                    React.createElement(
+                        "td",
+                        null,
+                        React.createElement("input", { type: "text", value: props.x, onChange: function onChange(e) {
+                                return props.setX(e.target.value);
+                            } })
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        React.createElement("input", { type: "text", value: props.y, onChange: function onChange(e) {
+                                return props.setY(e.target.value);
+                            } })
+                    )
+                )
+            )
+        )
+    );
+};
+
+var SponsorsForm = function SponsorsForm(props) {
+    var _useState23 = useState(""),
+        _useState24 = _slicedToArray(_useState23, 2),
+        nSponsorName = _useState24[0],
+        setNSponsorName = _useState24[1];
+
+    var _useState25 = useState(""),
+        _useState26 = _slicedToArray(_useState25, 2),
+        nSponsorContr = _useState26[0],
+        setNSponsorContr = _useState26[1];
 
     var addSponsor = function addSponsor(e) {
         e.preventDefault();
@@ -420,15 +555,15 @@ var SponsorsForm = function SponsorsForm(props) {
 };
 
 var ImageUpload = function ImageUpload(props) {
-    var _useState19 = useState([]),
-        _useState20 = _slicedToArray(_useState19, 2),
-        selected = _useState20[0],
-        setSelected = _useState20[1];
+    var _useState27 = useState([]),
+        _useState28 = _slicedToArray(_useState27, 2),
+        selected = _useState28[0],
+        setSelected = _useState28[1];
 
-    var _useState21 = useState(false),
-        _useState22 = _slicedToArray(_useState21, 2),
-        loading = _useState22[0],
-        setLoading = _useState22[1];
+    var _useState29 = useState(false),
+        _useState30 = _slicedToArray(_useState29, 2),
+        loading = _useState30[0],
+        setLoading = _useState30[1];
 
     var imageInput = useRef(null);
     var upload = function upload(e) {
@@ -500,7 +635,8 @@ var ImageUpload = function ImageUpload(props) {
                     React.createElement("br", null),
                     React.createElement(
                         "button",
-                        { className: "btn btn-sm btn-outline-danger mt-1", onClick: function onClick() {
+                        { className: "btn btn-sm btn-outline-danger mt-1",
+                            onClick: function onClick() {
                                 return props.change(props.images.filter(function (x) {
                                     return x !== i;
                                 }));
@@ -510,7 +646,7 @@ var ImageUpload = function ImageUpload(props) {
                 );
             }) : React.createElement(React.Fragment, null)
         ),
-        React.createElement("input", { hidden: true, type: "file", multiple: true, ref: imageInput,
+        React.createElement("input", { hidden: true, type: "file", multiple: true, ref: imageInput, accept: "image/*",
             onChange: function onChange(e) {
                 return Promise.all([].concat(_toConsumableArray(e.target.files))).then(function (res) {
                     return setSelected(res);

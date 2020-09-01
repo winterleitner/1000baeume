@@ -205,81 +205,34 @@
                 if (is_null($tree -> paten))  $tree -> paten = [];
             }
 
-            print ("let tr=" . json_encode($trees) . ";\n");
+            print ("let trees=" . json_encode($trees) . ";\n");
         }
     }
     ?>
-    // Load from Database here into trees constant
-    const t = [
-        {
-            id: 2,
-            beschreibung: "Baum 1 war ein wichtiger Meilenstein für das 1000-Bäume-Projekt. Anwesend waren unter anderem der Bürgermeister der Stadt Steyr, Gerald Hackl, sowie Projektinitiator Leopold Födermayr.",
-            datum: "10.10.2020",
-            ort: {name: "Stadtplatz", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix Winterleitner", beitrag: "100€"}],
-            bilder: [{src: "/images/Baum1.JPG", alt: "Pflanzen"}, {src: "/images/Logo_Kreis.png", alt: "Logo"}]
-        },
-        {
-            id: 2,
-            beschreibung: "",
-            datum: "10.10.2020",
-            ort: {name: "Grünmarkt", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Michael Aichinger", beitrag: "100€"}, {name: "Stefanie Aichiner", beitrag: "10€"}],
-            bilder: []
-        },
-        {
-            id: 879,
-            beschreibung: "Hallo",
-            datum: "10.10.2020",
-            ort: {name: "Taborstiege (oben)", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
-            bilder: [{
-                src: "https://www.lamodula.at/media/wysiwyg/Lexikon/esche-holz-baum-1.jpeg",
-                alt: "Pflanzen"
-            }, {
-                src: "https://www.baumpflegeportal.de/wp-content/uploads/2016/05/160509_Starke-Baumtypen_Eiche-im-Seidengewand_02.jpg",
-                alt: "Logo"
-            }, {src: "https://www.happinez.de/blog/wp-content/uploads/2018/03/AdobeStock_81977003.jpg", alt: ""}]
-        },
-        {
-            id: 2,
-            beschreibung: "",
-            datum: "10.10.2020",
-            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
-            bilder: []
-        },
-        {
-            id: 2,
-            beschreibung: "",
-            datum: "10.10.2020",
-            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
-            bilder: []
-        },
-        {
-            id: 2,
-            beschreibung: "",
-            datum: "10.10.2020",
-            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
-            bilder: []
-        },
-        {
-            id: 2,
-            beschreibung: "",
-            datum: "10.10.2020",
-            ort: {name: "Ennskai", lat: 22.22124, long: 23.232323},
-            paten: [{name: "Felix", beitrag: "100€"}, {name: "Steffi", beitrag: "10€"}],
-            bilder: []
-        }
-    ]
     const scrollInterval = 10000
-    const trees = []
-    for (let i = 0; i < 100; i++) {
-        trees.push(...tr);
-    }
+    trees = trees.reverse()
 </script>
+
+<div class="trees-map-container">
+    <div id="map"></div>
+</div>
+
+<script>
+    let mymap = L.map('map').setView([48.0392, 14.4192], 15);
+    mymap.scrollWheelZoom.disable();
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mymap);
+
+
+    trees.forEach(t => {
+        let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
+        marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}`);
+
+    })
+</script>
+
 <div id="trees_root"></div>
 
 <div class="myimagebox">
@@ -296,24 +249,6 @@
 
 </div>
 
-<div class="trees-map-container">
-    <div id="map"></div>
-</div>
-
-<script>
-    let mymap = L.map('map').setView([48.0392, 14.4192], 15);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mymap);
-
-
-    trees.forEach(t => {
-        let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
-        marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}`);
-
-    })
-</script>
 
 
 <div class="mydata">

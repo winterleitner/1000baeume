@@ -41,7 +41,7 @@ var TreeView = function TreeView(props) {
         React.createElement(
             "div",
             { className: "trees-view" },
-            props.trees.slice(0, 10).map(function (t) {
+            props.trees.map(function (t) {
                 return React.createElement(TreeContainer, { tree: t,
                     key: getRandomInt(1000000),
                     scrollInterval: props.scrollInterval,
@@ -76,9 +76,39 @@ var ImageModal = function ImageModal(props) {
 var TreeContainer = function TreeContainer(props) {
     var tree = props.tree;
 
+    var _useState3 = useState(false),
+        _useState4 = _slicedToArray(_useState3, 2),
+        showEntireText = _useState4[0],
+        setShowEntireText = _useState4[1];
+
+    var modal = showEntireText ? React.createElement(
+        "div",
+        { className: "modal", id: "imageModal" },
+        React.createElement(
+            "div",
+            { className: "modal-content" },
+            React.createElement(
+                "div",
+                { className: "close", onClick: function onClick() {
+                        return setShowEntireText(false);
+                    } },
+                "x"
+            ),
+            React.createElement(
+                "div",
+                { className: "description-modal-container" },
+                React.createElement(
+                    "div",
+                    null,
+                    tree.beschreibung
+                )
+            )
+        )
+    ) : React.createElement("div", null);
     return React.createElement(
         "div",
         { className: "tree-container" },
+        modal,
         React.createElement(
             "div",
             { className: "tree-container-top" },
@@ -122,7 +152,7 @@ var TreeContainer = function TreeContainer(props) {
                 ),
                 React.createElement("br", null),
                 React.createElement(
-                    "span",
+                    "div",
                     null,
                     tree.ort.name
                 )
@@ -139,7 +169,24 @@ var TreeContainer = function TreeContainer(props) {
                 React.createElement(
                     "p",
                     null,
-                    tree.beschreibung.length > 160 ? tree.beschreibung.substr(0, 145) + "..." : tree.beschreibung.length > 0 ? tree.beschreibung : "-"
+                    tree.beschreibung.length > 200 ? React.createElement(
+                        "div",
+                        { onClick: function onClick() {
+                                return setShowEntireText(!showEntireText);
+                            } },
+                        showEntireText ? tree.beschreibung : React.createElement(
+                            "div",
+                            null,
+                            tree.beschreibung.substr(0, 190),
+                            "...",
+                            React.createElement("br", null),
+                            React.createElement(
+                                "div",
+                                { className: "show-more" },
+                                "Mehr Anzeigen..."
+                            )
+                        )
+                    ) : tree.beschreibung.length > 0 ? tree.beschreibung : "-"
                 )
             ),
             tree.paten.length > 0 ? React.createElement(
@@ -152,7 +199,7 @@ var TreeContainer = function TreeContainer(props) {
                 ),
                 React.createElement("br", null),
                 React.createElement(
-                    "span",
+                    "div",
                     null,
                     tree.paten.map(function (p) {
                         return p.name;
@@ -164,15 +211,15 @@ var TreeContainer = function TreeContainer(props) {
 };
 
 var TreeImages = function TreeImages(props) {
-    var _useState3 = useState(0),
-        _useState4 = _slicedToArray(_useState3, 2),
-        selected = _useState4[0],
-        setSelected = _useState4[1];
-
     var _useState5 = useState(0),
         _useState6 = _slicedToArray(_useState5, 2),
-        intervalId = _useState6[0],
-        setIntervalId = _useState6[1];
+        selected = _useState6[0],
+        setSelected = _useState6[1];
+
+    var _useState7 = useState(0),
+        _useState8 = _slicedToArray(_useState7, 2),
+        intervalId = _useState8[0],
+        setIntervalId = _useState8[1];
 
     useEffect(function () {
         window.clearTimeout(intervalId);

@@ -230,7 +230,7 @@ p {
 
 
 .trees-view {
-    height: 600px;
+    height: 650px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -244,7 +244,7 @@ p {
 
 .tree-container {
     width: 400px;
-    height: 550px;
+    height: 600px;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 15px;
@@ -291,7 +291,7 @@ p {
 .tree-container-bottom {
     padding-top: 10px;
     position: relative;
-    height: 250px;
+    height: 300px;
 }
 
 .tree-date {
@@ -312,8 +312,13 @@ p {
     bottom: 10px;
 }
 
-.tree-location span {
+.tree-location div {
     font-size: 22px;
+    max-width: 200px;
+    overflow: scroll;
+}
+.tree-location div::-webkit-scrollbar {
+    display: none;
 }
 
 .tree-description {
@@ -322,6 +327,7 @@ p {
     left:15px;
     top: 20px;
     width: 370px;
+    max-width: 95%;
 }
 
 .tree-description p {
@@ -329,6 +335,17 @@ p {
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.show-more {
+    font-weight: bolder;
+    margin-top: -5px;
+}
+.show-more:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .tree-sponsors {
@@ -338,8 +355,10 @@ p {
     bottom: 70px;
 }
 
-.tree-sponsors span {
+.tree-sponsors div {
     font-size: 22px;
+    width: 370px;
+    max-width: 95%;
 }
 
 .tree-container h6 {
@@ -423,7 +442,7 @@ p {
 .modal {
     display: block;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
@@ -463,12 +482,28 @@ p {
     cursor: pointer;
 }
 
+.description-modal-container {
+    width: 80%;
+    max-width: 500px;
+    height: 100%;
+    margin:auto;
+}
+
+.description-modal-container div {
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
 /*endregion*/
 
 
 
 @media (max-width: 425px) {
 
+    h1, h2, h3, p {
+        margin-left: 20px;
+    }
     .tree-container {
         width: 90%;
         margin-left: 5%;

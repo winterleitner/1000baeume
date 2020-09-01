@@ -18,7 +18,7 @@ const TreeView = (props) => {
             <div className="container">
                 <div className="myheading"><h1>Die bereits gepflanzten Bäume</h1></div>
             </div>
-            <div className="trees-view">{props.trees.slice(0, 10).map(t => <TreeContainer tree={t}
+            <div className="trees-view">{props.trees.map(t => <TreeContainer tree={t}
                                                                                           key={getRandomInt(1000000)}
                                                                                           scrollInterval={props.scrollInterval}
                                                                                           openImage={setModalImage}/>)}
@@ -40,8 +40,18 @@ const ImageModal = props =>
 
 const TreeContainer = (props) => {
     let {tree} = props;
+    const [showEntireText, setShowEntireText] = useState(false)
+    let modal = showEntireText ?
+        <div className="modal" id="imageModal">
+            <div className="modal-content">
+                <div className="close" onClick={() => setShowEntireText(false)}>x</div>
+                <div className="description-modal-container"><div>{tree.beschreibung}</div></div>
+            </div>
+        </div>
+        : <div/>
     return (
         <div className="tree-container">
+            {modal}
             <div className="tree-container-top">
                 <div className="tree-id">
                     <div>{tree.id}</div>
@@ -53,15 +63,15 @@ const TreeContainer = (props) => {
                 <div className="tree-date"><strong>Gepflanzt</strong><br/><span>{tree.datum}</span></div>
                 <div className="tree-location">
                     <strong>Standort</strong><br/>
-                    <span>{tree.ort.name}</span>
+                    <div>{tree.ort.name}</div>
                 </div>
                 <div className="tree-description"><strong>Infos</strong><br/>
-                    <p>{tree.beschreibung.length > 160 ? tree.beschreibung.substr(0, 145) + "..." : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
+                    <p>{tree.beschreibung.length > 200 ? <div onClick={() => setShowEntireText(!showEntireText)}>{showEntireText ? tree.beschreibung : <div>{tree.beschreibung.substr(0, 190)}...<br/><div className="show-more">Mehr Anzeigen...</div></div>}</div> : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
                 </div>
                 {tree.paten.length > 0 ?
                 <div className="tree-sponsors">
                     <strong>{tree.paten.length === 1 ? "Baumpate" : "Baumpaten"}</strong><br/>
-                    <span>{tree.paten.map(p => p.name /*+ "(" + p.beitrag + ")"*/).join(", ")}</span>
+                    <div>{tree.paten.map(p => p.name /*+ "(" + p.beitrag + ")"*/).join(", ")}</div>
                 </div> : <React.Fragment/>}
             </div>
         </div>)

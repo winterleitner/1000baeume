@@ -145,6 +145,23 @@ if ($res->num_rows > 0) {
         border: 1px solid gray;
         padding: 5px;
     }
+
+    .location-resultlist {
+        padding-inline-start: 0px;
+    }
+
+    .location-result {
+        list-style: none;
+        border-bottom: 1px solid lightgray;
+    }
+    .location-result:hover {
+        color:white;
+        background-color: gray;
+    }
+
+    .location-result i:hover {
+        color: red;
+    }
 </style>
 
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>

@@ -121,15 +121,17 @@ const TreeForm = props => {
         <div className="tree-form">
             <div>
                 <label htmlFor="description">Beschreibung</label><br/>
-                <textarea name="description" rows="5" cols="50" defaultValue={description}
+                <textarea className="form-control" name="description" rows="5" cols="50" defaultValue={description}
                           onChange={e => setDescription(e.target.value)}/><br/>
                 <label htmlFor="date_planted">Pflanzdatum</label><br/>
-                <input type="date" name="date_planted"
+                <input className="form-control" type="date" name="date_planted"
                        value={date_planted}
                        onChange={e => setDatePlanted(e.target.value)}/><br/>
+                <h4>Standort</h4>
                 <label htmlFor="description">Standort-Name</label><br/>
-                <input type="text" name="location_name" defaultValue={location_name}
+                <input className="form-control" type="text" name="location_name" defaultValue={location_name}
                        onChange={e => setLocationName(e.target.value)}/><br/>
+
                 <CoordinatesForm x={x} y={y} setX={setX} setY={setY}/>
                 <hr/>
                 <SponsorsForm sponsors={sponsors} change={setSponsors}/>
@@ -142,44 +144,64 @@ const TreeForm = props => {
 }
 
 const CoordinatesForm = props => {
-        const [query, setQuery] = useState("")
-        const [results, setResults] = useState([])
-        const search = () => {
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURI(query)}`).then(res => res.json()).then(res => setResults(res))
-        }
-        return (
-            <div>
-                <h4>Standort-Koordinaten</h4>
-                <input type="text" onChange={e => setQuery(e.target.value)} value={query}/>
-                <button onClick={search}>Suchen</button>
-                {results.length > 0 ? <div>
-                    <strong>Ergebnisse</strong>
-                    <ul>
-                        {results.map(r => <li onClick={() => {
-                            props.setX(r.lat)
-                            props.setY(r.lon)
-                        }}>{r.display_name}</li>)}
-                    </ul></div> : <React.Fragment/>}
-                <table>
-                    <thead>
-                    <tr>
-                        <th><label>Lat</label></th>
-                        <th><label>Long</label></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <input type="text" value={props.x} onChange={e => props.setX(e.target.value)}/>
-                        </td>
-                        <td>
-                            <input type="text" value={props.y} onChange={e => props.setY(e.target.value)}/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        )
+    const [query, setQuery] = useState("")
+    const [results, setResults] = useState([])
+    const search = () => {
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURI(query)}`).then(res => res.json()).then(res => setResults(res))
+    }
+    return (
+        <div>
+            <label>Standort-Koordinaten</label><br/>
+            <input className="form-control" type="text" onChange={e => setQuery(e.target.value)} value={query}
+                   placeholder="Suchbegriff..."/>
+            <button onClick={search} className="btn btn-sm btn-outline-primary mt-1">Suchen</button>
+            {results.length > 0 ? <div>
+                <strong>Ergebnisse</strong>
+                <ul className="location-resultlist">
+                    {results.map(r =>
+                        <li className="location-result">
+                            <i className="fa fa-search mr-2" onClick={() => {
+                                const url = `https://www.openstreetmap.org/?mlat=${r.lat}&mlon=${r.lon}#map=19/${r.lat}/${r.lon}`;
+                                console.log("Open", url);
+                                window.open(url);
+                            }}/>
+                            <span onClick={() => {
+                                props.setX(r.lat)
+                                props.setY(r.lon)
+                            }}>{r.display_name}</span>
+                        </li>)}
+                </ul>
+            </div> : <React.Fragment/>}
+            <table style={{width: "100%"}}>
+                <thead>
+                <tr>
+                    <th><label>Lat</label></th>
+                    <th><label>Long</label></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input className="form-control" type="text" value={props.x}
+                               onChange={e => props.setX(e.target.value)}/>
+                    </td>
+                    <td>
+                        <input className="form-control" type="text" value={props.y}
+                               onChange={e => props.setY(e.target.value)}/>
+                    </td>
+                    <td>
+                        <button className="btn btn-primary"><i className="fa fa-search" onClick={() => {
+                            const url = `https://www.openstreetmap.org/?mlat=${props.x}&mlon=${props.y}#map=19/${props.x}/${props.y}`;
+                            console.log("Open", url);
+                            window.open(url);
+                        }}/></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 const SponsorsForm = props => {
@@ -201,17 +223,19 @@ const SponsorsForm = props => {
                                  onClick={() => props.change(props.sponsors.filter(x => x !== s))}></i>
                     </li>)}
             </ul>
-            <table>
+            <table  style={{width: "100%"}}>
                 <tr>
                     <th><label>Name</label></th>
                     <th><label>Beitrag</label></th>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" value={nSponsorName} onChange={e => setNSponsorName(e.target.value)}/>
+                        <input className="form-control" type="text" value={nSponsorName}
+                               onChange={e => setNSponsorName(e.target.value)}/>
                     </td>
                     <td>
-                        <input type="text" value={nSponsorContr} onChange={e => setNSponsorContr(e.target.value)}/>
+                        <input className="form-control" type="text" value={nSponsorContr}
+                               onChange={e => setNSponsorContr(e.target.value)}/>
                     </td>
                 </tr>
             </table>

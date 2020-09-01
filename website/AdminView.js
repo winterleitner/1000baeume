@@ -302,7 +302,7 @@ var TreeForm = function TreeForm(props) {
                 "Beschreibung"
             ),
             React.createElement("br", null),
-            React.createElement("textarea", { name: "description", rows: "5", cols: "50", defaultValue: description,
+            React.createElement("textarea", { className: "form-control", name: "description", rows: "5", cols: "50", defaultValue: description,
                 onChange: function onChange(e) {
                     return setDescription(e.target.value);
                 } }),
@@ -313,19 +313,24 @@ var TreeForm = function TreeForm(props) {
                 "Pflanzdatum"
             ),
             React.createElement("br", null),
-            React.createElement("input", { type: "date", name: "date_planted",
+            React.createElement("input", { className: "form-control", type: "date", name: "date_planted",
                 value: date_planted,
                 onChange: function onChange(e) {
                     return setDatePlanted(e.target.value);
                 } }),
             React.createElement("br", null),
             React.createElement(
+                "h4",
+                null,
+                "Standort"
+            ),
+            React.createElement(
                 "label",
                 { htmlFor: "description" },
                 "Standort-Name"
             ),
             React.createElement("br", null),
-            React.createElement("input", { type: "text", name: "location_name", defaultValue: location_name,
+            React.createElement("input", { className: "form-control", type: "text", name: "location_name", defaultValue: location_name,
                 onChange: function onChange(e) {
                     return setLocationName(e.target.value);
                 } }),
@@ -367,16 +372,18 @@ var CoordinatesForm = function CoordinatesForm(props) {
         "div",
         null,
         React.createElement(
-            "h4",
+            "label",
             null,
             "Standort-Koordinaten"
         ),
-        React.createElement("input", { type: "text", onChange: function onChange(e) {
+        React.createElement("br", null),
+        React.createElement("input", { className: "form-control", type: "text", onChange: function onChange(e) {
                 return setQuery(e.target.value);
-            }, value: query }),
+            }, value: query,
+            placeholder: "Suchbegriff..." }),
         React.createElement(
             "button",
-            { onClick: search },
+            { onClick: search, className: "btn btn-sm btn-outline-primary mt-1" },
             "Suchen"
         ),
         results.length > 0 ? React.createElement(
@@ -389,22 +396,31 @@ var CoordinatesForm = function CoordinatesForm(props) {
             ),
             React.createElement(
                 "ul",
-                null,
+                { className: "location-resultlist" },
                 results.map(function (r) {
                     return React.createElement(
                         "li",
-                        { onClick: function onClick() {
-                                props.setX(r.lat);
-                                props.setY(r.lon);
-                            } },
-                        r.display_name
+                        { className: "location-result" },
+                        React.createElement("i", { className: "fa fa-search mr-2", onClick: function onClick() {
+                                var url = "https://www.openstreetmap.org/?mlat=" + r.lat + "&mlon=" + r.lon + "#map=19/" + r.lat + "/" + r.lon;
+                                console.log("Open", url);
+                                window.open(url);
+                            } }),
+                        React.createElement(
+                            "span",
+                            { onClick: function onClick() {
+                                    props.setX(r.lat);
+                                    props.setY(r.lon);
+                                } },
+                            r.display_name
+                        )
                     );
                 })
             )
         ) : React.createElement(React.Fragment, null),
         React.createElement(
             "table",
-            null,
+            { style: { width: "100%" } },
             React.createElement(
                 "thead",
                 null,
@@ -428,7 +444,8 @@ var CoordinatesForm = function CoordinatesForm(props) {
                             null,
                             "Long"
                         )
-                    )
+                    ),
+                    React.createElement("th", null)
                 )
             ),
             React.createElement(
@@ -440,16 +457,31 @@ var CoordinatesForm = function CoordinatesForm(props) {
                     React.createElement(
                         "td",
                         null,
-                        React.createElement("input", { type: "text", value: props.x, onChange: function onChange(e) {
+                        React.createElement("input", { className: "form-control", type: "text", value: props.x,
+                            onChange: function onChange(e) {
                                 return props.setX(e.target.value);
                             } })
                     ),
                     React.createElement(
                         "td",
                         null,
-                        React.createElement("input", { type: "text", value: props.y, onChange: function onChange(e) {
+                        React.createElement("input", { className: "form-control", type: "text", value: props.y,
+                            onChange: function onChange(e) {
                                 return props.setY(e.target.value);
                             } })
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        React.createElement(
+                            "button",
+                            { className: "btn btn-primary" },
+                            React.createElement("i", { className: "fa fa-search", onClick: function onClick() {
+                                    var url = "https://www.openstreetmap.org/?mlat=" + props.x + "&mlon=" + props.y + "#map=19/" + props.x + "/" + props.y;
+                                    console.log("Open", url);
+                                    window.open(url);
+                                } })
+                        )
                     )
                 )
             )
@@ -504,7 +536,7 @@ var SponsorsForm = function SponsorsForm(props) {
         ),
         React.createElement(
             "table",
-            null,
+            { style: { width: "100%" } },
             React.createElement(
                 "tr",
                 null,
@@ -533,14 +565,16 @@ var SponsorsForm = function SponsorsForm(props) {
                 React.createElement(
                     "td",
                     null,
-                    React.createElement("input", { type: "text", value: nSponsorName, onChange: function onChange(e) {
+                    React.createElement("input", { className: "form-control", type: "text", value: nSponsorName,
+                        onChange: function onChange(e) {
                             return setNSponsorName(e.target.value);
                         } })
                 ),
                 React.createElement(
                     "td",
                     null,
-                    React.createElement("input", { type: "text", value: nSponsorContr, onChange: function onChange(e) {
+                    React.createElement("input", { className: "form-control", type: "text", value: nSponsorContr,
+                        onChange: function onChange(e) {
                             return setNSponsorContr(e.target.value);
                         } })
                 )

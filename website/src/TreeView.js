@@ -13,6 +13,7 @@ const TreeView = (props) => {
             }
         }
     })
+    if (props.trees.length === 0) return <React.Fragment/>
     return (
         <div>
             <div className="container">

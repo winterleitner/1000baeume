@@ -23,8 +23,8 @@ $res = $conn->query($sql);
 ?>
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        <img class="c-sidebar-brand-full" height="46" alt="Irish Logo" src="../images/Logo_Kreis.png"/>
-        <img class="c-sidebar-brand-minimized" height="46" alt="Irish Logo" src="../images/Logo_Kreis.png">
+        <img class="c-sidebar-brand-full" height="46" src="../images/Logo_Kreis.png"/>
+        <img class="c-sidebar-brand-minimized" height="46" src="../images/Logo_Kreis.png">
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">

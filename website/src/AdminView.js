@@ -99,6 +99,8 @@ const TreeForm = props => {
             if (typeof props.tree.date_planted != "undefined") setDatePlanted(props.tree.date_planted)
             if (typeof props.tree.location_name != "undefined") setLocationName(props.tree.location_name)
             if (typeof props.tree.id != "undefined") setId(props.tree.id)
+            if (typeof props.tree.x != "undefined") setX(props.tree.x)
+            if (typeof props.tree.y != "undefined") setY(props.tree.y)
         }
     }, [props])
     const save = () => {
@@ -301,7 +303,7 @@ const ImageUpload = props => {
                     </button>
                 </div>) : <React.Fragment/>}
             </div>
-            <input hidden type="file" multiple ref={imageInput} accept="image/*"
+            <input hidden type="file" ref={imageInput} accept="image/*"
                    onChange={(e) => Promise.all([...e.target.files]).then(res => setSelected(res))}/>
             <button className="btn btn-sm btn-outline-primary" onClick={() => imageInput.current.click()}>Fotos
                 auswählen

@@ -4,6 +4,8 @@ function getDbConnection() {
     $dbuser = "root";
     $dbpassword = "password";
     $dbname = "1000baeume";
-    return new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
+    $mysql = new mysqli($dbserver, $dbuser, $dbpassword, $dbname);
+    $mysql -> set_charset("utf8");
+    return $mysql;
 }
 ?>

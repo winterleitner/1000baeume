@@ -270,6 +270,8 @@ var TreeForm = function TreeForm(props) {
             if (typeof props.tree.date_planted != "undefined") setDatePlanted(props.tree.date_planted);
             if (typeof props.tree.location_name != "undefined") setLocationName(props.tree.location_name);
             if (typeof props.tree.id != "undefined") setId(props.tree.id);
+            if (typeof props.tree.x != "undefined") setX(props.tree.x);
+            if (typeof props.tree.y != "undefined") setY(props.tree.y);
         }
     }, [props]);
     var save = function save() {
@@ -680,7 +682,7 @@ var ImageUpload = function ImageUpload(props) {
                 );
             }) : React.createElement(React.Fragment, null)
         ),
-        React.createElement("input", { hidden: true, type: "file", multiple: true, ref: imageInput, accept: "image/*",
+        React.createElement("input", { hidden: true, type: "file", ref: imageInput, accept: "image/*",
             onChange: function onChange(e) {
                 return Promise.all([].concat(_toConsumableArray(e.target.files))).then(function (res) {
                     return setSelected(res);

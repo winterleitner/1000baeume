@@ -61,7 +61,9 @@
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
     <style>
-        #map {height: 400px;}
+        #map {
+            height: 400px;
+        }
     </style>
     <!---->
 
@@ -184,16 +186,19 @@
 </div>
 
 <script>
+    let trees = []
+
+    /* PRÄFERIERT: DIREKTER DATENBANKZUGRIFF */
     <?php
-        require "php/database.php";
+    require "php/database.php";
     $conn = getDbConnection();
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     $sql = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'beschreibung', description, 'datum', DATE_FORMAT(date_planted, '%d.%m.%Y'), 'ort', JSON_OBJECT('lat', ST_X(location), 'long', ST_Y(location), 'name', location_name), 'last_modified', last_modified,
-       'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) FROM images WHERE tree_id = t.id),
-       'paten', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'beitrag', contribution)) FROM sponsors WHERE tree_id = t.id))) AS res
-       FROM trees t ORDER BY t.id DESC;";
+           'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) FROM images WHERE tree_id = t.id),
+           'paten', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'beitrag', contribution)) FROM sponsors WHERE tree_id = t.id))) AS res
+           FROM trees t ORDER BY t.id DESC;";
 
     $res = $conn->query($sql);
     if ($res->num_rows > 0) {
@@ -201,16 +206,20 @@
         while ($row = $res->fetch_assoc()) {
             $trees = json_decode($row["res"]);
             foreach ($trees as $tree) {
-                if (is_null($tree -> bilder))  $tree -> bilder = [];
-                if (is_null($tree -> paten))  $tree -> paten = [];
+                if (is_null($tree->bilder)) $tree->bilder = [];
+                if (is_null($tree->paten)) $tree->paten = [];
             }
 
-            print ("let trees=" . json_encode($trees) . ";\n");
+            print ("trees=" . json_encode($trees) . ";\n");
         }
     }
     ?>
-    const scrollInterval = 10000
     trees = trees.reverse()
+
+    //ALTERNATIVE-EXTERN
+    // Load data from api
+    //fetch("api").then(res => res.json()).then(res => trees = res.reverse())
+    const scrollInterval = 10000
 </script>
 
 <div class="trees-map-container">
@@ -218,19 +227,48 @@
 </div>
 
 <script>
-    let mymap = L.map('map').setView([48.0392, 14.4192], 15);
-    mymap.scrollWheelZoom.disable();
+    if (trees.length > 0) {
+        document.getElementById("map").hidden = false;
+        let mymap = L.map('map').setView([48.0392, 14.4192], 15);
+        mymap.scrollWheelZoom.disable();
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mymap);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
 
 
-    trees.forEach(t => {
-        let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
-        marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}`);
+        trees.forEach(t => {
+            let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
+            marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}<br>${t.paten.map(p => p.name).join(",")}`);
 
-    })
+        })
+    } else {
+        document.getElementById("map").hidden = true;
+    }
+
+    // ALTERNATIVE-EXTERN
+    /*
+    fetch("api").then(res => res.json()).then(res => {
+            if (res.length > 0) {
+                document.getElementById("map").hidden = false;
+                let mymap = L.map('map').setView([48.0392, 14.4192], 15);
+                mymap.scrollWheelZoom.disable();
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mymap);
+
+
+                res.forEach(t => {
+                    let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
+                    marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}<br>${t.paten.map(p => p.name).join(",")}`);
+
+                })
+            } else {
+                document.getElementById("map").hidden = true;
+            }
+        }
+    )*/
 </script>
 
 <div id="trees_root"></div>
@@ -248,7 +286,6 @@
     </div>
 
 </div>
-
 
 
 <div class="mydata">

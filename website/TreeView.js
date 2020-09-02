@@ -22,6 +22,7 @@ var TreeView = function TreeView(props) {
             }
         };
     });
+    if (props.trees.length === 0) return React.createElement(React.Fragment, null);
     return React.createElement(
         "div",
         null,

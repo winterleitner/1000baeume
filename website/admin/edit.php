@@ -35,7 +35,7 @@ $conn = getDbConnection();
 
 
 
-$stmt = $conn->prepare("UPDATE trees SET description=?, date_planted=?, location=POINT(?,?), location_name=? WHERE id=?");
+$stmt = $conn->prepare("UPDATE trees SET description=?, date_planted=?, location=POINT(?,?), location_name=?, last_modified=CURRENT_TIMESTAMP WHERE id=?");
 $stmt->bind_param("ssddsi", $desc, $date_planted, $x, $y, $location, $tree_id);
 $stmt->execute();
 

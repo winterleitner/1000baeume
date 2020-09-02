@@ -24,9 +24,9 @@ var HighlightView = function HighlightView(props) {
                     "div",
                     { className: "carousel-caption d-none d-md-block mycarouseltext" },
                     React.createElement(
-                        "h5",
+                        "p",
                         null,
-                        props.text
+                        props.text == null ? "Pflanzung des ersten Baumes - " + "STR R.Kaufmann, Bgm. G.Hackl, VzBgm. W.Hauser, E.Pötzl und L.Födermayr" : props.text
                     )
                 )
             )
@@ -35,7 +35,7 @@ var HighlightView = function HighlightView(props) {
 };
 
 HighlightView.defaultProps = {
-    images: ["images/Baum1.JPG"]
+    images: [{ src: "images/Baum1.JPG" }]
 };
 
 var dc = document.getElementById('highlight_root');

@@ -2,8 +2,8 @@
 <head>
     <script src="https://kit.fontawesome.com/9b34ae5609.js" crossorigin="anonymous"></script>
     <title>1000 Bäume - Administrator</title>
-    <link rel="stylesheet" href="admin/styles/style.css">
-    <link href="admin/vendors/coreui/icons/css/free.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/styles/style.css">
+    <link href="/admin/vendors/coreui/icons/css/free.min.css" rel="stylesheet">
 </head>
 <body class="c-body">
 <?php
@@ -65,7 +65,7 @@ $res = $conn->query($sql);
                     <div class="dropdown-header bg-light py-2">
                         <strong>Account</strong>
                     </div>
-                    <a class="dropdown-item" href="admin/logout.php">
+                    <a class="dropdown-item" href="/admin/logout.php">
                         <svg class="c-icon mr-2">
                             <use xlink:href="/admin/vendors/coreui/icons/svg/free.svg#cil-account-logout"></use>
                         </svg> Logout
@@ -110,10 +110,11 @@ if ($res->num_rows > 0) {
             if (is_null($tree -> images))  $tree -> images = [];
             if (is_null($tree -> sponsors))  $tree -> sponsors = [];
         }
-
-        print ("<script>const trees=" . json_encode($trees) . "</script>");
+        if (is_null($trees)) print("<script>const trees=[]</script>");
+        else print ("<script>const trees=" . json_encode($trees) . "</script>");
     }
 }
+else print("<script>const trees=[]</script>");
 
 $sql = "SELECT highlight FROM settings;";
 $res = $conn->query($sql);
@@ -182,19 +183,19 @@ if ($res->num_rows > 0) {
     }
 </style>
 
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="../AdminView.js"></script>
 
 <!-- CoreUI and necessary plugins-->
-<script src="admin/vendors/coreui/coreui/js/coreui.bundle.min.js"></script>
+<script src="/admin/vendors/coreui/coreui/js/coreui.bundle.min.js"></script>
 <!--[if IE]><!-->
-<script src="admin/vendors/coreui/icons/js/svgxuse.min.js"></script>
+<script src="/admin/vendors/coreui/icons/js/svgxuse.min.js"></script>
 <!--<![endif]-->
 <!-- Plugins and scripts required by this view-->
-<script src="admin/vendors/coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
-<script src="admin/vendors/coreui/utils/js/coreui-utils.js"></script>
-<script src="admin/js/main.js"></script>
+<script src="/admin/vendors/coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
+<script src="/admin/vendors/coreui/utils/js/coreui-utils.js"></script>
+<script src="/admin/js/main.js"></script>
 
 
 </html>

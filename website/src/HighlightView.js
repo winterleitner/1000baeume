@@ -12,7 +12,8 @@ const HighlightView = props => {
                 <div className="carousel-item active">
                     {image}
                     <div className="carousel-caption d-none d-md-block mycarouseltext">
-                        <h5>{props.text}</h5>
+                        <p>{props.text == null ? "Pflanzung des ersten Baumes - " +
+                            "STR R.Kaufmann, Bgm. G.Hackl, VzBgm. W.Hauser, E.Pötzl und L.Födermayr" : props.text}</p>
                     </div>
                 </div>
             </div>
@@ -21,7 +22,7 @@ const HighlightView = props => {
 }
 
 HighlightView.defaultProps = {
-    images: ["images/Baum1.JPG"]
+    images: [{src: "images/Baum1.JPG"}]
 }
 
 

@@ -187,7 +187,7 @@
 
 <script>
     let trees = []
-    let hightlight = {}
+    let highlight = {}
 
     /* PRÄFERIERT: DIREKTER DATENBANKZUGRIFF */
     <?php
@@ -210,8 +210,8 @@
                 if (is_null($tree->bilder)) $tree->bilder = [];
                 if (is_null($tree->paten)) $tree->paten = [];
             }
-
-            print ("trees=" . json_encode($trees) . ";\n");
+            if (is_null($trees)) print("trees=[];\n");
+            else print ("trees=" . json_encode($trees) . ";\n");
         }
     }
 
@@ -302,8 +302,8 @@
     </div>
 </div>
 
-<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="TreeView.js"></script>
 <script src="HighlightView.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

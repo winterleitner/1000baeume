@@ -8,6 +8,19 @@ const nTree = {sponsors: [], images: []}
 
 const TreeList = (props) => {
     const [selectedTree, setSelectedTree] = useState(nTree)
+    const setHighlight = (id) => {
+        console.log("here")
+        const fd = new FormData
+        fd.append("id", id)
+        fetch(`/admin/set_highlight.php`, {
+            method: "POST",
+            body: fd
+        }).then(res => {
+            if (res.ok) {
+                window.location.reload()
+            }
+        })
+    }
     return (
         <div>
             <NewTreeForm/>
@@ -20,6 +33,7 @@ const TreeList = (props) => {
             <table className="table table-responsive-sm table-striped mt-1">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Beschreibung</th>
                     <th>Datum</th>
@@ -30,14 +44,23 @@ const TreeList = (props) => {
                 </thead>
                 <tbody>
                 {props.trees.sort((a, b) => a.id < b.id).map(t =>
-                    <tr className={"tree-list-tr"} onClick={() => setSelectedTree(t)} data-toggle="modal"
-                        data-target="#modal-edit">
-                        <td>{t.id}</td>
-                        <td>{t.description}</td>
-                        <td>{t.date_planted}</td>
-                        <td>{t.location_name}</td>
-                        <td>{t.images.length}</td>
-                        <td>{t.sponsors.map(i => <div>{i.name}({i.contribution})</div>)}</td>
+                    <tr className={"tree-list-tr"}>
+                        <td onClick={() => {
+                            setHighlight(t.id);
+                        }}>{t.id == highlight ? <span className="fa fa-star checked highlight-star"></span> :
+                            <span className="fa fa-star highlight-star"></span>}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.id}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.description}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.date_planted}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.location_name}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.images.length}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.sponsors.map(i => <div>{i.name}({i.contribution})</div>)}</td>
                     </tr>
                 )}
                 </tbody>
@@ -225,7 +248,7 @@ const SponsorsForm = props => {
                                  onClick={() => props.change(props.sponsors.filter(x => x !== s))}></i>
                     </li>)}
             </ul>
-            <table  style={{width: "100%"}}>
+            <table style={{width: "100%"}}>
                 <tr>
                     <th><label>Name</label></th>
                     <th><label>Beitrag</label></th>
@@ -334,6 +357,10 @@ SponsorsForm.defaultProos = {
     sponsors: []
 }
 
+TreeList.defaultProps = {
+    highlight: 1
+}
+
 
 const domContainer = document.getElementById('admin_root');
-ReactDOM.render(<TreeList trees={trees}/>, domContainer);
+ReactDOM.render(<TreeList trees={trees} highlight={highlight}/>, domContainer);

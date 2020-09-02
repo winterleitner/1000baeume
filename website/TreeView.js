@@ -45,7 +45,6 @@ var TreeView = function TreeView(props) {
             props.trees.map(function (t) {
                 return React.createElement(TreeContainer, { tree: t,
                     key: getRandomInt(1000000),
-                    scrollInterval: props.scrollInterval,
                     openImage: setModalImage });
             })
         ),

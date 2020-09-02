@@ -185,8 +185,12 @@ p {
     display: flex;
     justify-content: center;
     padding: 100px;
+}
 
-
+.highlight-image {
+    max-height: 100%;
+    height: 1000px;
+    object-fit: contain;
 }
 
 .mycarouseltext p {

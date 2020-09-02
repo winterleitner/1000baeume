@@ -20,6 +20,19 @@ var TreeList = function TreeList(props) {
         selectedTree = _useState2[0],
         setSelectedTree = _useState2[1];
 
+    var setHighlight = function setHighlight(id) {
+        console.log("here");
+        var fd = new FormData();
+        fd.append("id", id);
+        fetch("/admin/set_highlight.php", {
+            method: "POST",
+            body: fd
+        }).then(function (res) {
+            if (res.ok) {
+                window.location.reload();
+            }
+        });
+    };
     return React.createElement(
         "div",
         null,
@@ -49,6 +62,7 @@ var TreeList = function TreeList(props) {
                 React.createElement(
                     "tr",
                     null,
+                    React.createElement("th", null),
                     React.createElement(
                         "th",
                         null,
@@ -89,38 +103,60 @@ var TreeList = function TreeList(props) {
                 }).map(function (t) {
                     return React.createElement(
                         "tr",
-                        { className: "tree-list-tr", onClick: function onClick() {
-                                return setSelectedTree(t);
-                            }, "data-toggle": "modal",
-                            "data-target": "#modal-edit" },
+                        { className: "tree-list-tr" },
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    setHighlight(t.id);
+                                } },
+                            t.id == highlight ? React.createElement("span", { className: "fa fa-star checked highlight-star" }) : React.createElement("span", { className: "fa fa-star highlight-star" })
+                        ),
+                        React.createElement(
+                            "td",
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.id
                         ),
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.description
                         ),
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.date_planted
                         ),
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.location_name
                         ),
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.images.length
                         ),
                         React.createElement(
                             "td",
-                            null,
+                            { onClick: function onClick() {
+                                    return setSelectedTree(t);
+                                }, "data-toggle": "modal",
+                                "data-target": "#modal-edit" },
                             t.sponsors.map(function (i) {
                                 return React.createElement(
                                     "div",
@@ -733,5 +769,9 @@ SponsorsForm.defaultProos = {
     sponsors: []
 };
 
+TreeList.defaultProps = {
+    highlight: 1
+};
+
 var domContainer = document.getElementById('admin_root');
-ReactDOM.render(React.createElement(TreeList, { trees: trees }), domContainer);
+ReactDOM.render(React.createElement(TreeList, { trees: trees, highlight: highlight }), domContainer);

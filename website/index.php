@@ -187,6 +187,7 @@
 
 <script>
     let trees = []
+    let hightlight = {}
 
     /* PRÄFERIERT: DIREKTER DATENBANKZUGRIFF */
     <?php
@@ -211,6 +212,20 @@
             }
 
             print ("trees=" . json_encode($trees) . ";\n");
+        }
+    }
+
+    $sql = "SELECT JSON_OBJECT('bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) 
+            FROM images WHERE tree_id = t.id), 'beschreibung', description) as res FROM trees t
+            WHERE (SELECT highlight FROM settings)=t.id;";
+
+    $res = $conn->query($sql);
+    if ($res->num_rows > 0) {
+        // output data of each row
+        while ($row = $res->fetch_assoc()) {
+            $tree = json_decode($row["res"]);
+            if (is_null($tree->bilder)) $tree->bilder = [];
+            print ("highlight=" . json_encode($tree) . ";\n");
         }
     }
     ?>
@@ -273,19 +288,7 @@
 
 <div id="trees_root"></div>
 
-<div class="myimagebox">
-
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="images/Baum1.JPG" class="d-block w-100" alt="Erster Baum pflanzen Projekt 1000 Bäume für Steyr">
-            <div class="carousel-caption d-none d-md-block mycarouseltext">
-                <h5>Pflanzung des ersten Baumes</h5>
-                <p>STR R.Kaufmann, Bgm. G.Hackl, VzBgm. W.Hauser, E.Pötzl und L.Födermayr</p>
-            </div>
-        </div>
-    </div>
-
-</div>
+<div id="highlight_root"></div>
 
 
 <div class="mydata">
@@ -299,9 +302,10 @@
     </div>
 </div>
 
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 <script src="TreeView.js"></script>
+<script src="HighlightView.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

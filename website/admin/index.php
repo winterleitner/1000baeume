@@ -114,6 +114,15 @@ if ($res->num_rows > 0) {
         print ("<script>const trees=" . json_encode($trees) . "</script>");
     }
 }
+
+$sql = "SELECT highlight FROM settings;";
+$res = $conn->query($sql);
+if ($res->num_rows > 0) {
+    // output data of each row
+    while ($row = $res->fetch_assoc()) {
+        print ("<script>const highlight=" . $row['highlight'] . "</script>");
+    }
+}
 ?>
 
 </body>
@@ -162,10 +171,19 @@ if ($res->num_rows > 0) {
     .location-result i:hover {
         color: red;
     }
+
+    .checked {
+        color: orange;
+    }
+
+    .highlight-star:hover {
+        color: orange;
+        cursor: pointer;
+    }
 </style>
 
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 <script src="../AdminView.js"></script>
 
 <!-- CoreUI and necessary plugins-->

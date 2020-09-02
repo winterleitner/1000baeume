@@ -21,8 +21,7 @@ const TreeView = (props) => {
             </div>
             <div className="trees-view">{props.trees.map(t => <TreeContainer tree={t}
                                                                                           key={getRandomInt(1000000)}
-                                                                                          scrollInterval={props.scrollInterval}
-                                                                                          openImage={setModalImage}/>)}
+                                                                             openImage={setModalImage}/>)}
             </div>
             <ImageModal show={modalImage !== null} image={modalImage} close={() => setModalImage(null)}/>
         </div>)

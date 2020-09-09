@@ -42,7 +42,7 @@ const TreeContainer = (props) => {
     let {tree} = props;
     const [showEntireText, setShowEntireText] = useState(false)
     let modal = showEntireText ?
-        <div className="modal" id="imageModal">
+        <div className="modal" id="descriptionModal">
             <div className="modal-content">
                 <div className="close" onClick={() => setShowEntireText(false)}>x</div>
                 <div className="description-modal-container"><div>{tree.beschreibung}</div></div>
@@ -60,11 +60,11 @@ const TreeContainer = (props) => {
                             openImage={props.openImage}/>
             </div>
             <div className="tree-container-bottom">
-                <div className="tree-date"><strong>Gepflanzt</strong><br/><span>{tree.datum}</span></div>
                 <div className="tree-location">
                     <strong>Standort</strong><br/>
                     <div>{tree.ort.name}</div>
                 </div>
+                <div className="tree-date"><strong>Gepflanzt</strong><div>{tree.datum}</div></div>
                 <div className="tree-description"><strong>Infos</strong><br/>
                     <p>{tree.beschreibung.length > 200 ? <div onClick={() => setShowEntireText(!showEntireText)}>{showEntireText ? tree.beschreibung : <div>{tree.beschreibung.substr(0, 190)}...<br/><div className="show-more">Mehr Anzeigen...</div></div>}</div> : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
                 </div>

@@ -83,7 +83,7 @@ var TreeContainer = function TreeContainer(props) {
 
     var modal = showEntireText ? React.createElement(
         "div",
-        { className: "modal", id: "imageModal" },
+        { className: "modal", id: "descriptionModal" },
         React.createElement(
             "div",
             { className: "modal-content" },
@@ -129,21 +129,6 @@ var TreeContainer = function TreeContainer(props) {
             { className: "tree-container-bottom" },
             React.createElement(
                 "div",
-                { className: "tree-date" },
-                React.createElement(
-                    "strong",
-                    null,
-                    "Gepflanzt"
-                ),
-                React.createElement("br", null),
-                React.createElement(
-                    "span",
-                    null,
-                    tree.datum
-                )
-            ),
-            React.createElement(
-                "div",
                 { className: "tree-location" },
                 React.createElement(
                     "strong",
@@ -155,6 +140,20 @@ var TreeContainer = function TreeContainer(props) {
                     "div",
                     null,
                     tree.ort.name
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "tree-date" },
+                React.createElement(
+                    "strong",
+                    null,
+                    "Gepflanzt"
+                ),
+                React.createElement(
+                    "div",
+                    null,
+                    tree.datum
                 )
             ),
             React.createElement(

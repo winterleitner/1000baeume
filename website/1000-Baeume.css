@@ -189,7 +189,6 @@ p {
 
 .highlight-image {
     max-height: 100%;
-    height: 1000px;
     object-fit: contain;
 }
 
@@ -242,9 +241,11 @@ p {
     scroll-snap-type: x mandatory;
 }
 
+/*
 .trees-view::-webkit-scrollbar {
     display: none;
 }
+ */
 
 .tree-container {
     width: 400px;
@@ -299,28 +300,31 @@ p {
 }
 
 .tree-date {
-    text-align: left;
-    position: absolute;
-    left:15px;
-    bottom: 10px;
-}
-
-.tree-date span {
-    font-size: 22px;
-}
-
-.tree-location {
     text-align: right;
     position: absolute;
     right:15px;
     bottom: 10px;
 }
 
+.tree-date div {
+    font-size: 22px;
+    margin-top: -5px;
+}
+
+.tree-location {
+    text-align: left;
+    position: absolute;
+    left:15px;
+    bottom: 10px;
+}
+
 .tree-location div {
     font-size: 22px;
-    max-width: 200px;
+    max-width: 240px;
     overflow: scroll;
+    margin-top: -5px;
 }
+
 .tree-location div::-webkit-scrollbar {
     display: none;
 }
@@ -340,7 +344,11 @@ p {
     word-wrap: break-word;
     hyphens: auto;
     overflow: hidden;
+    max-height: 140px;
     text-overflow: ellipsis;
+    text-align: justify;
+    margin-left: 0;
+    padding-right: 10px;
 }
 
 .show-more {
@@ -356,18 +364,42 @@ p {
     text-align: left;
     position: absolute;
     left:15px;
-    bottom: 70px;
+    bottom: 60px;
 }
 
 .tree-sponsors div {
     font-size: 22px;
     width: 370px;
     max-width: 95%;
+    margin-top: -5px;
 }
 
 .tree-container h6 {
     margin-bottom: 0px;
     margin-top: 5px;
+}
+
+
+@media (max-width: 380px) {
+    .tree-location div {
+        font-size: 18px;
+        max-width: 130px;
+        overflow: scroll;
+    }
+
+    .tree-date div {
+        font-size: 18px;
+    }
+
+    .tree-sponsors div {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 425px) {
+    .tree-location div {
+        max-width: 220px;
+    }
 }
 
 .tree-imagebox {
@@ -468,6 +500,7 @@ p {
 .modal-image {
     width: 100%;
     object-fit: contain;
+    max-height: 100%;
 }
 
 /* The Close Button */
@@ -494,10 +527,12 @@ p {
 }
 
 .description-modal-container div {
+    height: 100%;
     white-space: pre-line;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
+    overflow: scroll;
 }
 /*endregion*/
 

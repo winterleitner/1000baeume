@@ -1,7 +1,7 @@
 <?php
+session_start();
 require '../php/database.php';
 
-session_start();
 if (!isset($_SESSION["username"])) {
     http_response_code(401);
     die();

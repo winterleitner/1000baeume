@@ -197,7 +197,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     $sql = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'beschreibung', description, 'datum', DATE_FORMAT(date_planted, '%d.%m.%Y'), 'ort', JSON_OBJECT('lat', ST_X(location), 'long', ST_Y(location), 'name', location_name), 'last_modified', last_modified,
-           'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) FROM images WHERE tree_id = t.id),
+           'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'highRes', image_high_res, 'alt', text)) FROM images WHERE tree_id = t.id),
            'paten', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'beitrag', contribution)) FROM sponsors WHERE tree_id = t.id))) AS res
            FROM trees t ORDER BY t.id DESC;";
 
@@ -215,7 +215,7 @@
         }
     }
 
-    $sql = "SELECT JSON_OBJECT('bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'alt', text)) 
+    $sql = "SELECT JSON_OBJECT('bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image_high_res, 'alt', text)) 
             FROM images WHERE tree_id = t.id), 'beschreibung', description) as res FROM trees t
             WHERE (SELECT highlight FROM settings)=t.id;";
 

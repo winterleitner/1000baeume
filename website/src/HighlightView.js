@@ -1,7 +1,7 @@
 const {useState, useEffect} = React
 
 const HighlightView = props => {
-    let image = <img src={props.images[0].src} className="d-block w-100 highlight-image"
+    let image = <img src={props.images[0].src.split()} className="d-block w-100 highlight-image"
                      alt="Erster Baum pflanzen Projekt 1000 Bäume für Steyr"/>
     if (!Array.isArray(props.images)){
            image = <img src="images/Baum1.JPG" className="d-block w-100"

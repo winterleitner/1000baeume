@@ -136,7 +136,7 @@ const TreeForm = props => {
                 date_planted: date_planted,
                 location_name,
                 sponsors,
-                images,
+                images: images.map(i => {return {id: i.id, text: ""}}),
                 x,
                 y
             })
@@ -301,7 +301,7 @@ const ImageUpload = props => {
                     body: fd
                 }).then(res => {
                     if (res.ok) {
-                        res.text().then(t => props.change([...props.images, {id: t, image: senddata.fileData}]))
+                        res.text().then(t => props.change([...props.images, {id: t, image: senddata.fileData}])).then(() => setLoading(false))
                     }
 
                 })
@@ -312,7 +312,6 @@ const ImageUpload = props => {
 
 
         })
-        setLoading(false)
         setSelected([])
     }
     return (
@@ -320,7 +319,7 @@ const ImageUpload = props => {
             <h4>Bilder</h4>
             <div className="images-list">
                 {props.images.length > 0 ? props.images.sort((a, b) => a.id < b.id).map(i => <div
-                    className="images-list-item mb-3"><img src={i.image} height="180px"/><br/><span>{i.text}</span><br/>
+                    className="images-list-item mb-3"><img src={i.image.startsWith("uploads") ? "../" + i.image : i.image} height="180px"/><br/><span>{i.text}</span><br/>
                     <button className="btn btn-sm btn-outline-danger mt-1"
                             onClick={() => props.change(props.images.filter(x => x !== i))}>Löschen
                     </button>

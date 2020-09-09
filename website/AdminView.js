@@ -320,7 +320,9 @@ var TreeForm = function TreeForm(props) {
                 date_planted: date_planted,
                 location_name: location_name,
                 sponsors: sponsors,
-                images: images,
+                images: images.map(function (i) {
+                    return { id: i.id, text: "" };
+                }),
                 x: x,
                 y: y
             })
@@ -668,6 +670,8 @@ var ImageUpload = function ImageUpload(props) {
                     if (res.ok) {
                         res.text().then(function (t) {
                             return props.change([].concat(_toConsumableArray(props.images), [{ id: t, image: senddata.fileData }]));
+                        }).then(function () {
+                            return setLoading(false);
                         });
                     }
                 });
@@ -676,7 +680,6 @@ var ImageUpload = function ImageUpload(props) {
             // Die Datei einlesen und in eine Data-URL konvertieren
             reader.readAsDataURL(datei);
         });
-        setLoading(false);
         setSelected([]);
     };
     return React.createElement(
@@ -697,7 +700,7 @@ var ImageUpload = function ImageUpload(props) {
                     "div",
                     {
                         className: "images-list-item mb-3" },
-                    React.createElement("img", { src: i.image, height: "180px" }),
+                    React.createElement("img", { src: i.image.startsWith("uploads") ? "../" + i.image : i.image, height: "180px" }),
                     React.createElement("br", null),
                     React.createElement(
                         "span",

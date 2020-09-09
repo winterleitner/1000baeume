@@ -4,7 +4,7 @@ var _React = React,
 
 
 var HighlightView = function HighlightView(props) {
-    var image = React.createElement("img", { src: props.images[0].src, className: "d-block w-100 highlight-image",
+    var image = React.createElement("img", { src: props.images[0].src.split(), className: "d-block w-100 highlight-image",
         alt: "Erster Baum pflanzen Projekt 1000 B\xE4ume f\xFCr Steyr" });
     if (!Array.isArray(props.images)) {
         image = React.createElement("img", { src: "images/Baum1.JPG", className: "d-block w-100",

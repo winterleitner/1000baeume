@@ -77,19 +77,11 @@ function createThumbnail($src, $dest, $targetWidth, $targetHeight = null) {
 
         // get width to height ratio
         $ratio = $width / $height;
-
-        // if is portrait
-        // use ratio to scale height to fit in square
-        if ($width > $height) {
-            $targetHeight = floor($targetWidth / $ratio);
-        }
-        // if is landscape
-        // use ratio to scale width to fit in square
-        else {
-            $targetHeight = $targetWidth;
-            $targetWidth = floor($targetWidth * $ratio);
-        }
+        $targetHeight = floor($targetWidth / $ratio);
     }
+
+    echo "SRC:".$width."/".$height;
+    echo "SRC:".$targetWidth."/".$targetHeight;
 
     // create duplicate image based on calculated target size
     $thumbnail = imagecreatetruecolor($targetWidth, $targetHeight);
@@ -133,11 +125,32 @@ function createThumbnail($src, $dest, $targetWidth, $targetHeight = null) {
     );
 }
 
+function isPortrait($src) {
+
+    $type = exif_imagetype($src);
+
+    if (!$type || !IMAGE_HANDLERS[$type]) {
+        return null;
+    }
+
+    $image = call_user_func(IMAGE_HANDLERS[$type]['load'], $src);
+
+    if (!$image) {
+        return null;
+    }
+
+    $width = imagesx($image);
+    $height = imagesy($image);
+    return $width < $height;
+}
+
 session_start();
+/*
 if (!isset($_SESSION["username"])) {
     http_response_code(401);
     die();
 }
+*/
 require ("../php/database.php");
 
 $conn = getDbConnection();
@@ -174,8 +187,12 @@ if (is_null($url)){
     $random = generateRandomString(5);
     $target = "../uploads/".$random.$image["name"];
     $target_high_res = "../uploads/highres/".$random.$image["name"];
-    createThumbnail($image["tmp_name"], $target, 1000);
     move_uploaded_file($image["tmp_name"], $target_high_res);
+    correctImageOrientation($target_high_res);
+    $targetWidth = 1000;
+    if (isPortrait($target_high_res))
+        $targetWidth = 750;
+    createThumbnail($target_high_res, $target, $targetWidth);
     $url = substr($target, 3);
     $url_high_res = substr($target_high_res, 3);
 
@@ -186,3 +203,31 @@ $stmt->bind_param("isss", $tree_id, $url, $url_high_res, $hash);
 $stmt->execute();
 print($stmt->insert_id);
 
+function correctImageOrientation($filename) {
+    if (function_exists('exif_read_data')) {
+        $exif = exif_read_data($filename);
+        if($exif && isset($exif['Orientation'])) {
+            $orientation = $exif['Orientation'];
+            if($orientation != 1){
+                $img = imagecreatefromjpeg($filename);
+                $deg = 0;
+                switch ($orientation) {
+                    case 3:
+                        $deg = 180;
+                        break;
+                    case 6:
+                        $deg = 270;
+                        break;
+                    case 8:
+                        $deg = 90;
+                        break;
+                }
+                if ($deg) {
+                    $img = imagerotate($img, $deg, 0);
+                }
+                // then rewrite the rotated image back to the disk as $filename
+                imagejpeg($img, $filename, 95);
+            } // if there is some rotation necessary
+        } // if have the exif orientation info
+    } // if function exists
+}

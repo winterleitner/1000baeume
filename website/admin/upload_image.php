@@ -80,9 +80,6 @@ function createThumbnail($src, $dest, $targetWidth, $targetHeight = null) {
         $targetHeight = floor($targetWidth / $ratio);
     }
 
-    echo "SRC:".$width."/".$height;
-    echo "SRC:".$targetWidth."/".$targetHeight;
-
     // create duplicate image based on calculated target size
     $thumbnail = imagecreatetruecolor($targetWidth, $targetHeight);
 

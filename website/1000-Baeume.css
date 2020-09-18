@@ -25,7 +25,7 @@ p {
 
 
 .myentrance {
-    height: 750px;
+    height: 100vh;
     width: 100%;
     background-image: url(images/Pflanze_Dunkel.jpg);
     background-size: cover;
@@ -56,7 +56,20 @@ p {
     background-image: url(images/Logo_Kreis.png);
     background-size: cover;
     background-position: center;
-    margin-right: 100px;
+    margin-right: 10%;
+}
+
+@media (min-width: 850px) {
+    .myentrancelogobox {
+        /* background-color: olive; */
+        height: 300px;
+    }
+
+    .myentrancelogo {
+        /* background-color: grey; */
+        height: 300px;
+        width: 300px;
+    }
 }
 
 

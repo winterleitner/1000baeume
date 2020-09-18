@@ -1,26 +1,8 @@
 <?php
 session_start();
-include '../php/database.php';
 
 $username = "test";
 $password = "test";
-?>
-
-<?php
-if (isset($_POST['username'])) {
-    $username = $_POST['username'];
-}
-if (isset($_POST['passwort'])) {
-    $passwort = $_POST['passwort'];
-}
-
-// Create connection
-$conn = getDbConnection();
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 
 if (isset($_GET['logout'])) {
     if ($_GET['logout']) {
@@ -50,7 +32,6 @@ if (isset($_GET['logout'])) {
     if (isset($_POST['login'])) {
 
         if (strcmp($_POST["username"], $username) == 0 && strcmp($_POST["password"], $password) == 0) {
-            $_SESSION['userid'] = $dbretrID;
             $_SESSION['username'] = $username;
             header('Location: /admin');
             echo '<script type="text/javascript"> window.location = "/admin"; </script>';

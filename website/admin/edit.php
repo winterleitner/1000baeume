@@ -67,8 +67,7 @@ $stmt = $conn->prepare("UPDATE images SET tree_id = 0 WHERE id = ?;");
 $stmt->bind_param("i", $img_id);
 foreach ($images_to_remove as $img) {
     $img_id = $img;
-    var_dump($img_id);
-    var_dump($stmt->execute());
+    $stmt->execute();
 }
 
 #endregion
@@ -123,7 +122,7 @@ foreach ($sponsors as $sponsor) {
     if ($sponsor -> id != -1) continue; // Only add newly added sponsors
     $name = $sponsor -> name;
     $contr = $sponsor -> contribution;
-    var_dump($stmt->execute());
+    $stmt->execute();
 }
 #endregion
 http_response_code(200);

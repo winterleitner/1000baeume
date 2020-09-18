@@ -7,7 +7,6 @@
 </head>
 <body class="c-body">
 <?php
-session_start();
 require '../php/database.php';
 require 'authentication.php';
 
@@ -179,6 +178,9 @@ if ($res->num_rows > 0) {
 
     .highlight-star:hover {
         color: orange;
+    }
+
+    .clickable {
         cursor: pointer;
     }
 </style>

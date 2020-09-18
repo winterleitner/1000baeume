@@ -33,6 +33,20 @@ var TreeList = function TreeList(props) {
             }
         });
     };
+    var deleteEntry = function deleteEntry(id) {
+        if (!window.confirm("Den Eintrag mit der Id " + id + " wirklich l\xF6schen?")) return;
+        console.log("Deleted " + id);
+        var fd = new FormData();
+        fd.append("id", id);
+        fetch("/admin/delete.php", {
+            method: "POST",
+            body: fd
+        }).then(function (res) {
+            if (res.ok) {
+                window.location.reload();
+            }
+        });
+    };
     return React.createElement(
         "div",
         null,
@@ -92,7 +106,8 @@ var TreeList = function TreeList(props) {
                         "th",
                         null,
                         "Sponsoren"
-                    )
+                    ),
+                    React.createElement("th", null)
                 )
             ),
             React.createElement(
@@ -109,7 +124,7 @@ var TreeList = function TreeList(props) {
                             { onClick: function onClick() {
                                     setHighlight(t.id);
                                 } },
-                            t.id == highlight ? React.createElement("span", { className: "fa fa-star checked highlight-star" }) : React.createElement("span", { className: "fa fa-star highlight-star" })
+                            t.id == highlight ? React.createElement("span", { className: "fa fa-star checked highlight-star clickable" }) : React.createElement("span", { className: "fa fa-star highlight-star clickable" })
                         ),
                         React.createElement(
                             "td",
@@ -167,6 +182,13 @@ var TreeList = function TreeList(props) {
                                     ")"
                                 );
                             })
+                        ),
+                        React.createElement(
+                            "td",
+                            { onClick: function onClick() {
+                                    return deleteEntry(t.id);
+                                } },
+                            React.createElement("span", { className: "fa fa-trash clickable" })
                         )
                     );
                 })
@@ -408,6 +430,17 @@ var CoordinatesForm = function CoordinatesForm(props) {
             return setResults(res);
         });
     };
+    var handlePaste = function handlePaste(e) {
+        var val = e.clipboardData.getData("Text");
+        var parts = val.split(",");
+        if (parts.length !== 2) return;
+        e.stopPropagation();
+        e.preventDefault();
+        var x = parseFloat(parts[0]);
+        var y = parseFloat(parts[1]);
+        props.setX(x);
+        props.setY(y);
+    };
     return React.createElement(
         "div",
         null,
@@ -440,7 +473,7 @@ var CoordinatesForm = function CoordinatesForm(props) {
                 results.map(function (r) {
                     return React.createElement(
                         "li",
-                        { className: "location-result" },
+                        { className: "location-result clickable" },
                         React.createElement("i", { className: "fa fa-search mr-2", onClick: function onClick() {
                                 var url = "https://www.openstreetmap.org/?mlat=" + r.lat + "&mlon=" + r.lon + "#map=19/" + r.lat + "/" + r.lon;
                                 console.log("Open", url);
@@ -500,7 +533,11 @@ var CoordinatesForm = function CoordinatesForm(props) {
                         React.createElement("input", { className: "form-control", type: "text", value: props.x,
                             onChange: function onChange(e) {
                                 return props.setX(e.target.value);
-                            } })
+                            },
+                            onPaste: function onPaste(e) {
+                                return handlePaste(e);
+                            }
+                        })
                     ),
                     React.createElement(
                         "td",
@@ -508,7 +545,11 @@ var CoordinatesForm = function CoordinatesForm(props) {
                         React.createElement("input", { className: "form-control", type: "text", value: props.y,
                             onChange: function onChange(e) {
                                 return props.setY(e.target.value);
-                            } })
+                            },
+                            onPaste: function onPaste(e) {
+                                return handlePaste(e);
+                            }
+                        })
                     ),
                     React.createElement(
                         "td",

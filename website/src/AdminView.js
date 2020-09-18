@@ -21,6 +21,20 @@ const TreeList = (props) => {
             }
         })
     }
+    const deleteEntry = id => {
+        if (!window.confirm(`Den Eintrag mit der Id ${id} wirklich löschen?`)) return
+        console.log(`Deleted ${id}`);
+        const fd = new FormData
+        fd.append("id", id)
+        fetch(`/admin/delete.php`, {
+            method: "POST",
+            body: fd
+        }).then(res => {
+            if (res.ok) {
+                window.location.reload()
+            }
+        })
+    }
     return (
         <div>
             <NewTreeForm/>
@@ -40,6 +54,7 @@ const TreeList = (props) => {
                     <th>Standort</th>
                     <th>Bilder</th>
                     <th>Sponsoren</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,8 +62,8 @@ const TreeList = (props) => {
                     <tr className={"tree-list-tr"}>
                         <td onClick={() => {
                             setHighlight(t.id);
-                        }}>{t.id == highlight ? <span className="fa fa-star checked highlight-star"></span> :
-                            <span className="fa fa-star highlight-star"></span>}</td>
+                        }}>{t.id == highlight ? <span className="fa fa-star checked highlight-star clickable"></span> :
+                            <span className="fa fa-star highlight-star clickable"></span>}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
                             data-target="#modal-edit">{t.id}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
@@ -61,6 +76,7 @@ const TreeList = (props) => {
                             data-target="#modal-edit">{t.images.length}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
                             data-target="#modal-edit">{t.sponsors.map(i => <div>{i.name}({i.contribution})</div>)}</td>
+                        <td onClick={() => deleteEntry(t.id)}><span className="fa fa-trash clickable"/></td>
                     </tr>
                 )}
                 </tbody>
@@ -174,6 +190,17 @@ const CoordinatesForm = props => {
     const search = () => {
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURI(query)}`).then(res => res.json()).then(res => setResults(res))
     }
+    const handlePaste = e => {
+        const val = e.clipboardData.getData("Text")
+        const parts = val.split(",");
+        if (parts.length !== 2) return
+        e.stopPropagation();
+        e.preventDefault();
+        const x = parseFloat(parts[0])
+        const y = parseFloat(parts[1])
+        props.setX(x)
+        props.setY(y)
+    }
     return (
         <div>
             <label>Standort-Koordinaten</label><br/>
@@ -184,7 +211,7 @@ const CoordinatesForm = props => {
                 <strong>Ergebnisse</strong>
                 <ul className="location-resultlist">
                     {results.map(r =>
-                        <li className="location-result">
+                        <li className="location-result clickable">
                             <i className="fa fa-search mr-2" onClick={() => {
                                 const url = `https://www.openstreetmap.org/?mlat=${r.lat}&mlon=${r.lon}#map=19/${r.lat}/${r.lon}`;
                                 console.log("Open", url);
@@ -209,11 +236,15 @@ const CoordinatesForm = props => {
                 <tr>
                     <td>
                         <input className="form-control" type="text" value={props.x}
-                               onChange={e => props.setX(e.target.value)}/>
+                               onChange={e => props.setX(e.target.value)}
+                               onPaste={e => handlePaste(e)}
+                        />
                     </td>
                     <td>
                         <input className="form-control" type="text" value={props.y}
-                               onChange={e => props.setY(e.target.value)}/>
+                               onChange={e => props.setY(e.target.value)}
+                               onPaste={e => handlePaste(e)}
+                        />
                     </td>
                     <td>
                         <button className="btn btn-primary"><i className="fa fa-search" onClick={() => {

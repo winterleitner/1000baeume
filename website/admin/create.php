@@ -20,12 +20,12 @@ catch (Exception $ex) {
 }
 
 $desc = $tree -> description;
+$no_trees = $tree -> no_of_trees;
 $date_planted = date("Y-m-d", strtotime($tree -> date_planted));
 $location = $tree -> location_name;
 $x = $tree -> x;
 $y = $tree -> y;
 
-var_dump($date_planted);
 $images = $tree -> images;
 $sponsors = $tree -> sponsors;
 
@@ -35,8 +35,8 @@ $conn = getDbConnection();
 
 
 
-$stmt = $conn->prepare("INSERT INTO trees (description, date_planted, location, location_name) VALUE (?, ?, POINT(?,?), ?)");
-$stmt->bind_param("ssdds", $desc, $date_planted, $x, $y, $location);
+$stmt = $conn->prepare("INSERT INTO trees (description, no_of_trees, date_planted, location, location_name) VALUE (?, ?, POINT(?,?), ?)");
+$stmt->bind_param("ssdds", $desc, $no_trees, $date_planted, $x, $y, $location);
 $stmt->execute();
 $tree_id = $stmt->insert_id;
 

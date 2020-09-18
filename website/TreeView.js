@@ -81,6 +81,7 @@ var TreeContainer = function TreeContainer(props) {
         showEntireText = _useState4[0],
         setShowEntireText = _useState4[1];
 
+    var descLengthLimit = tree.paten.length > 1 ? 150 : 200;
     var modal = showEntireText ? React.createElement(
         "div",
         { className: "modal", id: "descriptionModal" },
@@ -118,7 +119,9 @@ var TreeContainer = function TreeContainer(props) {
                 React.createElement(
                     "div",
                     null,
-                    tree.id
+                    tree.anzahl,
+                    React.createElement("img", { src: "images/Baum_Logo.png", height: "20px", style: { marginLeft: "4px", marginBottom: "4px" } }),
+                    " "
                 )
             ),
             React.createElement(TreeImages, { images: tree.bilder, treeId: tree.id, scrollInterval: props.scrollInterval,
@@ -167,8 +170,8 @@ var TreeContainer = function TreeContainer(props) {
                 React.createElement("br", null),
                 React.createElement(
                     "p",
-                    null,
-                    tree.beschreibung.length > 200 ? React.createElement(
+                    { className: tree.paten.length > 1 ? "desc-100" : "desc-140" },
+                    tree.beschreibung.length > descLengthLimit ? React.createElement(
                         "div",
                         { onClick: function onClick() {
                                 return setShowEntireText(!showEntireText);
@@ -176,7 +179,7 @@ var TreeContainer = function TreeContainer(props) {
                         showEntireText ? tree.beschreibung : React.createElement(
                             "div",
                             null,
-                            tree.beschreibung.substr(0, 190),
+                            tree.beschreibung.substr(0, descLengthLimit - 10),
                             "...",
                             React.createElement("br", null),
                             React.createElement(

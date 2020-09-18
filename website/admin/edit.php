@@ -20,6 +20,7 @@ catch (Exception $ex) {
 }
 
 $tree_id = $tree -> id;
+$no_trees = $tree -> no_of_trees;
 $desc = $tree -> description;
 $date_planted = date("Y-m-d", strtotime($tree -> date_planted));
 $location = $tree -> location_name;
@@ -35,8 +36,8 @@ $conn = getDbConnection();
 
 
 
-$stmt = $conn->prepare("UPDATE trees SET description=?, date_planted=?, location=POINT(?,?), location_name=?, last_modified=CURRENT_TIMESTAMP WHERE id=?");
-$stmt->bind_param("ssddsi", $desc, $date_planted, $x, $y, $location, $tree_id);
+$stmt = $conn->prepare("UPDATE trees SET description=?, no_of_trees=?, date_planted=?, location=POINT(?,?), location_name=?, last_modified=CURRENT_TIMESTAMP WHERE id=?");
+$stmt->bind_param("sisddsi", $desc, $no_trees, $date_planted, $x, $y, $location, $tree_id);
 $stmt->execute();
 
 #region Assign images

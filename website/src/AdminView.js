@@ -49,6 +49,7 @@ const TreeList = (props) => {
                 <tr>
                     <th></th>
                     <th>ID</th>
+                    <th>Anzahl</th>
                     <th>Beschreibung</th>
                     <th>Datum</th>
                     <th>Standort</th>
@@ -66,6 +67,8 @@ const TreeList = (props) => {
                             <span className="fa fa-star highlight-star clickable"></span>}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
                             data-target="#modal-edit">{t.id}</td>
+                        <td onClick={() => setSelectedTree(t)} data-toggle="modal"
+                            data-target="#modal-edit">{t.no_of_trees}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
                             data-target="#modal-edit">{t.description}</td>
                         <td onClick={() => setSelectedTree(t)} data-toggle="modal"
@@ -122,6 +125,7 @@ const EditTreeForm = props =>
 
 const TreeForm = props => {
     const [id, setId] = useState(-1)
+    const [noTrees, setNoTrees] = useState(1)
     const [description, setDescription] = useState("")
     const [date_planted, setDatePlanted] = useState(`${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`)
     const [location_name, setLocationName] = useState("")
@@ -140,6 +144,7 @@ const TreeForm = props => {
             if (typeof props.tree.id != "undefined") setId(props.tree.id)
             if (typeof props.tree.x != "undefined") setX(props.tree.x)
             if (typeof props.tree.y != "undefined") setY(props.tree.y)
+            if (typeof props.tree.no_of_trees != "undefined") setNoTrees(props.tree.no_of_trees)
         }
     }, [props])
     const save = () => {
@@ -148,6 +153,7 @@ const TreeForm = props => {
             method: "POST",
             body: JSON.stringify({
                 id,
+                no_of_trees: noTrees,
                 description: description,
                 date_planted: date_planted,
                 location_name,
@@ -168,6 +174,10 @@ const TreeForm = props => {
                 <input className="form-control" type="date" name="date_planted"
                        value={date_planted}
                        onChange={e => setDatePlanted(e.target.value)}/><br/>
+                <label htmlFor="no_trees">Anzahl der Bäume</label><br/>
+                <input className="form-control" type="number" name="no_trees" min={0}
+                       value={noTrees}
+                       onChange={e => setNoTrees(parseInt(e.target.value))}/><br/>
                 <h4>Standort</h4>
                 <label htmlFor="description">Standort-Name</label><br/>
                 <input className="form-control" type="text" name="location_name" defaultValue={location_name}
@@ -275,24 +285,27 @@ const SponsorsForm = props => {
             <ul>
                 {props.sponsors.map(s =>
                     <li className="sponsor-item">{s.name} - {s.contribution}
-                        &nbsp;<i className="fa fa-trash" style={{color: "red"}} aria-hidden="true"
+                        &nbsp;<i className="fa fa-trash clickable" style={{color: "red"}} aria-hidden="true"
                                  onClick={() => props.change(props.sponsors.filter(x => x !== s))}></i>
                     </li>)}
             </ul>
             <table style={{width: "100%"}}>
                 <tr>
                     <th><label>Name</label></th>
-                    <th><label>Beitrag</label></th>
+                    {/*<th><label>Beitrag</label></th>*/}
                 </tr>
                 <tr>
                     <td>
                         <input className="form-control" type="text" value={nSponsorName}
                                onChange={e => setNSponsorName(e.target.value)}/>
                     </td>
+                    {/*
                     <td>
                         <input className="form-control" type="text" value={nSponsorContr}
                                onChange={e => setNSponsorContr(e.target.value)}/>
                     </td>
+                    */
+                    }
                 </tr>
             </table>
             <button className="btn btn-sm btn-outline-primary mt-1" onClick={addSponsor}>Hinzufügen</button>

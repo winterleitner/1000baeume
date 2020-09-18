@@ -41,6 +41,7 @@ const ImageModal = props =>
 const TreeContainer = (props) => {
     let {tree} = props;
     const [showEntireText, setShowEntireText] = useState(false)
+    const descLengthLimit = tree.paten.length > 1 ? 150 : 200;
     let modal = showEntireText ?
         <div className="modal" id="descriptionModal">
             <div className="modal-content">
@@ -54,7 +55,7 @@ const TreeContainer = (props) => {
             {modal}
             <div className="tree-container-top">
                 <div className="tree-id">
-                    <div>{tree.id}</div>
+                    <div>{tree.anzahl}<img src={"images/Baum_Logo.png"} height={"20px"} style={{marginLeft:"4px", marginBottom: "4px"}}/> </div>
                 </div>
                 <TreeImages images={tree.bilder} treeId={tree.id} scrollInterval={props.scrollInterval}
                             openImage={props.openImage}/>
@@ -66,7 +67,7 @@ const TreeContainer = (props) => {
                 </div>
                 <div className="tree-date"><strong>Gepflanzt</strong><div>{tree.datum}</div></div>
                 <div className="tree-description"><strong>Infos</strong><br/>
-                    <p>{tree.beschreibung.length > 200 ? <div onClick={() => setShowEntireText(!showEntireText)}>{showEntireText ? tree.beschreibung : <div>{tree.beschreibung.substr(0, 190)}...<br/><div className="show-more">Mehr Anzeigen...</div></div>}</div> : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
+                    <p className={tree.paten.length > 1 ? "desc-100" : "desc-140"}>{tree.beschreibung.length > descLengthLimit ? <div onClick={() => setShowEntireText(!showEntireText)}>{showEntireText ? tree.beschreibung : <div>{tree.beschreibung.substr(0, descLengthLimit-10)}...<br/><div className="show-more">Mehr Anzeigen...</div></div>}</div> : tree.beschreibung.length > 0 ? tree.beschreibung : "-"}</p>
                 </div>
                 {tree.paten.length > 0 ?
                 <div className="tree-sponsors">

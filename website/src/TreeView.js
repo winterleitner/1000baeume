@@ -27,7 +27,18 @@ const TreeView = (props) => {
         </div>)
 }
 
-const ImageModal = props =>
+const ImageModal = props => {
+    useEffect(() => {
+        if(props.show) {
+            document.documentElement.style.overflow = 'hidden';
+            document.body.scroll = "no";
+        }
+        else {
+            document.documentElement.style.overflow = 'scroll';
+            document.body.scroll = "yes";
+        }
+    }, [props])
+    return (
     props.show ?
         <div className="modal" id="imageModal">
             <div className="modal-content">
@@ -36,12 +47,26 @@ const ImageModal = props =>
             </div>
         </div>
         : <div/>
+    )
+}
 
 
 const TreeContainer = (props) => {
     let {tree} = props;
     const [showEntireText, setShowEntireText] = useState(false)
     const descLengthLimit = tree.paten.length > 1 ? 150 : 200;
+
+    useEffect(() => {
+        if(showEntireText) {
+            document.documentElement.style.overflow = 'hidden';
+            document.body.scroll = "no";
+        }
+        else {
+            document.documentElement.style.overflow = 'scroll';
+            document.body.scroll = "yes";
+        }
+    }, [showEntireText])
+
     let modal = showEntireText ?
         <div className="modal" id="descriptionModal">
             <div className="modal-content">

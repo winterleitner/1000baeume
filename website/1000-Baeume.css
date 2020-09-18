@@ -390,7 +390,7 @@ p {
 .tree-sponsors div {
     font-size: 22px;
     width: 370px;
-    max-width: 95%;
+    max-width: 80vw;
     margin-top: -5px;
     overflow-y: scroll;
     max-height: 80px;
@@ -423,7 +423,7 @@ p {
 
 @media (max-width: 425px) {
     .tree-location div {
-        max-width: 220px;
+        max-width: 215px;
     }
 }
 

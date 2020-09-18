@@ -55,6 +55,15 @@ var TreeView = function TreeView(props) {
 };
 
 var ImageModal = function ImageModal(props) {
+    useEffect(function () {
+        if (props.show) {
+            document.documentElement.style.overflow = 'hidden';
+            document.body.scroll = "no";
+        } else {
+            document.documentElement.style.overflow = 'scroll';
+            document.body.scroll = "yes";
+        }
+    }, [props]);
     return props.show ? React.createElement(
         "div",
         { className: "modal", id: "imageModal" },
@@ -82,6 +91,17 @@ var TreeContainer = function TreeContainer(props) {
         setShowEntireText = _useState4[1];
 
     var descLengthLimit = tree.paten.length > 1 ? 150 : 200;
+
+    useEffect(function () {
+        if (showEntireText) {
+            document.documentElement.style.overflow = 'hidden';
+            document.body.scroll = "no";
+        } else {
+            document.documentElement.style.overflow = 'scroll';
+            document.body.scroll = "yes";
+        }
+    }, [showEntireText]);
+
     var modal = showEntireText ? React.createElement(
         "div",
         { className: "modal", id: "descriptionModal" },

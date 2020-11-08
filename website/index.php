@@ -75,7 +75,7 @@
 
 <div class="myentrance">
     <div class="myentrancelogobox">
-        <div class="myentrancelogo"></div>
+        <a class="myentrancelogo" href="/"></a>
     </div>
     <div class="myentrancetext">
         <div class="myentrancetexth1">

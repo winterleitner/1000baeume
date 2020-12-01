@@ -201,7 +201,7 @@ p {
 }
 
 .highlight-image {
-    max-height: 100%;
+    max-height: 1000px;
     object-fit: contain;
 }
 
@@ -246,7 +246,7 @@ p {
 
 
 .trees-view {
-    height: 650px;
+    height: 660px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -386,13 +386,17 @@ p {
     left:15px;
     bottom: 60px;
 }
+.tree-sponsors div::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Chrome/Safari/Webkit */
+}
 
 .tree-sponsors div {
     font-size: 22px;
     width: 370px;
     max-width: 80vw;
     margin-top: -5px;
-    overflow-y: scroll;
+    overflow-x: scroll;
     max-height: 80px;
     white-space: normal;
     line-height: normal;
@@ -436,6 +440,8 @@ p {
     background-size: cover;
     background-position: center center;
     position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .tree-imagebox div {

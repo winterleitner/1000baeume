@@ -35,7 +35,6 @@ p {
     justify-content: left;
     align-items: center;
     /* background-color: chartreuse; */
-    margin-bottom: 50px;
     flex-wrap: wrap;
 }
 
@@ -198,6 +197,53 @@ p {
     width: 250px;
     background-image: url(images/Statement_Schmidbauer.png);
     background-size: cover;
+}
+
+.holiday-box {
+    background-color: #800080;
+    color: white;
+    margin-top: auto;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.holiday-box-intro {
+    font-size: 19px;
+}
+
+.holiday-box h1 {
+    margin: 0;
+}
+
+.holiday-box button, .holiday-box a {
+    background-color: #8f028f;
+    border-radius: 5px;
+    border: 3px solid white;
+    color: white;
+    font-size: 20px;
+    width: 300px;
+    margin-top: 15px;
+}
+
+@media (max-width: 500px) {
+    .holiday-box {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .holiday-box h1 {
+        font-size: 30px;
+    }
+    .holiday-box button, .holiday-box a {
+        width: 90%;
+    }
+}
+
+
+
+.holiday-box button:hover {
+    color: #8f028f;
+    background-color: white;
 }
 
 .mygreybox {
@@ -614,6 +660,19 @@ p {
 }
 
 /*endregion*/
+
+@media (max-width: 636px) {
+    .myentrancetexth1 h1 {
+        font-size: 5rem;
+        padding: 0px;
+    }
+
+    .myentrancetexth2 h2 {
+        font-size: 3rem;
+    }
+
+}
+
 @media (max-width: 425px) {
 
     h1, h2, h3, p {
@@ -732,14 +791,8 @@ p {
     }
 }
 
-@media (max-width: 636px) {
-    .myentrancetexth1 h1 {
-        font-size: 5rem;
-        padding: 0px;
-    }
 
-    .myentrancetexth2 h2 {
-        font-size: 3rem;
-    }
-    
+
+.container {
+    margin-top: 50px;
 }

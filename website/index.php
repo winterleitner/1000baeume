@@ -108,6 +108,34 @@
 </div>
 
 
+<script>
+    function onGiftContactClicked() {
+        document.getElementById("gift-contact").hidden = true
+        document.getElementById("gift-contact-phone").hidden = false
+        document.getElementById("gift-contact-mail").hidden = false
+    }
+    function onGiftPhone() {
+        window.location.href="tel: 0664 3423146"
+    }
+    function onGiftMail() {
+        const body = "Guten Tag,\n\nich möchte einen Gutschein für eine Baumpatenschaft in Steyr im Wert von 350€ bestellen.\n\nMeine Kontaktdaten:\n\nName:\nTelefonnummer:\n\n\n" +
+            "Die Zahlung erfolgt auf folgendes Konto:\n\n\"Tourismusverband Steyr und die Nationalparkregion\", Zusatzbezeichnung \"1000 Bäume für Steyr\"\nAT97 3411 4000 0004 2572\n"
+        window.location.href=("mailto:leopold@foedermayr.at?subject=Gutschein für eine Baumpatenschaft&body=" + encodeURI(body))
+    }
+
+
+</script>
+
+<div class="holiday-box">
+    <div>
+        <span class="holiday-box-intro">Perfekt für Weihnachten:</span>
+        <h1>Baumpatenschaft als Gutschein schenken!</h1>
+        <button id="gift-contact" onclick="onGiftContactClicked()">Kontakt</button>
+        <button id="gift-contact-phone" onclick="onGiftPhone()" hidden>Telefon: 0664 3423146</button>
+        <button id="gift-contact-mail" onclick="onGiftMail()" hidden>Mail</button>
+    </div>
+</div>
+
 <div class="container">
 
     <div class="myheading">
@@ -130,6 +158,7 @@
         <div class="myquote4"></div>
     </div>
 </div>
+
 
 <div class="mygreybox">
     <div class="myFAQbox">

@@ -299,7 +299,7 @@
 
         trees.forEach(t => {
             let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
-            marker.bindPopup(`<b>Baum Nr. ${t.id}</b><br>${t.datum}<br>${t.paten.map(p => p.name).join(",")}`);
+            marker.bindPopup(`<b>${t.anzahl} ${t.anzahl > 1 ? "Bäume" : "Baum"}</b><br>${t.datum}<br>${t.paten.map(p => p.name).join(", ")}`);
 
         })
     } else {

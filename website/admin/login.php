@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-$username = "test";
-$password = "test";
+require "credentials.php";
 
 if (isset($_GET['logout'])) {
     if ($_GET['logout']) {

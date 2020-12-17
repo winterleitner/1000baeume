@@ -85,6 +85,26 @@
             <h2>Helfen Sie jetzt mit!</h2>
         </div>
     </div>
+    <?php
+    require "php/database.php";
+    $conn = getDbConnection();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT `value` FROM settings WHERE `key`='tree_count';";
+    $res = $conn->query($sql);
+    $treeCount = "100+";
+    if ($res->num_rows > 0) {
+        // output data of each row
+        while ($row = $res->fetch_assoc()) {
+            $treeCount = $row['value'];
+        }
+    }
+    ?>
+    <div class="tree-progress">
+        <div><?php echo($treeCount); ?></div>
+        gepflanzte Bäume
+    </div>
 </div>
 
 
@@ -189,13 +209,7 @@
     let trees = []
     let highlight = {}
 
-    /* PRÄFERIERT: DIREKTER DATENBANKZUGRIFF */
     <?php
-    require "php/database.php";
-    $conn = getDbConnection();
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
     $sql = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'beschreibung', description, 'anzahl', no_of_trees, 'datum', DATE_FORMAT(date_planted, '%d.%m.%Y'), 'ort', JSON_OBJECT('lat', ST_X(location), 'long', ST_Y(location), 'name', location_name), 'last_modified', last_modified,
            'bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image, 'highRes', image_high_res, 'alt', text)) FROM images WHERE tree_id = t.id),
            'paten', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'beitrag', contribution)) FROM sponsors WHERE tree_id = t.id))) AS res
@@ -217,7 +231,7 @@
 
     $sql = "SELECT JSON_OBJECT('bilder', (SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'src', image_high_res, 'alt', text)) 
             FROM images WHERE tree_id = t.id), 'beschreibung', description) as res FROM trees t
-            WHERE (SELECT highlight FROM settings)=t.id;";
+            WHERE (SELECT CAST(`value` AS SIGNED) FROM settings WHERE `key` = 'highlight')=t.id;";
 
     $res = $conn->query($sql);
     if ($res->num_rows > 0) {
@@ -228,6 +242,8 @@
             print ("highlight=" . json_encode($tree) . ";\n");
         }
     }
+
+    $conn->close()
     ?>
     trees = trees.reverse()
 

@@ -97,6 +97,53 @@ p {
 }
 
 
+.tree-progress {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.tree-progress div {
+    font-size: 4rem;
+    font-weight: bold;
+    padding: 0;
+    margin-top: -60px;
+    margin-bottom: -30px;
+}
+
+@media (min-width: 820px) {
+
+    .tree-progress div {
+        font-size: 10rem;
+        font-weight: bold;
+        padding: 0;
+        margin-top: -60px;
+        margin-bottom: -50px;
+    }
+}
+
+@media (max-width: 425px) {
+    .tree-progress {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        color: white;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .tree-progress div {
+        font-size: 4rem;
+        font-weight: bold;
+        padding: 0;
+        margin-top: 0px;
+        margin-bottom: -15px;
+    }
+}
+
 .myheading {
     margin-left: 20px;
     margin-top: 20px;
@@ -259,7 +306,6 @@ p {
     display: none;
 }
  */
-
 .tree-container {
     width: 400px;
     height: 600px;
@@ -272,7 +318,7 @@ p {
     text-align: center;
     scroll-snap-align: center;
     background: #f5f5f5;
-    box-shadow: 0 10px 20px rgba(0,0,0,.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .3);
     overflow: hidden;
     border-radius: 5px;
     text-align: center;
@@ -289,15 +335,15 @@ p {
 .tree-id {
     text-align: left;
     position: absolute;
-    left:10px;
+    left: 10px;
     top: 10px;
     color: white;
     z-index: 1;
     height: 33px;
     width: 65px;
     border-radius: 5px;
-    background-color:  rgb(212, 230, 212);
-    box-shadow: 0 0px 5px rgba(0,0,0,.1);
+    background-color: rgb(212, 230, 212);
+    box-shadow: 0 0px 5px rgba(0, 0, 0, .1);
 }
 
 .tree-id div {
@@ -315,7 +361,7 @@ p {
 .tree-date {
     text-align: right;
     position: absolute;
-    right:15px;
+    right: 15px;
     bottom: 10px;
 }
 
@@ -327,7 +373,7 @@ p {
 .tree-location {
     text-align: left;
     position: absolute;
-    left:15px;
+    left: 15px;
     bottom: 10px;
 }
 
@@ -345,7 +391,7 @@ p {
 .tree-description {
     text-align: left;
     position: absolute;
-    left:15px;
+    left: 15px;
     top: 20px;
     width: 370px;
     max-width: 95%;
@@ -375,6 +421,7 @@ p {
     font-weight: bolder;
     margin-top: -5px;
 }
+
 .show-more:hover {
     cursor: pointer;
     text-decoration: underline;
@@ -383,9 +430,10 @@ p {
 .tree-sponsors {
     text-align: left;
     position: absolute;
-    left:15px;
+    left: 15px;
     bottom: 60px;
 }
+
 .tree-sponsors div::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* Chrome/Safari/Webkit */
@@ -451,11 +499,10 @@ p {
 
 .dots-container {
     position: absolute;
-    left:50%;
+    left: 50%;
     bottom: 0px;
     transform: translateX(-50%);
 }
-
 
 
 .slider-dot {
@@ -492,19 +539,19 @@ p {
 }
 
 .arrow:hover {
-    color: rgba(255,255,255, 0.95);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .arrow-left {
     left: 10px;
 }
+
 .arrow-right {
     right: 10px;
 }
 
 
 /*region modal*/
-
 /* The Modal (background) */
 .modal {
     display: block;
@@ -514,8 +561,8 @@ p {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(255,255,255); /* Fallback color */
-    background-color: rgba(255,255,255,0.95);
+    background-color: rgb(255, 255, 255); /* Fallback color */
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 /* Modal Content/Box */
@@ -554,7 +601,7 @@ p {
     width: 80%;
     max-width: 500px;
     height: 100%;
-    margin:auto;
+    margin: auto;
 }
 
 .description-modal-container div {
@@ -565,15 +612,14 @@ p {
     hyphens: auto;
     overflow: scroll;
 }
+
 /*endregion*/
-
-
-
 @media (max-width: 425px) {
 
     h1, h2, h3, p {
         margin-left: 20px;
     }
+
     .tree-container {
         width: 90%;
         margin-left: 5%;
@@ -684,4 +730,16 @@ p {
     .myentrancelogobox {
         padding: 10px 0px 0px 10px;
     }
+}
+
+@media (max-width: 636px) {
+    .myentrancetexth1 h1 {
+        font-size: 5rem;
+        padding: 0px;
+    }
+
+    .myentrancetexth2 h2 {
+        font-size: 3rem;
+    }
+    
 }

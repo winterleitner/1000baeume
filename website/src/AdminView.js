@@ -37,6 +37,7 @@ const TreeList = (props) => {
     }
     return (
         <div>
+            <TreeCounterForm treeCount={props.treeCount}/>
             <NewTreeForm/>
             <EditTreeForm tree={selectedTree} modifyTree={setSelectedTree}/>
             <div className="inline"><strong>Baumliste</strong>
@@ -396,6 +397,39 @@ const ImageUpload = props => {
     )
 }
 
+const TreeCounterForm = props => {
+    const [treeCount, setTreeCount] = useState(props.treeCount)
+    const [saved, setSaved] = useState(false)
+
+    const edit = value => {
+        setSaved(false)
+        setTreeCount(value)
+    }
+    const save = (e) => {
+        const data = new FormData();
+        data.append('count', treeCount);
+        fetch("set_tree_count.php", {method: 'POST', body:data}).then((res) => res.ok ? setSaved(true) : alert("Fehler beim Speichern!"))
+    }
+    return (<div>
+
+    <table style={{width: "100%", textAlign: "center"}}>
+        <tr>
+            <th><label>Anzuzeigende Baum-Anzahl</label></th>
+        </tr>
+        <tr>
+            <td>
+                <input className="form-control" type="number" value={treeCount}
+                       onChange={e => edit(e.target.value)}/>
+            </td>
+        </tr>
+        <tr>
+            <td><button className="btn btn-sm btn-outline-primary mt-1" onClick={save}>{saved ? "Gespeichert!" : "Speichern"}</button></td>
+        </tr>
+    </table>
+        <hr/>
+    </div>)
+}
+
 SponsorsForm.defaultProos = {
     sponsors: []
 }
@@ -406,4 +440,4 @@ TreeList.defaultProps = {
 
 
 const domContainer = document.getElementById('admin_root');
-ReactDOM.render(<TreeList trees={trees} highlight={highlight}/>, domContainer);
+ReactDOM.render(<TreeList trees={trees} highlight={highlight} treeCount={treeCount}/>, domContainer);

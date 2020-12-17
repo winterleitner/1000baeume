@@ -9,8 +9,16 @@ if (isset($_GET['logout'])) {
         session_destroy();
     }
 }
-?>
 
+if (isset($_POST['login'])) {
+
+    if (strcmp($_POST["username"], $username) == 0 && strcmp($_POST["password"], $password) == 0) {
+        $_SESSION['username'] = $username;
+        header('Location: /admin');
+        echo '<script type="text/javascript"> window.location = "/admin"; </script>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +38,7 @@ if (isset($_GET['logout'])) {
 <div class="container">
     <?php
     if (isset($_POST['login'])) {
-
-        if (strcmp($_POST["username"], $username) == 0 && strcmp($_POST["password"], $password) == 0) {
-            $_SESSION['username'] = $username;
-            header('Location: /admin');
-            echo '<script type="text/javascript"> window.location = "/admin"; </script>';
-        } else {
+        if (!(strcmp($_POST["username"], $username) == 0 && strcmp($_POST["password"], $password) == 0)) {
             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
         Login fehlgeschlagen!
         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
@@ -54,38 +57,39 @@ if (isset($_GET['logout'])) {
                         <h1>Login</h1>
                         <p></p>
                         <form target="" method="post" class="form-horizontal" role="form">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <svg class="c-icon">
                                             <use xlink:href="/admin/vendors/coreui/icons/svg/free.svg#cil-user"></use>
                                         </svg>
                                     </span>
+                                </div>
+                                <input class="form-control" type="text" id="username" name="username"
+                                       placeholder="Username"
+                                       required>
                             </div>
-                            <input class="form-control" type="text" id="username" name="username" placeholder="Username"
-                                   required>
-                        </div>
-                        <div class="input-group mb-4">
-                            <div class="input-group-prepend">
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <svg class="c-icon">
                                             <use xlink:href="/admin/vendors/coreui/icons/svg/free.svg#cil-lock-locked"></use>
                                         </svg>
                                     </span>
+                                </div>
+                                <input class="form-control" type="password" id="password" name="password"
+                                       placeholder="Password" required>
+                                <input type="hidden" name="login" id="login" value="1">
                             </div>
-                            <input class="form-control" type="password" id="password" name="password"
-                                   placeholder="Password" required>
-                            <input type="hidden" name="login" id="login" value="1">
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <button class="btn btn-primary px-4" type="submit">Login</button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-primary px-4" type="submit">Login</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <a class="btn btn-link px-0" href="mailto:felix.winterleitner@gmail.com">Passwort
+                                        vergessen?</a>
+                                </div>
                             </div>
-                            <div class="col-6 text-right">
-                                <a class="btn btn-link px-0" href="mailto:felix.winterleitner@gmail.com">Passwort
-                                    vergessen?</a>
-                            </div>
-                        </div>
                         </form>
                     </div>
                 </div>

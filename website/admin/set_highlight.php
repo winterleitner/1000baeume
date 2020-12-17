@@ -17,6 +17,6 @@ $res = $stmt->get_result();
 
 if ($res->num_rows <= 0) die();
 
-$stmt = $conn->prepare("UPDATE settings SET highlight=?;");
+$stmt = $conn->prepare("UPDATE settings SET `value`=? WHERE `key`='highlight';");
 $stmt->bind_param("i", $id);
 $stmt->execute();

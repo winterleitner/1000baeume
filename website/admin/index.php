@@ -115,12 +115,21 @@ if ($res->num_rows > 0) {
 }
 else print("<script>const trees=[]</script>");
 
-$sql = "SELECT highlight FROM settings;";
+$sql = "SELECT `value` FROM settings WHERE `key`='highlight';";
 $res = $conn->query($sql);
 if ($res->num_rows > 0) {
     // output data of each row
     while ($row = $res->fetch_assoc()) {
-        print ("<script>const highlight=" . $row['highlight'] . "</script>");
+        print ("<script>const highlight=" . $row['value'] . "</script>");
+    }
+}
+
+$sql = "SELECT `value` FROM settings WHERE `key`='tree_count';";
+$res = $conn->query($sql);
+if ($res->num_rows > 0) {
+    // output data of each row
+    while ($row = $res->fetch_assoc()) {
+        print ("<script>const treeCount=" . $row['value'] . "</script>");
     }
 }
 ?>

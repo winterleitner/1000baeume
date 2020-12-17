@@ -50,6 +50,7 @@ var TreeList = function TreeList(props) {
     return React.createElement(
         "div",
         null,
+        React.createElement(TreeCounterForm, { treeCount: props.treeCount }),
         React.createElement(NewTreeForm, null),
         React.createElement(EditTreeForm, { tree: selectedTree, modifyTree: setSelectedTree }),
         React.createElement(
@@ -824,6 +825,77 @@ var ImageUpload = function ImageUpload(props) {
     );
 };
 
+var TreeCounterForm = function TreeCounterForm(props) {
+    var _useState33 = useState(props.treeCount),
+        _useState34 = _slicedToArray(_useState33, 2),
+        treeCount = _useState34[0],
+        setTreeCount = _useState34[1];
+
+    var _useState35 = useState(false),
+        _useState36 = _slicedToArray(_useState35, 2),
+        saved = _useState36[0],
+        setSaved = _useState36[1];
+
+    var edit = function edit(value) {
+        setSaved(false);
+        setTreeCount(value);
+    };
+    var save = function save(e) {
+        var data = new FormData();
+        data.append('count', treeCount);
+        fetch("set_tree_count.php", { method: 'POST', body: data }).then(function (res) {
+            return res.ok ? setSaved(true) : alert("Fehler beim Speichern!");
+        });
+    };
+    return React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "table",
+            { style: { width: "100%", textAlign: "center" } },
+            React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                    "th",
+                    null,
+                    React.createElement(
+                        "label",
+                        null,
+                        "Anzuzeigende Baum-Anzahl"
+                    )
+                )
+            ),
+            React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                    "td",
+                    null,
+                    React.createElement("input", { className: "form-control", type: "number", value: treeCount,
+                        onChange: function onChange(e) {
+                            return edit(e.target.value);
+                        } })
+                )
+            ),
+            React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                    "td",
+                    null,
+                    React.createElement(
+                        "button",
+                        { className: "btn btn-sm btn-outline-primary mt-1", onClick: save },
+                        saved ? "Gespeichert!" : "Speichern"
+                    )
+                )
+            )
+        ),
+        React.createElement("hr", null)
+    );
+};
+
 SponsorsForm.defaultProos = {
     sponsors: []
 };
@@ -833,4 +905,4 @@ TreeList.defaultProps = {
 };
 
 var domContainer = document.getElementById('admin_root');
-ReactDOM.render(React.createElement(TreeList, { trees: trees, highlight: highlight }), domContainer);
+ReactDOM.render(React.createElement(TreeList, { trees: trees, highlight: highlight, treeCount: treeCount }), domContainer);

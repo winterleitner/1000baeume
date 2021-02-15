@@ -126,9 +126,9 @@
 
 </script>
 
-<div class="holiday-box">
+<div class="gutschein-box">
     <div>
-        <span class="holiday-box-intro">Perfekt für Weihnachten:</span>
+        <span class="gutschein-box-intro">Perfekt für Weihnachten:</span>
         <h1>Baumpatenschaft als Gutschein schenken!</h1>
         <button id="gift-contact" onclick="onGiftContactClicked()">Kontakt</button>
         <button id="gift-contact-phone" onclick="onGiftPhone()" hidden>Telefon: 0664 3423146</button>

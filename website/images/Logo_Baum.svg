@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 211 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Logo" transform="matrix(1,0,0,1,0,1.27575)">
+        <path d="M119,181L119,117C119,117 118.765,17.98 0,27C0,27 0.624,114.687 93,119L93,181C93,181 104.229,187.13 119,181" style="fill:rgb(140,195,132);"/>
+        <path d="M106,48C106,48 128.872,-7.086 211,0C211,0 216.251,76.211 129,92.5C129,92.5 124.927,69.501 106,48" style="fill:rgb(140,195,132);"/>
+    </g>
+</svg>

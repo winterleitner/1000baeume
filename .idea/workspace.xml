@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3bae52e2-948a-4cb1-8288-86606b514436" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/website/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/website/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Felix Winterleitner &lt;39999795+seltat@users.noreply.github.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3" />
+  <component name="ProjectId" id="1hYFltzR6UfLLYiiofPVsrfS1qs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/website/images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Run Locally" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/website" port="8080">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3bae52e2-948a-4cb1-8288-86606b514436" name="Default Changelist" comment="" />
+      <created>1600180272917</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600180272917</updated>
+      <workItem from="1600180273961" duration="3427000" />
+      <workItem from="1600238164723" duration="237000" />
+      <workItem from="1600249550415" duration="9357000" />
+      <workItem from="1600686978920" duration="70000" />
+      <workItem from="1600771430344" duration="2044000" />
+      <workItem from="1604858247919" duration="650000" />
+      <workItem from="1605210582565" duration="5000" />
+      <workItem from="1606847141528" duration="684000" />
+      <workItem from="1607507204785" duration="544000" />
+      <workItem from="1607585767127" duration="595000" />
+      <workItem from="1608152729444" duration="16541000" />
+      <workItem from="1608656371872" duration="36000" />
+      <workItem from="1613393124337" duration="2227000" />
+      <workItem from="1613484250666" duration="611000" />
+      <workItem from="1613810973204" duration="1804000" />
+    </task>
+    <task id="LOCAL-00001" summary="fixed image rotation problem">
+      <created>1600183795458</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600183795458</updated>
+    </task>
+    <task id="LOCAL-00002" summary="removed comment">
+      <created>1600183884312</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600183884312</updated>
+    </task>
+    <task id="LOCAL-00003" summary="now automatically detecting pasted coordinates and splitting them into lat and long fields&#10;&#10;added delete button">
+      <created>1600416003420</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1600416003420</updated>
+    </task>
+    <task id="LOCAL-00004" summary="now supporting up to two lines for sponsors&#10;&#10;now displaying number of trees instead of id&#10;&#10;made number of trees editable&#10;&#10;small ui changes">
+      <created>1600422345862</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600422345862</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed multiple issues with overlapping text on some devices">
+      <created>1600432654074</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1600432654074</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed a bug introduced by adding the no_of_trees feature that prevented new trees from being created">
+      <created>1600773548891</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1600773548891</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixed broken links and css in datenschutzerklaerung.html and Impressum.html">
+      <created>1604858885711</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604858885711</updated>
+    </task>
+    <task id="LOCAL-00008" summary="small css adjustments for front page">
+      <created>1606847826331</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606847826331</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added treecount to front page and admin view">
+      <created>1608193552936</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1608193552936</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added Tree-Gifting banner to frontpage">
+      <created>1608205446034</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608205446034</updated>
+    </task>
+    <task id="LOCAL-00011" summary="replaced &quot;Baum Nr. X&quot; by &quot;1 Baum&quot;/&quot;x Bäume&quot;">
+      <created>1608206257056</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608206257056</updated>
+    </task>
+    <task id="LOCAL-00012" summary="moved credentials to separate file credentials.php">
+      <created>1608206594966</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608206594966</updated>
+    </task>
+    <task id="LOCAL-00013" summary="changed gutschein-box style">
+      <created>1613394094264</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1613394094265</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed image rotation problem" />
+    <MESSAGE value="removed comment" />
+    <MESSAGE value="now automatically detecting pasted coordinates and splitting them into lat and long fields&#10;&#10;added delete button" />
+    <MESSAGE value="now supporting up to two lines for sponsors&#10;&#10;now displaying number of trees instead of id&#10;&#10;made number of trees editable&#10;&#10;small ui changes" />
+    <MESSAGE value="fixed multiple issues with overlapping text on some devices" />
+    <MESSAGE value="fixed a bug introduced by adding the no_of_trees feature that prevented new trees from being created" />
+    <MESSAGE value="fixed broken links and css in datenschutzerklaerung.html and Impressum.html" />
+    <MESSAGE value="small css adjustments for front page" />
+    <MESSAGE value="added treecount to front page and admin view" />
+    <MESSAGE value="added Tree-Gifting banner to frontpage" />
+    <MESSAGE value="replaced &quot;Baum Nr. X&quot; by &quot;1 Baum&quot;/&quot;x Bäume&quot;" />
+    <MESSAGE value="moved credentials to separate file credentials.php" />
+    <MESSAGE value="changed gutschein-box style" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed gutschein-box style" />
+  </component>
+</project>

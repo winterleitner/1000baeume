@@ -128,8 +128,8 @@
 
 <div class="gutschein-box">
     <div>
-        <span class="gutschein-box-intro">Perfekt für Weihnachten:</span>
-        <h1>Baumpatenschaft als Gutschein schenken!</h1>
+        <span class="gutschein-box-intro">Nachhaltigkeit zu verschenken:</span>
+        <h1>Baumpatenschaft als Gutschein!</h1>
         <button id="gift-contact" onclick="onGiftContactClicked()">Kontakt</button>
         <button id="gift-contact-phone" onclick="onGiftPhone()" hidden>Telefon: 0664 3423146</button>
         <button id="gift-contact-mail" onclick="onGiftMail()" hidden>Mail</button>
@@ -296,9 +296,22 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
 
+        let LeafIcon = L.Icon.extend({
+            options: {
+                shadowUrl: '/images/Logo_HQ_shadow_blur.png',
+                iconSize:     [38, 38],
+                shadowSize:   [40, 38],
+                iconAnchor:   [19, 38],
+                shadowAnchor: [0, 38],
+                popupAnchor:  [-1, -30]
+            }
+        });
+
+        let greenIcon = new LeafIcon({iconUrl: '/images/Logo_HQ.png'})
+
 
         trees.forEach(t => {
-            let marker = L.marker([t.ort.lat, t.ort.long]).addTo(mymap);
+            let marker = L.marker([t.ort.lat, t.ort.long], {icon: greenIcon}).addTo(mymap);
             marker.bindPopup(`<b>${t.anzahl} ${t.anzahl > 1 ? "Bäume" : "Baum"}</b><br>${t.datum}<br>${t.paten.map(p => p.name).join(", ")}`);
 
         })

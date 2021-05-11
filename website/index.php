@@ -186,7 +186,7 @@
                 </ul>
                 <h2>Wie kann man eine Baumpatenschaft übernehmen, wie läuft das ab?</h2>
                 <ul>
-                    <li>Sie senden uns ein Mail mit dem Betrag für eine Baumpatenschaft (mind. 100€)</li>
+                    <li>Sie senden uns ein Mail mit dem Betrag für eine Baumpatenschaft</li>
                     <li>Wir stimmen mit Ihnen den Pflanzort und den Baum (Gattung, Stammdurchmesser) ab und informieren
                         Sie über den Termin der Pflanzung.
                     </li>

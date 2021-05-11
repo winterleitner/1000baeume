@@ -352,7 +352,7 @@
 <div class="mydata">
     <div class="mydatatext">
         <h2>1000 Bäume für Steyr</h2>
-        <p><i class="far fa-copyright" aria-hidden="true"></i> 2020 Dkfm. Leopold Födermayr</p>
+        <p><i class="far fa-copyright" aria-hidden="true"></i> <?php echo date("Y"); ?> Dkfm. Leopold Födermayr</p>
         <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a> <a href="tel:+436643423146">0664 3423146</a>
         <!-- <p>e-Mail: leopold@foedermayr.at oder Tel.: 0664 3423146</p> -->
         <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>

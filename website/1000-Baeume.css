@@ -238,14 +238,15 @@ p {
         padding-left: 20px;
         padding-right: 20px;
     }
+
     .gutschein-box h1 {
         font-size: 30px;
     }
+
     .gutschein-box button, .gutschein-box a {
         width: 90%;
     }
 }
-
 
 
 .gutschein-box button:hover {
@@ -806,6 +807,67 @@ p {
     }
 }
 
+
+/* New Quotes */
+
+.quotes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+.quote {
+    width: 300px;
+    flex: 25%;
+    padding: 10px;
+    text-align: center;
+}
+
+.quote-auer {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+@media (max-width: 1000px) {
+    .quote {
+        flex: 50%;
+    }
+
+    .quote-auer {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .quote {
+        flex: 100%;
+    }
+}
+
+.quote img {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.quote-text {
+    font-size: 14pt;
+    line-height: 16pt;
+    font-style: italic;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.quote-author div {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
 
 
 .container {

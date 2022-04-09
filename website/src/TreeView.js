@@ -6,6 +6,7 @@ function getRandomInt(max) {
 
 const TreeView = (props) => {
     const [modalImage, setModalImage] = useState(null)
+    
     useEffect(() => {
         window.onclick = function (event) {
             if (event.target == document.getElementById("imageModal")) {

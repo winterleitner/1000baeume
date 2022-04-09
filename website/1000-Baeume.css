@@ -340,7 +340,32 @@ p {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 15px;
 }
+
+.footer-flex a {
+    color: black;
+    text-decoration: underline;
+    flex: 20%;
+    text-align: center;
+}
+
+.footer-flex {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .footer-flex a {
+        flex: 100%;
+    }
+
+    .footer-flex .hide-sm {
+        display: none;
+    }
+}
+
 
 .mydatalink {
     /* background-color: green; */

@@ -19,13 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3bae52e2-948a-4cb1-8288-86606b514436" name="Default Changelist" comment="jahr im footer ist jetzt dynamisch">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2a5b51b4-3ef4-4f1c-bd04-e0c99a8c8dea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2a5b51b4-3ef4-4f1c-bd04-e0c99a8c8dea.xml" afterDir="false" />
+    <list default="true" id="3bae52e2-948a-4cb1-8288-86606b514436" name="Default Changelist" comment="change image for project member&#10;implement html member display">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/1000-Baeume.css" beforeDir="false" afterPath="$PROJECT_DIR$/website/1000-Baeume.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/images/foedermayr_quote.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/website/images/foedermayr_quote.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/images/hackl_quote.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/website/images/hackl_quote.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/images/schmidbauer_quote.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/website/images/schmidbauer_quote.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/TreeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/TreeView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/website/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +104,7 @@
       <workItem from="1620753023144" duration="577000" />
       <workItem from="1621370957722" duration="7000" />
       <workItem from="1621943588190" duration="599000" />
-      <workItem from="1649497525536" duration="4624000" />
+      <workItem from="1649497525536" duration="6832000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image rotation problem">
       <created>1600183795458</created>
@@ -217,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620753091123</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="change image for project member&#10;implement html member display">
+      <created>1649504912946</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1649504912946</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +259,7 @@
     <MESSAGE value="changed leaflet icon to 1000bäume logo" />
     <MESSAGE value="mindestbetrag von FAQ-seite entfernt" />
     <MESSAGE value="jahr im footer ist jetzt dynamisch" />
-    <option name="LAST_COMMIT_MESSAGE" value="jahr im footer ist jetzt dynamisch" />
+    <MESSAGE value="change image for project member&#10;implement html member display" />
+    <option name="LAST_COMMIT_MESSAGE" value="change image for project member&#10;implement html member display" />
   </component>
 </project>

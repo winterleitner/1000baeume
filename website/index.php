@@ -114,13 +114,15 @@
         document.getElementById("gift-contact-phone").hidden = false
         document.getElementById("gift-contact-mail").hidden = false
     }
+
     function onGiftPhone() {
-        window.location.href="tel: 0664 3423146"
+        window.location.href = "tel: 0664 3423146"
     }
+
     function onGiftMail() {
         const body = "Guten Tag,\n\nich möchte einen Gutschein für eine Baumpatenschaft in Steyr im Wert von 350€ bestellen.\n\nMeine Kontaktdaten:\n\nName:\nTelefonnummer:\n\n\n" +
             "Die Zahlung erfolgt auf folgendes Konto:\n\n\"Tourismusverband Steyr und die Nationalparkregion\", Zusatzbezeichnung \"1000 Bäume für Steyr\"\nAT97 3411 4000 0004 2572\n"
-        window.location.href=("mailto:leopold@foedermayr.at?subject=Gutschein für eine Baumpatenschaft&body=" + encodeURI(body))
+        window.location.href = ("mailto:leopold@foedermayr.at?subject=Gutschein für eine Baumpatenschaft&body=" + encodeURI(body))
     }
 
 
@@ -151,11 +153,44 @@
             Helfen Sie mit!</p>
     </div>
 
-    <div class="myquotes">
-        <div class="myquote1"></div>
-        <div class="myquote2"></div>
-        <div class="myquote3"></div>
-        <div class="myquote4"></div>
+    <div class="quotes">
+        <div class="quote">
+            <img src="images/foedermayr_quote.jpg"/>
+            <div class="quote-text"><q>In 30 Jahren wird es sehr heiß sein.
+                    Wenn wir wollen, dass es dann in den Städten erträglich ist,
+                    müssen wir jetzt starten, Bäume zu pflanzen.</q></div>
+            <div class="quote-author">
+                <div>Leopold Födermayr</div>
+                <small>Projektinitiator</small>
+            </div>
+        </div>
+        <div class="quote">
+            <img src="images/hackl_quote.jpg"/>
+            <div class="quote-text"><q>Wir haben in der Stadt Steyr vor Jahren schon einmal 1000 Bäume gepflanzt.
+                    Nun weitere 1000 Bäume zu pflanzen, ist hervorragend.</q></div>
+            <div class="quote-author">
+                <div>Gerald Hackl</div>
+                <small>Ehem. Steyrer Bürgermeister</small>
+            </div>
+        </div>
+        <div class="quote">
+            <img src="images/auer_quote.jpg"/>
+            <div class="quote-text quote-auer"><q>Jeder Baum ist wertvoll und wir freuen uns über viele neue
+                    Baumpatenschaften.</q></div>
+            <div class="quote-author">
+                <div>Katrin Auer</div>
+                <small>Umweltstadträtin</small>
+            </div>
+        </div>
+        <div class="quote">
+            <img src="images/schmidbauer_quote.jpg"/>
+            <div class="quote-text"><q>Wir haben uns zum Ziel gesetzt, die Region Steyr positiv weiterzuentwickeln.
+                    Dieses Baumprojekt ist eine ausgezeichnete Möglichkeit, dies zu tun.</q></div>
+            <div class="quote-author">
+                <div>Andreas Schmidbauer</div>
+                <small>Direktor Raiffeisenbank Steyr</small>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -187,7 +222,8 @@
                 <h2>Wie kann man eine Baumpatenschaft übernehmen, wie läuft das ab?</h2>
                 <ul>
                     <li>Sie senden uns ein Mail mit dem Betrag für eine Baumpatenschaft</li>
-                    <li>Wir stimmen mit Ihnen den Pflanzort und den Baum (Gattung, Stammdurchmesser) ab und informieren
+                    <li>Wir stimmen mit Ihnen den Pflanzort und den Baum (Gattung, Stammdurchmesser) ab und
+                        informieren
                         Sie über den Termin der Pflanzung.
                     </li>
                     <li>Sie überweisen den Betrag der Patenschaft auf das Konto "Tourismusverban Steyr und die
@@ -200,7 +236,8 @@
             </div>
             <div class="myFAQantworten">
                 <h2>Kann man auch einfach nur spenden?</h2>
-                <p>Ja, sie zahlen einen Betrag auf das Bankkonto "Tourismusverband Steyr und die Nationalparkregion",
+                <p>Ja, sie zahlen einen Betrag auf das Bankkonto "Tourismusverband Steyr und die
+                    Nationalparkregion",
                     Zusatzbezeichnung "1000 Bäume für Steyr": AT97 3411 4000 0004 2572 ein.</p>
                 <h2>Auf welchen Grundstücken werden die Bäume gepflanzt? Privat, öffentlich? Wer plant das?</h2>
                 <ul>
@@ -212,23 +249,25 @@
                     </li>
                     <li>Die Finanzierung der Pflanzung erfolgt dann durch Baumpatenschaft bzw. Spenden.</li>
                 </ul>
-                <h2>Wie wird dafür gesorgt, dass das gespendete bzw. überwiesene Geld für diese Aktion verwendet wird -
+                <h2>Wie wird dafür gesorgt, dass das gespendete bzw. überwiesene Geld für diese Aktion verwendet
+                    wird -
                     und nicht für die Verwaltung "draufgeht"?</h2>
                 <p>Die Verwaltung des Geldes erfolgt durch den Tourismusverband der Stadt Steyr. Die gesamte
                     Verwaltungsarbeit erfolgt ehrenamtlich. Die Kontrolle der Gebarung erfolgt durch Dr. Christoph
                     Grumböck von der Notariatskanzlei Dr. Kaliba</p>
                 <h2>Wer ist mein Ansprechpartner? Wo kann ich mich wie hinwenden?</h2>
                 <h3>Projektansprechpartner:</h3>
-                <p>STR Reinhard Kaufmann und Dkfm. Leopold Födermayr
-                    <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a>
+                <p>STR Reinhard Kaufmann und Dkfm. Leopold Födermayr<br>
+                    <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a><br>
                     <a href="tel:+436643423146">0664 3423146</a></p>
                 <!-- <p>Dkfm. Leopold Födermayr (leopold@foedermayr.at, 0664/3423146)</p> -->
                 <h3>Mailadressen:</h3>
-                <p><a href="mailto:1000baeume@steyr.gv.at">1000baeume@steyr.gv.at</a>
+                <p><a href="mailto:1000baeume@steyr.gv.at">1000baeume@steyr.gv.at</a><br>
                     <a href="mailto:steyr@nachrichten.at">steyr@nachrichten.at</a></p>
                 <h3>Projektpartner:</h3>
                 <p>OÖ Nachrichten, Raiffeisenbank Steyr, Tourismusverband Steyr und die Nationalparkregion, GRS
-                    Wirtschaftsprüfung Steuerberatung GmbH und Christoph Grumböck Notariatsubstitut Rechtsberatung</p>
+                    Wirtschaftsprüfung Steuerberatung GmbH und Christoph Grumböck Notariatsubstitut
+                    Rechtsberatung</p>
             </div>
         </div>
     </div>
@@ -299,11 +338,11 @@
         let LeafIcon = L.Icon.extend({
             options: {
                 shadowUrl: '/images/Logo_HQ_shadow_blur.png',
-                iconSize:     [38, 38],
-                shadowSize:   [40, 38],
-                iconAnchor:   [19, 38],
+                iconSize: [38, 38],
+                shadowSize: [40, 38],
+                iconAnchor: [19, 38],
                 shadowAnchor: [0, 38],
-                popupAnchor:  [-1, -30]
+                popupAnchor: [-1, -30]
             }
         });
 
@@ -353,10 +392,13 @@
     <div class="mydatatext">
         <h2>1000 Bäume für Steyr</h2>
         <p><i class="far fa-copyright" aria-hidden="true"></i> <?php echo date("Y"); ?> Dkfm. Leopold Födermayr</p>
-        <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a> <a href="tel:+436643423146">0664 3423146</a>
-        <!-- <p>e-Mail: leopold@foedermayr.at oder Tel.: 0664 3423146</p> -->
-        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>
-        <a href="Impressum.html">Impressum</a>
+        <div class="footer-flex">
+            <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a><div class="hide-sm"> | </div>
+            <a href="tel:+436643423146">0664 3423146</a><div class="hide-sm"> | </div>
+            <!-- <p>e-Mail: leopold@foedermayr.at oder Tel.: 0664 3423146</p> -->
+            <a href="datenschutzerklaerung.html">Datenschutzerklärung</a><div class="hide-sm"> | </div>
+            <a href="Impressum.html">Impressum</a>
+        </div>
     </div>
 </div>
 

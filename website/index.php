@@ -165,6 +165,15 @@
             </div>
         </div>
         <div class="quote">
+            <img src="images/vogl_quote.jpg" alt="Bürgermeister Markus Vogl, Foto: Hannes Ecker"/>
+            <div class="quote-text"><q>Bäume verschönern nicht nur das Stadtbild von Steyr, sondern sorgen auch für eine bessere Luftqualität in der Stadt,
+                    indem sie Schadstoffe und Feinstaub aus der Luft filtern.</q></div>
+            <div class="quote-author">
+                <div>Markus Vogl</div>
+                <small>Bürgermeister der Stadt Steyr</small>
+            </div>
+        </div>
+        <!--<div class="quote">
             <img src="images/hackl_quote.jpg"/>
             <div class="quote-text"><q>Wir haben in der Stadt Steyr vor Jahren schon einmal 1000 Bäume gepflanzt.
                     Nun weitere 1000 Bäume zu pflanzen, ist hervorragend.</q></div>
@@ -172,14 +181,14 @@
                 <div>Gerald Hackl</div>
                 <small>Ehem. Steyrer Bürgermeister</small>
             </div>
-        </div>
+        </div>-->
         <div class="quote">
             <img src="images/auer_quote.jpg"/>
             <div class="quote-text quote-auer"><q>Jeder Baum ist wertvoll und wir freuen uns über viele neue
                     Baumpatenschaften.</q></div>
             <div class="quote-author">
                 <div>Katrin Auer</div>
-                <small>Umweltstadträtin</small>
+                <small>Umweltstadträtin der Stadt Steyr</small>
             </div>
         </div>
         <div class="quote">

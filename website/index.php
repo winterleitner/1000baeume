@@ -266,7 +266,7 @@
                     Grumböck von der Notariatskanzlei Dr. Kaliba</p>
                 <h2>Wer ist mein Ansprechpartner? Wo kann ich mich wie hinwenden?</h2>
                 <h3>Projektansprechpartner:</h3>
-                <p>STR Reinhard Kaufmann und Dkfm. Leopold Födermayr<br>
+                <p>STRin Mag.a Katrin Auer und Dkfm. Leopold Födermayr<br>
                     <a href="mailto:leopold@foedermayr.at">leopold@foedermayr.at</a><br>
                     <a href="tel:+436643423146">0664 3423146</a></p>
                 <!-- <p>Dkfm. Leopold Födermayr (leopold@foedermayr.at, 0664/3423146)</p> -->
